@@ -9,7 +9,7 @@ import csv
 from uuid import UUID, uuid1
 import random
 from datetime import datetime, timedelta
-from decimal import getcontext, Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP
 
 from tqdm import tqdm
 
