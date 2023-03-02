@@ -154,7 +154,7 @@ def generate_sales_data() -> None:
     
     start_date : datetime = datetime.now() - timedelta(weeks=52)
 
-    headers : list = ['id', 'date', 'total_price']
+    headers : list = ['id', 'date', 'time', 'total_price']
 
     with open('Order.csv', mode='w') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=headers)
@@ -169,9 +169,19 @@ def generate_sales_data() -> None:
 
             for _ in range(num_sales):
                 order_id = uuid1() 
+                
                 order_datetime = start_date + timedelta(days=day, hours=random.randint(8, 20))
+                date_string = order_datetime.strftime('%Y-%m-%d')
+                time_string = order_datetime.strftime('%H:%M:%S')
+                
                 total_price = generate_sale(order_id)
-                writer.writerow({'id': order_id, 'date': order_datetime, 'total_price': total_price})
+                writer.writerow({
+                    'id': order_id, 
+                    'date': date_string, 
+                    'time': time_string,
+                    'total_price': total_price
+                    })
+                
                 total_sales += total_price
     
     print(f"\nTotal Yearly Revenue: ${total_sales.quantize(CENT, rounding=ROUND_HALF_UP):,}")
