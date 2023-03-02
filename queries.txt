@@ -1,9 +1,9 @@
 // Create all the individual tables to store all the csv files
 CREATE TABLE ordered_menu (order_id text, menu_id text, quantity int); 
 CREATE TABLE menu_item_cutlery (menu_item_id text, cutlery_id text, quantity int);
-CREATE TABLE menu_item (id text, name text, price float, category text);
-CREATE TABLE cutlery(id text, name text, quantity int);
-CREATE TABLE orders (id text, date text, total_price float);
+CREATE TABLE menu_item (id text PRIMARY KEY, name text, price float, category text);
+CREATE TABLE cutlery(id text PRIMARY KEY, name text, quantity int);
+CREATE TABLE orders (id text PRIMARY KEY, date text, total_price float);
 
 // Copy from the individual csv files to all the tables
 \copy orders from 'Order.csv' CSV HEADER
