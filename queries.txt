@@ -28,6 +28,9 @@ SELECT * FROM orders WHERE data like '%2022-09-18%'
 SELECT MIN(total_price) FROM orders;
 SELECT MAX(total_price) FROM orders; 
 
+//Find the total sales revenue
+SELECT SUM(total_price) FROM orders; 
+
 //Select Average for the specific value from the table
 SELECT AVG(total_price) FROM orders;
 
