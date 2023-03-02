@@ -3,6 +3,7 @@ CREATE TABLE ordered_menu (order_id text, menu_id text, quantity int);
 CREATE TABLE menu_item_cutlery (menu_item_id text, cutlery_id text, quantity int);
 CREATE TABLE menu_item (id text PRIMARY KEY, name text, price float, category text);
 CREATE TABLE cutlery(id text PRIMARY KEY, name text, quantity int);
+//separate date and time
 CREATE TABLE orders (id text PRIMARY KEY, date text, total_price float);
 
 // Copy from the individual csv files to all the tables
