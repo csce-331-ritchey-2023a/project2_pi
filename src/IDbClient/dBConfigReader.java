@@ -7,9 +7,9 @@ import java.util.Properties;
 public class dBConfigReader {
     private static Properties _properties;
     
-    public static String link;
-    public static String username;
-    public static String password;
+    public String link;
+    public String username;
+    public String password;
 
     public dBConfigReader()
     {
