@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DbClient implements IDbClient {
-    private Connection _connection;
+    public Connection connection;
 
     private String _dbLink;
     private String _dbUser;
@@ -22,7 +22,7 @@ public class DbClient implements IDbClient {
     @Override
     public void connect() {
         try {
-            _connection = DriverManager.getConnection(_dbLink, _dbUser, _dbPassword);
+            connection = DriverManager.getConnection(_dbLink, _dbUser, _dbPassword);
             System.out.println("[dBClient] Connected to database successfully.");
         } catch (SQLException e) {
             System.out.println("[dbClient] Error Connecting to database: " + e.getMessage());
@@ -32,13 +32,13 @@ public class DbClient implements IDbClient {
     @Override
     public void disconnect() {
         try {
-            if (_connection == null) 
+            if (connection == null) 
             {
                 System.out.println("[dbClient] Error Disconnecting: connection is null");
                 return;
             }
             
-            _connection.close();
+            connection.close();
             System.out.println("[dbClient] Disconnected from db");
         } catch (SQLException e) {
             System.out.println("[dbClient] Error Disconnecting: " + e.getMessage());
@@ -50,7 +50,7 @@ public class DbClient implements IDbClient {
     public ResultSet executeQuery(String query) {
         ResultSet rs = null;
         try {
-            Statement stmt = _connection.createStatement();
+            Statement stmt = connection.createStatement();
             boolean returnsResult = stmt.execute(query);
             
             System.out.println("[dbClient] query ran successfully");
