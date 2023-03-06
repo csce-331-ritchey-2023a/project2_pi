@@ -22,10 +22,13 @@ public class DbClient implements IDbClient {
     @Override
     public void connect() {
         try {
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(_dbLink, _dbUser, _dbPassword);
             System.out.println("[dBClient] Connected to database successfully.");
         } catch (SQLException e) {
             System.out.println("[dbClient] Error Connecting to database: " + e.getMessage());
+        }catch (ClassNotFoundException e) {
+            System.out.println("[dbClient] Error Connecting Finding Driver Class");
         }
     }
 
