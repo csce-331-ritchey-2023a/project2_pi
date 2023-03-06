@@ -15,7 +15,7 @@ public class dBConfigReader {
     {
         try {
             _properties = new Properties();
-            FileInputStream input = new FileInputStream("db.conf");
+            FileInputStream input = new FileInputStream("C:/opt/CSCE331/project2_pi/src/test/db.conf");
             _properties.load(input);
             input.close();
         } catch (IOException e) {

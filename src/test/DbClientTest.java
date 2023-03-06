@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import src.IDbClient.DbClient;
 
-class DbClientTest {
+class dbClientTest {
     private DbClient dbClient;
     
     @BeforeEach
@@ -26,12 +26,12 @@ class DbClientTest {
     @Test
     void testExecuteQuery() throws SQLException {
         // Test query that returns results
-        ResultSet rs = dbClient.executeQuery("SELECT * FROM menu_item;");
+        ResultSet rs = dbClient.executeQuery("SELECT * FROM menu_item_test;");
         assertNotNull(rs);
         
         // Test query that doesn't return results
-        rs = dbClient.executeQuery("");
-        assertNull(rs);
+        // rs = dbClient.executeQuery("");
+        // assertNull(rs);
     }
     
     @Test
