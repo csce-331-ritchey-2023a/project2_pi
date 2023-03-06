@@ -12,8 +12,8 @@ public class DbClient implements IDbClient {
     private String _dbUser;
     private String _dbPassword;
     
-    public DbClient() {
-        dBConfigReader configReader = new dBConfigReader();
+    public DbClient(String configFile) {
+        dBConfigReader configReader = new dBConfigReader(configFile);
         _dbLink = configReader.link;
         _dbUser = configReader.username;
         _dbPassword = configReader.password;
@@ -28,7 +28,7 @@ public class DbClient implements IDbClient {
         } catch (SQLException e) {
             System.out.println("[dbClient] Error Connecting to database: " + e.getMessage());
         }catch (ClassNotFoundException e) {
-            System.out.println("[dbClient] Error Connecting Finding Driver Class");
+            System.out.println("[dbClient] Error Finding Driver Class");
         }
     }
 

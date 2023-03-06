@@ -14,7 +14,7 @@ class dbClientTest {
     
     @BeforeEach
     void setUp() {
-        dbClient = new DbClient();
+        dbClient = new DbClient("C:/opt/CSCE331/project2_pi/src/test/db.conf");
         dbClient.connect();
     }
     

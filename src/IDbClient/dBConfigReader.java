@@ -11,11 +11,11 @@ public class dBConfigReader {
     public String username;
     public String password;
 
-    public dBConfigReader()
+    public dBConfigReader(String fileloc)
     {
         try {
             _properties = new Properties();
-            FileInputStream input = new FileInputStream("C:/opt/CSCE331/project2_pi/src/test/db.conf");
+            FileInputStream input = new FileInputStream(fileloc);
             _properties.load(input);
             input.close();
         } catch (IOException e) {
