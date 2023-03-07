@@ -12,7 +12,7 @@ public class dBConfigReaderTest {
 
     @Before
     public void setUp() {
-        configReader = new dBConfigReader();
+        configReader = new dBConfigReader("C:/opt/CSCE331/project2_pi/src/test/db.conf");
     }
 
     @Test
