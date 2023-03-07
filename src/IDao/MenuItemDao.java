@@ -14,10 +14,11 @@ public class MenuItemDao implements IDao<MenuItem>{
     public DbClient dbClient;    
 
     public MenuItemDao() {
-        dbClient = new DbClient("configs//db.conf");
+        dbClient = new DbClient();
         dbClient.connect();
     }
     
+    // cleans up before object is destructed  
     protected void finalize() {
         if (dbClient.connection != null) {
             dbClient.disconnect();
@@ -44,15 +45,22 @@ public class MenuItemDao implements IDao<MenuItem>{
         String query = String.format("SELECT * FROM menu_item WHERE id = '%s';", id);
         ResultSet rs = dbClient.executeQuery(query);
 
-        if (rs == null)
-        {
-            System.out.println("[MenuItemDao] Menu Item with id " + id + " not found");
+        try {
+            // if exists, then return object inside Optional container
+            if (rs.next())
+            {
+                MenuItem menuItem = ConvertResultSet(rs);
+                return Optional.of(menuItem);
+            }
+            else
+            {
+                System.out.println("[MenuItemDao] Menu Item with id " + id + " not found");
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
-
-        MenuItem menuItem = ConvertResultSet(rs);
-
-        return Optional.of(menuItem);           
     }
 
     @Override
@@ -79,7 +87,11 @@ public class MenuItemDao implements IDao<MenuItem>{
         String query = String.format("SELECT * FROM menu_item WHERE name='%s';", name);
         ResultSet rs = dbClient.executeQuery(query); 
         try {
-            String id = rs.getString("id");
+            String id = "";
+            if (rs.next())
+            {
+                id = rs.getString("id");
+            }
             return Optional.of(id);
         } catch (SQLException e) { 
             System.out.println("[MenuItemDao]: Given query did not return id");
@@ -91,7 +103,7 @@ public class MenuItemDao implements IDao<MenuItem>{
     public void add(MenuItem menuItem) {
         // Add MenuItem to table
         String query = String.format(
-            "INSERT INTO menu_item(id, name, quantity, price, category) VALUES (%s, %s, %d, %f, %s);", 
+            "INSERT INTO menu_item(id, name, quantity, price, category) VALUES ('%s', '%s', %d, %f, '%s');", 
             menuItem.id, menuItem.name, menuItem.quanitity, menuItem.price, menuItem.category); 
         
         dbClient.executeQuery(query);
@@ -100,7 +112,7 @@ public class MenuItemDao implements IDao<MenuItem>{
         {
             // insert into MenuItemCutlery table
             query = String.format(
-                "INSERT INTO menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES (%s, %s, %d);",
+                "INSERT INTO menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES ('%s', '%s', %d);",
                 menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId, menuItem.MenuItemCutlery.get(i).quantity 
             );
         }
@@ -109,8 +121,18 @@ public class MenuItemDao implements IDao<MenuItem>{
     @Override
     public void update(MenuItem menuItem) {
         String query = String.format(
-            "UPDATE menu_item SET name = %s, quantity = %d, price = %f, category = %s WHERE id = %s;", 
+            "UPDATE menu_item SET name = '%s', quantity = %d, price = %f, category = '%s' WHERE id = %s;", 
             menuItem.name, menuItem.quanitity, menuItem.price, menuItem.category, menuItem.id); 
+        
+        
+        for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
+        {
+            // Update Cutlery 
+            query = String.format(
+                "UPDATE menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES ('%s', '%s', %d);",
+                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId, menuItem.MenuItemCutlery.get(i).quantity 
+            );
+        }
         
         dbClient.executeQuery(query);
     }

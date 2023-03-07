@@ -1,2 +1,1 @@
-/db.conf
-/src/test/db.conf
+src/IDbClient/db.conf

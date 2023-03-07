@@ -13,7 +13,7 @@ public class CutleryDao implements IDao<Cutlery>{
     public DbClient dbClient;    
 
     public CutleryDao() {
-        dbClient = new DbClient("configs//db.conf");
+        dbClient = new DbClient();
         dbClient.connect();
     }
     
@@ -31,7 +31,7 @@ public class CutleryDao implements IDao<Cutlery>{
             cutlery.name = rs.getString("name");
             cutlery.quantity = rs.getInt("quantity");
         } catch (SQLException e) {
-            System.out.println("[MenuItemDao]: Given Result Set Could Not Be Converted to Menu Item");
+            System.out.println("[CutleryDao]: Given Result Set Could Not Be Converted to Cutlery Object");
         } 
 
         return cutlery;
@@ -42,15 +42,22 @@ public class CutleryDao implements IDao<Cutlery>{
         String query = String.format("SELECT * FROM cutlery WHERE id = '%s';", id);
         ResultSet rs = dbClient.executeQuery(query);
 
-        if (rs == null)
-        {
-            System.out.println("[CutleryDao] Cutlery with id " + id + " not found");
+        try {
+            // if exists, then return object inside Optional container
+            if (rs.next()) {
+                Cutlery cutlery = ConvertResultSet(rs);
+                return Optional.of(cutlery);           
+            }
+            else 
+            {
+                System.out.println("[CutleryDao] Cutlery with id " + id + " not found");
+                return Optional.empty();
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
-
-        Cutlery cutlery = ConvertResultSet(rs);
-
-        return Optional.of(cutlery);           
     } 
 
     @Override
@@ -77,10 +84,14 @@ public class CutleryDao implements IDao<Cutlery>{
         String query = String.format("SELECT * FROM cutlery WHERE name='%s';", name);
         ResultSet rs = dbClient.executeQuery(query); 
         try {
-            String id = rs.getString("id");
+            String id = "";
+            if (rs.next())
+            {
+                id = rs.getString("id");
+            }
             return Optional.of(id);
         } catch (SQLException e) { 
-            System.out.println("[MenuItemDao]: Given query did not return id");
+            System.out.println("[CutleryDao]: Given query did not return id");
             return Optional.empty();
         }
     }    
@@ -89,7 +100,7 @@ public class CutleryDao implements IDao<Cutlery>{
     public void add(Cutlery cutlery) {
         // Add Cutlery to table
         String query = String.format(
-            "INSERT INTO cutlery(id, name, quantity) VALUES (%s, %s, %d)", 
+            "INSERT INTO cutlery(id, name, quantity) VALUES ('%s', '%s', %d)", 
             cutlery.id, cutlery.name, cutlery.quantity); 
         
         dbClient.executeQuery(query);
@@ -98,7 +109,7 @@ public class CutleryDao implements IDao<Cutlery>{
     @Override
     public void update(Cutlery cutlery) {
         String query = String.format(
-            "UPDATE menu_item SET name = %s, quantity = %d, price = %f, category = %s WHERE id = %s;", 
+            "UPDATE cutlery SET name = '%s', quantity = %d WHERE id = '%s';", 
             cutlery.name, cutlery.quantity, cutlery.id); 
         
         dbClient.executeQuery(query);

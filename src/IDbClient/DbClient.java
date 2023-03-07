@@ -12,8 +12,8 @@ public class DbClient implements IDbClient {
     private String _dbUser;
     private String _dbPassword;
     
-    public DbClient(String configFile) {
-        dBConfigReader configReader = new dBConfigReader(configFile);
+    public DbClient() {
+        dBConfigReader configReader = new dBConfigReader();
         _dbLink = configReader.link;
         _dbUser = configReader.username;
         _dbPassword = configReader.password;
@@ -67,7 +67,9 @@ public class DbClient implements IDbClient {
                 System.out.println(rowsAffected + " rows affected");
             }
         } catch (SQLException e) {
-            System.out.println("[dbClient] Error executing query: " + e.getMessage());
+            System.out.println("[dbClient] Error executing query '" + query + 
+            "' : " + e.getMessage());
+            System.out.println(query);
         }
 
         return rs;

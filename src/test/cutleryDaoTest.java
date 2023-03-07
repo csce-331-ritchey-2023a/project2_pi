@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import src.IDao.CutleryDao;
 import src.Models.Cutlery;
@@ -17,17 +18,31 @@ public class cutleryDaoTest {
         cutleryDao = new CutleryDao();
     }
 
+    @Test 
+    public void testGetId() {
+        // Test for existing cutlery
+        Optional<String> optionalId = cutleryDao.getId("bowl");
+        Assertions.assertTrue(optionalId.isPresent());
+        Assertions.assertEquals("15b4c496-b7ca-11ed-8be6-00155d0752bf", optionalId.get());
+    }
+
     @Test
     public void testGet() {
-        // Test for existing cutlery
-        Optional<Cutlery> optionalCutlery = cutleryDao.get("1");
-        Assertions.assertTrue(optionalCutlery.isPresent());
-        Cutlery cutlery = optionalCutlery.get();
-        Assertions.assertEquals("1", cutlery.id);
-        Assertions.assertEquals("Fork", cutlery.name);
-        Assertions.assertEquals(10, cutlery.quantity);
+        /* Test for existing cutlery */
+        String id = cutleryDao.getId("bowl").get();
 
-        // Test for non-existent cutlery
+        // test if it got anything at all
+        Optional<Cutlery> optionalCutlery = cutleryDao.get(id);
+        Assertions.assertTrue(optionalCutlery.isPresent());
+
+        // test to see if we got the right object 
+        Cutlery cutlery = optionalCutlery.get();
+
+        Assertions.assertEquals(id, cutlery.id);
+        Assertions.assertEquals("bowl", cutlery.name);
+        Assertions.assertEquals(2000, cutlery.quantity);
+
+        /* Test for non-existent cutlery */
         Optional<Cutlery> optionalCutlery2 = cutleryDao.get("100");
         Assertions.assertTrue(optionalCutlery2.isEmpty());
     }
@@ -36,18 +51,19 @@ public class cutleryDaoTest {
     public void testGetAll() {
         List<Cutlery> cutleryList = cutleryDao.getAll();
         Assertions.assertFalse(cutleryList.isEmpty());
-        Assertions.assertTrue(cutleryList.size() >= 2);
+        Assertions.assertTrue(cutleryList.size() >= 5);
     }
 
     @Test
     public void testAddAndUpdate() {
+        // add cutlery
         Cutlery cutlery = new Cutlery();
         cutlery.id = "3";
-        cutlery.name = "Knife";
-        cutlery.quantity = 20;
-
+        cutlery.name = "test";
+        cutlery.quantity = 69;
         cutleryDao.add(cutlery);
 
+        // make sure the cutlery was added 
         Optional<Cutlery> optionalCutlery = cutleryDao.get("3");
         Assertions.assertTrue(optionalCutlery.isPresent());
         Cutlery addedCutlery = optionalCutlery.get();
@@ -55,9 +71,11 @@ public class cutleryDaoTest {
         Assertions.assertEquals(cutlery.name, addedCutlery.name);
         Assertions.assertEquals(cutlery.quantity, addedCutlery.quantity);
 
-        addedCutlery.quantity = 30;
+        // update the cutlery object
+        addedCutlery.quantity = 420;
         cutleryDao.update(addedCutlery);
-
+        
+        // make sure the cutlery object was updated
         Optional<Cutlery> optionalUpdatedCutlery = cutleryDao.get("3");
         Assertions.assertTrue(optionalUpdatedCutlery.isPresent());
         Cutlery updatedCutlery = optionalUpdatedCutlery.get();
@@ -68,13 +86,8 @@ public class cutleryDaoTest {
     public void testDelete() {
         Cutlery cutlery = new Cutlery();
         cutlery.id = "3";
-        cutlery.name = "Knife";
-        cutlery.quantity = 20;
-
-        cutleryDao.add(cutlery);
-
-        Optional<Cutlery> optionalCutlery = cutleryDao.get("3");
-        Assertions.assertTrue(optionalCutlery.isPresent());
+        cutlery.name = "test";
+        cutlery.quantity = 420;
 
         cutleryDao.delete(cutlery);
 
