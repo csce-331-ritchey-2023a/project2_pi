@@ -1,6 +1,6 @@
 package src.Models;
 
-public class OrderedMenuItem {
+public class MenuItemCutlery {
     public String menuItemId;
     public String orderId;
     public int quantity; 

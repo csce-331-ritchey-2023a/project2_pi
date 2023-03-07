@@ -98,7 +98,11 @@ public class MenuItemDao implements IDao<MenuItem>{
 
         for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
         {
-            // MenuItemCutlery DAO
+            // insert into MenuItemCutlery table
+            query = String.format(
+                "INSERT INTO menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES (%s, %s, %d);",
+                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId, menuItem.MenuItemCutlery.get(i).quantity 
+            );
         }
     }
 
@@ -113,7 +117,7 @@ public class MenuItemDao implements IDao<MenuItem>{
 
     @Override
     public void delete(MenuItem menuItem) {
-        String query = String.format("DELETE FROM cutlery_test WHERE id = '%s'", menuItem.id);
+        String query = String.format("DELETE FROM cutlery_test WHERE id = '%s';", menuItem.id);
         dbClient.executeQuery(query);
     } 
 }

@@ -9,7 +9,7 @@ public class MenuItem {
     public String category;
     public float price;
     public int quanitity;
-    public List<Cutlery> MenuItemCutlery;
+    public List<MenuItemCutlery> MenuItemCutlery;
 
     public MenuItem() {
         id = UUID.randomUUID().toString();
