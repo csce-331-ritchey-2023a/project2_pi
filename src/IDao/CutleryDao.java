@@ -89,7 +89,7 @@ public class CutleryDao implements IDao<Cutlery>{
     public void add(Cutlery cutlery) {
         // Add Cutlery to table
         String query = String.format(
-            "INSERT INTO menu_item(id, name, quantity, price, category) VALUES (%s, %s, %d, %f, %s)", 
+            "INSERT INTO cutlery(id, name, quantity) VALUES (%s, %s, %d)", 
             cutlery.id, cutlery.name, cutlery.quantity); 
         
         dbClient.executeQuery(query);
@@ -97,13 +97,16 @@ public class CutleryDao implements IDao<Cutlery>{
 
     @Override
     public void update(Cutlery cutlery) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        String query = String.format(
+            "UPDATE menu_item SET name = %s, quantity = %d, price = %f, category = %s WHERE id = %s;", 
+            cutlery.name, cutlery.quantity, cutlery.id); 
+        
+        dbClient.executeQuery(query);
     }
 
     @Override
     public void delete(Cutlery cutlery) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        String query = String.format("DELETE FROM cutlery WHERE id = '%s';", cutlery.id);
+        dbClient.executeQuery(query);
     }  
 }
