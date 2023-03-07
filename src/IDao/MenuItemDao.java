@@ -75,11 +75,11 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
    
     @Override
-    public Optional<Integer> getId(String name) {
+    public Optional<String> getId(String name) {
         String query = String.format("SELECT * FROM menu_item WHERE name='%s';", name);
         ResultSet rs = dbClient.executeQuery(query); 
         try {
-            int id = rs.getInt("id");
+            String id = rs.getString("id");
             return Optional.of(id);
         } catch (SQLException e) { 
             System.out.println("[MenuItemDao]: Given query did not return id");

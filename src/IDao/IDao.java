@@ -12,7 +12,7 @@ public interface IDao<T> {
     
     List<T> getAll();
     
-    Optional<Integer> getId(String name);
+    Optional<String> getId(String name);
 
     void add(T entity);
 
