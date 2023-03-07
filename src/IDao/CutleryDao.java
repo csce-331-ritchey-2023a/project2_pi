@@ -12,11 +12,13 @@ import src.Models.Cutlery;
 public class CutleryDao implements IDao<Cutlery>{ 
     public DbClient dbClient;    
 
+    // init client connection
     public CutleryDao() {
         dbClient = new DbClient();
         dbClient.connect();
     }
     
+    // ensure client is disconnected before object is destructed
     protected void finalize() {
         if (dbClient.connection != null) {
             dbClient.disconnect();
@@ -85,6 +87,8 @@ public class CutleryDao implements IDao<Cutlery>{
         ResultSet rs = dbClient.executeQuery(query); 
         try {
             String id = "";
+            
+            // if result set has any rows
             if (rs.next())
             {
                 id = rs.getString("id");

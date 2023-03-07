@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.postgresql.core.SqlCommand;
-
 import src.IDbClient.DbClient;
 import src.Models.Order;
 
@@ -15,11 +13,13 @@ public class OrdersDao implements IDao<Order> {
 
     public DbClient dbClient;    
 
+    // init client connection
     public OrdersDao() {
         dbClient = new DbClient();
         dbClient.connect();
     }
     
+    // make sure client is disconnected before we throw away obj
     protected void finalize() {
         if (dbClient.connection != null) {
             dbClient.disconnect();
@@ -47,15 +47,22 @@ public class OrdersDao implements IDao<Order> {
         String query = String.format("SELECT * FROM orders WHERE name='%s';", id);
         ResultSet rs = dbClient.executeQuery(query);
 
-        if (rs == null){
-            System.out.println("[OrdersDao] Orders with id " + id + " not found");
+        try {
+            // if exists, then return object inside Optional container
+            if (rs.next()) {
+                Order order = ConvertResultSet(rs);
+                return Optional.of(order);           
+            }
+            else 
+            {
+                System.out.println("[OrdersDao] Order with id " + id + " not found");
+                return Optional.empty();
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
             return Optional.empty();
         }
-
-        Order order = ConvertResultSet(rs);
-
-        return Optional.of(order);
-
     }
 
     @Override
@@ -65,6 +72,7 @@ public class OrdersDao implements IDao<Order> {
 
        List<Order> orders = new ArrayList<Order>();
        try{
+        // while orders still exist
         while (rs.next()){
             orders.add(ConvertResultSet(rs));
         }
@@ -79,11 +87,16 @@ public class OrdersDao implements IDao<Order> {
     public Optional<String> getId(String name) {
         String query = String.format("SELECT * FROM menu_item WHERE name = '%s';",name);
         ResultSet rs = dbClient.executeQuery(query);
-        try{
-            String uuid = rs.getString("id");
-            return Optional.of(uuid);
-        }catch(SQLException e){
-            System.out.println("[OrdersDao]: Given query did not return id");
+        try {
+            String id = "";
+            // if result set has any rows
+            if (rs.next())
+            {
+                id = rs.getString("id");
+            }
+            return Optional.of(id);
+        } catch (SQLException e) { 
+            System.out.println("[OrderDao]: Given query did not return id");
             return Optional.empty();
         }
     }   
@@ -111,6 +124,5 @@ public class OrdersDao implements IDao<Order> {
     public void delete(Order order) {
         String query = String.format("DELETE FROM order_test WHERE id = '%s';", order.id);
         dbClient.executeQuery(query);
-    }
-    
+    } 
 }

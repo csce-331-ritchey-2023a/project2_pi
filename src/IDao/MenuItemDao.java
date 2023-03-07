@@ -13,6 +13,7 @@ public class MenuItemDao implements IDao<MenuItem>{
     
     public DbClient dbClient;    
 
+    // init client connection
     public MenuItemDao() {
         dbClient = new DbClient();
         dbClient.connect();
@@ -88,6 +89,8 @@ public class MenuItemDao implements IDao<MenuItem>{
         ResultSet rs = dbClient.executeQuery(query); 
         try {
             String id = "";
+            
+            // if result set has any rows
             if (rs.next())
             {
                 id = rs.getString("id");
