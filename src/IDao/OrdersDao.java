@@ -16,7 +16,7 @@ public class OrdersDao implements IDao<Order> {
     public DbClient dbClient;    
 
     public OrdersDao() {
-        dbClient = new DbClient("configs//db.conf");
+        dbClient = new DbClient();
         dbClient.connect();
     }
     
@@ -28,7 +28,6 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public Order ConvertResultSet(ResultSet rs) {
-        // TODO Auto-generated method stub
         Order order = new Order();
         try{
             order.id = rs.getString("id");
@@ -45,10 +44,10 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public Optional<Order> get(String id) {
-        String query = String.format("SELECT * FROM orders WHERE name=%s;", id);
+        String query = String.format("SELECT * FROM orders WHERE name='%s';", id);
         ResultSet rs = dbClient.executeQuery(query);
 
-        if(rs == null){
+        if (rs == null){
             System.out.println("[OrdersDao] Orders with id " + id + " not found");
             return Optional.empty();
         }
@@ -78,7 +77,7 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public Optional<String> getId(String name) {
-        String query = String.format("SELECT * FROM menu_item WHERE name = %s;",name);
+        String query = String.format("SELECT * FROM menu_item WHERE name = '%s';",name);
         ResultSet rs = dbClient.executeQuery(query);
         try{
             String uuid = rs.getString("id");
@@ -97,13 +96,13 @@ public class OrdersDao implements IDao<Order> {
         
        for(int i = 0; i < order.OrderedMenuItems.size(); i++)
        {
-            query = String.format("INSERT INTO OrderedMenuItems(id, date, total_price) VALUES (%s, %s, %f);", order.id, order.date, order.total_price);
+            query = String.format("INSERT INTO OrderedMenuItems(id, date, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
        };
     }
 
     @Override
     public void update(Order order) {
-        String query = String.format("UPDATE OrderedMenuItems SET date = %s, total_price = %f WHERE id = %s;", order.date, order.total_price, order.id);
+        String query = String.format("UPDATE OrderedMenuItems SET date = '%s', total_price = %f WHERE id = '%s';", order.date, order.total_price, order.id);
         
         dbClient.executeQuery(query);
     }
