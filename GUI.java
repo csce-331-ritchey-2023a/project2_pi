@@ -70,7 +70,7 @@ public class GUI extends JFrame implements ActionListener {
       JTextArea myArea = new JTextArea(name);
       p.add(myArea);
 
-      //TODO Step 4
+      //TODO Step 4javac *.java
 
       // add button to panel
       p.add(b);
