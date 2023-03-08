@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import src.IDao.CutleryDao;
 import src.Models.Cutlery;

@@ -33,6 +33,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             menuItem.id = rs.getString("id");
             menuItem.name = rs.getString("name");
             menuItem.price = rs.getFloat("price");
+            menuItem.quantity = rs.getInt("quantity");
             menuItem.category = rs.getString("category");
         } catch (SQLException e) {
             System.out.println("[MenuItemDao]: Given Result Set Could Not Be Converted to Menu Item");
@@ -107,7 +108,7 @@ public class MenuItemDao implements IDao<MenuItem>{
         // Add MenuItem to table
         String query = String.format(
             "INSERT INTO menu_item(id, name, quantity, price, category) VALUES ('%s', '%s', %d, %f, '%s');", 
-            menuItem.id, menuItem.name, menuItem.quanitity, menuItem.price, menuItem.category); 
+            menuItem.id, menuItem.name, menuItem.quantity, menuItem.price, menuItem.category); 
         
         dbClient.executeQuery(query);
 
@@ -124,16 +125,16 @@ public class MenuItemDao implements IDao<MenuItem>{
     @Override
     public void update(MenuItem menuItem) {
         String query = String.format(
-            "UPDATE menu_item SET name = '%s', quantity = %d, price = %f, category = '%s' WHERE id = %s;", 
-            menuItem.name, menuItem.quanitity, menuItem.price, menuItem.category, menuItem.id); 
+            "UPDATE menu_item SET name = '%s', quantity = %d, price = %f, category = '%s' WHERE id = '%s';", 
+            menuItem.name, menuItem.quantity, menuItem.price, menuItem.category, menuItem.id); 
         
         
         for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
         {
             // Update Cutlery 
             query = String.format(
-                "UPDATE menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES ('%s', '%s', %d);",
-                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId, menuItem.MenuItemCutlery.get(i).quantity 
+                "UPDATE menu_item_cutlery SET quanitity %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
+                menuItem.MenuItemCutlery.get(i).quantity ,menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId
             );
         }
         
@@ -142,7 +143,16 @@ public class MenuItemDao implements IDao<MenuItem>{
 
     @Override
     public void delete(MenuItem menuItem) {
-        String query = String.format("DELETE FROM cutlery_test WHERE id = '%s';", menuItem.id);
+        String query = String.format("DELETE FROM menu_item WHERE id = '%s';", menuItem.id);
         dbClient.executeQuery(query);
-    } 
+        
+        for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
+        {
+            // Update Cutlery 
+            query = String.format(
+                "DELETE FROM menu_item_cutlery WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
+                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId
+            );
+        }
+    }
 }

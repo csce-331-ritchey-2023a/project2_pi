@@ -103,7 +103,7 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public void add(Order order) {
-       String query = String.format("INSERT INTO orders(id, date, total_price) VALUES (%s, %s, %f);", order.id, order.date, order.total_price);
+       String query = String.format("INSERT INTO orders(id, date, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
 
        dbClient.executeQuery(query);
         
@@ -115,14 +115,15 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public void update(Order order) {
-        String query = String.format("UPDATE OrderedMenuItems SET date = '%s', total_price = %f WHERE id = '%s';", order.date, order.total_price, order.id);
-        
+        String query = String.format("UPDATE Orders SET date = '%s', total_price = %f WHERE id = '%s';", order.date, order.total_price, order.id);
+        // update all the orderedMenuItems as well  
         dbClient.executeQuery(query);
     }
 
     @Override
     public void delete(Order order) {
-        String query = String.format("DELETE FROM order_test WHERE id = '%s';", order.id);
+        String query = String.format("DELETE FROM orders WHERE id = '%s';", order.id);
+        // delete all MenuItem Dependencies
         dbClient.executeQuery(query);
     } 
 }

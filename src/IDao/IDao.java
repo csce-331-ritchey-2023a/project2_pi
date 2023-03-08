@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface IDao<T> {
     /**
      * Converts Result Set to Class Object T
@@ -50,4 +49,23 @@ public interface IDao<T> {
      * @param entity
      */
     void delete(T entity);
+
+    // /**
+    //  * Removes sub entity from database (MenuItemCutlery, OrderedMenuItem, etc)
+    //  * @param entity
+    //  */
+    // void removeDependency(T entity);
+
+    // /**
+    //  * Gets historic sales data
+    //  */
+    // XYSeries getHistory();
+
+// SELECT DATE(o.date_time) AS sale_date, SUM(om.quantity) AS quantity_sold
+// FROM orders o
+// JOIN ordered_menu_item om ON o.id = om.order_id
+// JOIN menu_item mi ON om.menuitem_id = mi.id
+// WHERE mi.name = 'pita'
+// GROUP BY sale_date;
+
 }

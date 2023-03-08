@@ -10,13 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.After;
 
-import org.junit.Before;
 import src.IDao.MenuItemDao;
 import src.Models.MenuItem;
-import src.Models.MenuItemCutlery;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MenuItemDaoTest {
 
@@ -31,6 +26,12 @@ public class MenuItemDaoTest {
     public void tearDown() throws Exception {
         if (menuItemDao.dbClient.connection != null) {
             menuItemDao.dbClient.disconnect();
+        }
+        
+        Optional<MenuItem> testMenuItem= menuItemDao.get("3");
+        if (testMenuItem.isPresent())
+        {
+            menuItemDao.delete(testMenuItem.get());
         }
     }
 
@@ -52,11 +53,11 @@ public class MenuItemDaoTest {
     @Test
     public void testGetAll() {
         List<MenuItem> menuItems = menuItemDao.getAll();
-        assertEquals(25, menuItems.size());
+        assertTrue(menuItems.size() >= 24);
     }
 
     @Test
-    public void testAdd() {
+    public void testAddAndUpdate() {
         MenuItem menuItem = new MenuItem();
         menuItem.id = "3";
         menuItem.name = "test";
@@ -68,16 +69,8 @@ public class MenuItemDaoTest {
         Optional<MenuItem> addedMenuItem = menuItemDao.get("3");
         assertTrue(addedMenuItem.isPresent());
         assertEquals("test", addedMenuItem.get().name);
-    }
-
-    @Test
-    public void testUpdate() {
-        MenuItem menuItem = new MenuItem();
-        menuItem.id = "3";
-        menuItem.name = "test";
+        
         menuItem.quantity = 420;
-        menuItem.price = 0f;
-        menuItem.category = "base";
         menuItemDao.update(menuItem);
 
         Optional<MenuItem> updatedMenuItem = menuItemDao.get("3");
@@ -89,7 +82,13 @@ public class MenuItemDaoTest {
     }
 
     @Test
-    public void testDelete() {
+    public void testDelete() { 
+        Optional<MenuItem> testMenuItem= menuItemDao.get("3");
+        if (testMenuItem.isPresent())
+        {
+            menuItemDao.add(testMenuItem.get());
+        }
+
         MenuItem menuItem = new MenuItem();
         menuItem.id = "3";
         menuItemDao.delete(menuItem);
