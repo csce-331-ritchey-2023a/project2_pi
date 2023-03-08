@@ -3,6 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import src.Models.Order;
+
+import src.IDao.*;
+import src.Models.*;
+import src.IDbClient.*;
+
 // ***IMPORTS NOW WORK BUT GETTING ISSUES WITH CONFIGREADER
 //import src.IDbClient.dBConfigReader;
 
@@ -19,6 +25,15 @@ public class GUI extends JFrame implements ActionListener {
 
   //holds the current frame
   static String currentFrame;
+
+  //used to hold JComboBox selections
+  static JComboBox baseList;
+  static JComboBox proteinList;
+  static JComboBox dressingList;
+  static JComboBox toppingsList;
+  static JComboBox sidesList;
+  static JComboBox drinksList;
+  static JComboBox extrasList;
   
   //private static dBConfigReader configReader;
 
@@ -44,9 +59,9 @@ public class GUI extends JFrame implements ActionListener {
     //closing the connection
     try {
       conn.close();
-      JOptionPane.showMessageDialog(null,"Connection Closed.");
+      JOptionPane.showMessageDialog(null,"Test Connection Closed.");
     } catch(Exception e) {
-      JOptionPane.showMessageDialog(null,"Connection NOT Closed.");
+      JOptionPane.showMessageDialog(null,"Test Connection NOT Closed.");
     }
   }
 
@@ -148,35 +163,35 @@ public class GUI extends JFrame implements ActionListener {
     //Individual Data Rows: ASAHU
     String itemData[][] = {
       {"Item","Amount","Pricing","Add","Remove"},
-      {"brown rice","2000","0.0","Temp","Temp"},
-      {"rice pilaf","2000","0.0","Temp","Temp"},
-      {"pita","2000","0.0","Temp","Temp"},
-      {"falafel","2000","5.89","Temp","Temp"},
-      {"meatball","2000","6.89","Temp","Temp"},
-      {"feta cheese","2000","0.0","Temp","Temp"},
-      {"cucumber","2000","0.0","Temp","Temp"},
-      {"tzatziki","2000","0.0","Temp","Temp"},
-      {"hot sauce","2000","0.0","Temp","Temp"},
-      {"peppers","2000","0.0","Temp","Temp"},
-      {"hummus","2000","0.0","Temp","Temp"},
-      {"olives","2000","0.0","Temp","Temp"},
-      {"onion","2000","0.0","Temp","Temp"},
-      {"tomato","2000","0.0","Temp","Temp"},
-      {"greek yogurt","2000","0.0","Temp","Temp"},
-      {"aioli","2000","0.0","Temp","Temp"},
-      {"harissa","2000","0.0","Temp","Temp"},
-      {"tahini","2000","0.0","Temp","Temp"},
-      {"oregano","2000","0.0","Temp","Temp"},
-      {"salad","2000","0.0","Temp","Temp"},
-      {"hummus and pita","2000","0.0","Temp","Temp"},
-      {"drink","2000","0.0","Temp","Temp"},
-      {"extra meat","2000","2.49","Temp","Temp"},
-      {"extra dressing","2000","0.39","Temp","Temp"},
-      {"bowl","2000","0.0","Temp","Temp"},
-      {"plate","2000","0.0","Temp","Temp"},
-      {"silverware","5000","0.0","Temp","Temp"},
-      {"napkins","10000","0.0","Temp","Temp"},
-      {"cup","4000","0.0","Temp","Temp"}
+      {"brown rice","2000","0.0","+","-"},
+      {"rice pilaf","2000","0.0","+","-"},
+      {"pita","2000","0.0","+","-"},
+      {"falafel","2000","5.89","+","-"},
+      {"meatball","2000","6.89","+","-"},
+      {"feta cheese","2000","0.0","+","-"},
+      {"cucumber","2000","0.0","+","-"},
+      {"tzatziki","2000","0.0","+","-"},
+      {"hot sauce","2000","0.0","+","-"},
+      {"peppers","2000","0.0","+","-"},
+      {"hummus","2000","0.0","+","-"},
+      {"olives","2000","0.0","+","-"},
+      {"onion","2000","0.0","+","-"},
+      {"tomato","2000","0.0","+","-"},
+      {"greek yogurt","2000","0.0","+","-"},
+      {"aioli","2000","0.0","+","-"},
+      {"harissa","2000","0.0","+","-"},
+      {"tahini","2000","0.0","+","-"},
+      {"oregano","2000","0.0","+","-"},
+      {"salad","2000","0.0","+","-"},
+      {"hummus and pita","2000","0.0","+","-"},
+      {"drink","2000","0.0","+","-"},
+      {"extra meat","2000","2.49","+","-"},
+      {"extra dressing","2000","0.39","+","-"},
+      {"bowl","2000","0.0","+","-"},
+      {"plate","2000","0.0","+","-"},
+      {"silverware","5000","0.0","+","-"},
+      {"napkins","10000","0.0","+","-"},
+      {"cup","4000","0.0","+","-"}
     };
 
     //Individual Column Names: ASAHU
@@ -228,7 +243,7 @@ public class GUI extends JFrame implements ActionListener {
 
     // Add a combobox dropdown for Base items: ASAHU 
     String[] baseItems = {"brown rice","rice pillaf","pita"};
-    JComboBox baseList = new JComboBox(baseItems);
+    baseList = new JComboBox(baseItems);
     JLabel baseLabel = new JLabel("BASE");
     baseLabel.setFont(new Font("serif", Font.PLAIN, 20));
     baseLabel.setForeground(Color.black);
@@ -240,7 +255,7 @@ public class GUI extends JFrame implements ActionListener {
     
     // Add a combobox dropdown for protein: ASAHU 
     String[] protein = {"falafel","meatball"};
-    JComboBox proteinList = new JComboBox(protein);
+    proteinList = new JComboBox(protein);
     JLabel proteinLabel = new JLabel("PROTEIN");
     proteinLabel.setFont(new Font("serif",Font.PLAIN,20));
     proteinLabel.setForeground(Color.black);
@@ -252,7 +267,7 @@ public class GUI extends JFrame implements ActionListener {
 
     // Add a combobox dropdown for the dressing: ASAHU
     String[] dressing = {"greek yogurt", "aioli","harissa","tahini","oregano"};
-    JComboBox dressingList = new JComboBox(dressing);
+    dressingList = new JComboBox(dressing);
     JLabel dressingLabel = new JLabel("DRESSING");
     dressingLabel.setFont(new Font("serif",Font.PLAIN,20));
     dressingLabel.setForeground(Color.black);
@@ -274,7 +289,7 @@ public class GUI extends JFrame implements ActionListener {
       "onion",
       "tomato",
     };
-    JComboBox toppingsList = new JComboBox(toppings);
+    toppingsList = new JComboBox(toppings);
     JLabel toppingLabel = new JLabel("TOPPINGS");
     toppingLabel.setFont(new Font("serif",Font.PLAIN,20));
     toppingLabel.setForeground(Color.black);
@@ -287,7 +302,7 @@ public class GUI extends JFrame implements ActionListener {
 
     // Add a combobox dropdown for the Sides: ASAHU
     String[] sides = {"salad","hummus and pita"};
-    JComboBox sidesList = new JComboBox(sides);
+    sidesList = new JComboBox(sides);
     JLabel sideLabel = new JLabel("SIDES");
     sideLabel.setFont(new Font("serif",Font.PLAIN,20));
     sideLabel.setForeground(Color.black);
@@ -299,8 +314,8 @@ public class GUI extends JFrame implements ActionListener {
     drinksPanel.setBackground(Color.white);
 
     // Add a combobox dropdown for the Drinks: ASAHU
-    String[] drinks = {"drink"};
-    JComboBox drinksList = new JComboBox(drinks);
+    String[] drinks = {"drink", "no drink"};
+    drinksList = new JComboBox(drinks);
     JLabel drinksLabel = new JLabel("DRINKS");
     drinksLabel.setFont(new Font("serif",Font.PLAIN,20));
     drinksLabel.setForeground(Color.black);
@@ -312,7 +327,7 @@ public class GUI extends JFrame implements ActionListener {
 
     // Add a combobox dropdown for the Drinks: ASAHU
     String[] extras = {"extra meat","extra dressing"};
-    JComboBox extrasList = new JComboBox(extras);
+    extrasList = new JComboBox(extras);
     JLabel extrasLabel = new JLabel("EXTRAS");
     extrasLabel.setFont(new Font("serif",Font.PLAIN,20));
     extrasLabel.setForeground(Color.black);
@@ -327,8 +342,9 @@ public class GUI extends JFrame implements ActionListener {
     submitLabel.setForeground(Color.black);
 
     //Create a new Button for the Submit Button Panel: ASAHU
-    JButton submitButton = new JButton("SUBMIT");
+    JButton submitButton = new JButton("Submit");
     submitButton.setBounds(20,20,95,30);
+    submitButton.addActionListener(MainGUI);
 
     //adds components to Jpanel
     serverPanel.add(label);
@@ -412,6 +428,26 @@ public class GUI extends JFrame implements ActionListener {
 
         //tracks switch
         currentFrame = "main";
+      }
+      else if (s.equals("Submit")){
+        JOptionPane.showMessageDialog(serverFrame,"Order Submitted");
+        //String base = baseList.getSelectedItem().toString();
+        // String protein = proteinList.getSelectedItem().toString();
+        // String dressing = dressingList.getSelectedItem().toString();
+        // String topping = toppingsList.getSelectedItem().toString();
+        // String sides = sidesList.getSelectedItem().toString();
+        // String drink = drinksList.getSelectedItem().toString();
+        // String extras = extrasList.getSelectedItem().toString();
+
+        //creates new order based on chosen value
+        Order curOrder = new Order();
+        curOrder.date = "2023-03-08";
+        curOrder.id = "f3f20238-b924-11fd-a35d-00155dc3f5bd";
+        curOrder.total_price = (float)12.38;
+
+        OrdersDao newOrder = new OrdersDao();
+        newOrder.add(curOrder);
+
       }
       /* ADD HERE IF YOU WANT ACTION TO OCCUR WHEN BUTTON IS CLICKED */
   }
