@@ -102,6 +102,24 @@ public class MenuItemDao implements IDao<MenuItem>{
             return Optional.empty();
         }
     }
+   
+    @Override
+    public ResultSet getHistory(String id) {
+        String query = String.format(
+            "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales" +
+            "FROM orders o" +
+            "JOIN ordered_menu_item omi ON omi.order_id = o.id" +
+            "JOIN menu_item mi ON mi.id = omi.menuitem_id" +
+            "WHERE mi.id = '%s'" + 
+            "AND o.date_time >= CURRENT_DATE - INTERVAL '6 months' -- filter data from the last 6 months" +
+            "GROUP BY day" +
+            "ORDER BY day ASC;",
+            id
+        ); 
+        
+        ResultSet rs = dbClient.executeQuery(query); 
+        return rs;
+    }
 
     @Override
     public void add(MenuItem menuItem) {

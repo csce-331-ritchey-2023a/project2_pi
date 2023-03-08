@@ -102,6 +102,11 @@ public class OrdersDao implements IDao<Order> {
     }   
 
     @Override
+    public ResultSet getHistory(String id) {   
+        throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
+    }
+
+    @Override
     public void add(Order order) {
        String query = String.format("INSERT INTO orders(id, date, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
 
@@ -125,5 +130,5 @@ public class OrdersDao implements IDao<Order> {
         String query = String.format("DELETE FROM orders WHERE id = '%s';", order.id);
         // delete all MenuItem Dependencies
         dbClient.executeQuery(query);
-    } 
+    }
 }

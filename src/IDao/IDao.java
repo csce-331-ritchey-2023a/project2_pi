@@ -24,7 +24,14 @@ public interface IDao<T> {
      * @return List containing all the objects in the database
      */
     List<T> getAll();
-   
+    
+    /**
+     * Returns historical sales data over past 6 months
+     * @param entity
+     * @return Result set containing sales history
+     */
+    ResultSet getHistory(String id);
+    
     /**
      * Gets Id of object given name
      * @param name - name of object 
@@ -49,23 +56,4 @@ public interface IDao<T> {
      * @param entity
      */
     void delete(T entity);
-
-    // /**
-    //  * Removes sub entity from database (MenuItemCutlery, OrderedMenuItem, etc)
-    //  * @param entity
-    //  */
-    // void removeDependency(T entity);
-
-    // /**
-    //  * Gets historic sales data
-    //  */
-    // XYSeries getHistory();
-
-// SELECT DATE(o.date_time) AS sale_date, SUM(om.quantity) AS quantity_sold
-// FROM orders o
-// JOIN ordered_menu_item om ON o.id = om.order_id
-// JOIN menu_item mi ON om.menuitem_id = mi.id
-// WHERE mi.name = 'pita'
-// GROUP BY sale_date;
-
 }
