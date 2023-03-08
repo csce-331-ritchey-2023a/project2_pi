@@ -1,0 +1,217 @@
+import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+// ***IMPORTS NOW WORK BUT GETTING ISSUES WITH CONFIGREADER
+//import src.IDbClient.dBConfigReader;
+
+
+public class GUI extends JFrame implements ActionListener {
+
+  //Main GUI object
+  static GUI MainGUI;
+
+  //JFrames for the 3 parts of GUI
+  static JFrame mainMenu;
+  static JFrame managerFrame;
+  static JFrame serverFrame;
+
+  //holds the current frame
+  static String currentFrame;
+  
+  //private static dBConfigReader configReader;
+
+  public static void main(String[] args)
+  {
+    //Checks for connection at start
+    Connection conn = null;
+    try {
+
+      Class.forName("org.postgresql.Driver");
+      conn = DriverManager.getConnection("jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_pi",
+      "csce315331_pi_master", "3.1415");
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println(e.getClass().getName()+": "+e.getMessage());
+      System.exit(0);
+    }
+    JOptionPane.showMessageDialog(null,"Opened database successfully");
+
+    currentFrame = "main";
+    open_main_menu();
+
+    //closing the connection
+    try {
+      conn.close();
+      JOptionPane.showMessageDialog(null,"Connection Closed.");
+    } catch(Exception e) {
+      JOptionPane.showMessageDialog(null,"Connection NOT Closed.");
+    }
+  }
+
+  //Main Menu GUI design
+  public static void open_main_menu(){
+    // create a new frame
+    mainMenu = new JFrame("DB GUI");
+
+    // create a object
+    MainGUI = new GUI();
+
+    // create a panel
+    JPanel mainPanel = new JPanel();
+    mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 150, 50));
+    mainPanel.setBackground(Color.darkGray);
+    mainPanel.setLayout(new GridLayout(4,1));
+
+    //creates array for buttons
+    JButton mainButtons[] = {new JButton("Server"), new JButton("Manager")};
+
+    // add actionlistener to button
+    mainButtons[0].addActionListener(MainGUI);
+    mainButtons[1].addActionListener(MainGUI);
+
+    //change design of server and manager button
+    for (int i = 0; i < mainButtons.length; i++) {
+      mainButtons[i].setFont(new Font("serif", Font.PLAIN, 30));
+      mainButtons[i].setBackground(new Color(46,56,116));
+      mainButtons[i].setForeground(Color.white);
+      mainButtons[i].setFocusable(false);
+    }
+
+    //Create and set up JLabel
+    JLabel label = new JLabel("<html>Choose Manager or Server Side:<br></html>");
+    label.setFont(new Font("serif", Font.PLAIN, 40));
+    label.setForeground(Color.white);
+
+    label.setHorizontalAlignment(JLabel.CENTER);
+    mainPanel.add(label, BorderLayout.NORTH);
+
+    // add buttons to panel
+    mainPanel.add(mainButtons[0]);
+    mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+    mainPanel.add(mainButtons[1]);
+
+    // add panel to frame
+    mainMenu.add(mainPanel);
+
+    // set the size of Main Menu Frame
+    mainMenu.setSize(1920, 1080);
+    mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    //shows Main Menu JFrame
+    mainMenu.setVisible(true);
+  }
+
+  /* ADD CODE HERE FOR MANAGE AND SERVER CLIENT */
+  public static void switch_to_manager_client(){
+    //closes Main Menu JFrame
+    mainMenu.setVisible(false);
+
+    //creates Manager JFrame
+    managerFrame = new JFrame("Manager Client");
+    managerFrame.setSize(1920, 1080);
+    managerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // create a JPanel
+    JPanel managerPanel = new JPanel();
+    managerPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 150, 50));
+    managerPanel.setBackground(Color.darkGray);
+
+    //creates button to return to main menu
+    JButton mainMenuButton = new JButton("Main Menu");
+
+    //add actionlistener to button and adds to main
+    mainMenuButton.addActionListener(MainGUI);
+
+    //Create and sets up JLabel
+    JLabel label = new JLabel("MANAGER SIDE!");
+    label.setFont(new Font("serif", Font.PLAIN, 40));
+    label.setForeground(Color.white);
+
+    //adds components to JPanel
+    managerPanel.add(label);
+    managerPanel.add(mainMenuButton);
+
+    //shows Manager JFrame
+    managerFrame.add(managerPanel);
+    managerFrame.setVisible(true);
+  }
+
+  public static void switch_to_server_client(){
+    //closes Main Menu JFrame
+    mainMenu.setVisible(false);
+
+    //creates Server JFrame
+    serverFrame = new JFrame("Server Client");
+    serverFrame.setSize(1920, 1080);
+    serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // create a Jpanel
+    JPanel serverPanel = new JPanel();
+    serverPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 150, 50));
+    serverPanel.setBackground(Color.darkGray);
+
+    //creates button to return to main menu
+    JButton mainMenuButton = new JButton("Main Menu");
+
+    //add actionlistener to button and adds to main
+    mainMenuButton.addActionListener(MainGUI);
+
+    //Create and set up JLabel
+    JLabel label = new JLabel("SERVER SIDE!");
+    label.setFont(new Font("serif", Font.PLAIN, 40));
+    label.setForeground(Color.white);
+
+    //adds components to Jpanel
+    serverPanel.add(label);
+    serverPanel.add(mainMenuButton);
+
+    //shows Server JFrame
+    serverFrame.add(serverPanel);
+    serverFrame.setVisible(true);
+  }
+
+  //When button is pressed
+  public void actionPerformed(ActionEvent e)
+  {
+      String s = e.getActionCommand();
+      if (s.equals("Server")) {
+        
+        //runs switch to server code
+        switch_to_server_client();
+
+        //tracks switch
+        currentFrame = "server";
+      }
+      else if (s.equals("Manager")){
+
+        //runs switch to manager code
+        switch_to_manager_client();
+
+        //tracks switch
+        currentFrame = "manager";
+      }
+      else if (s.equals("Main Menu")){
+
+        //checks what frame it is currently in
+        if (currentFrame == "server") {
+
+          //turns off visiblilty
+          serverFrame.setVisible(false);
+        }
+        else if (currentFrame == "manager"){
+
+          //turns off visiblilty
+          managerFrame.setVisible(false);
+        }
+
+        //opens the main menu
+        open_main_menu();
+
+        //tracks switch
+        currentFrame = "main";
+      }
+      /* ADD HERE IF YOU WANT ACTION TO OCCUR WHEN BUTTON IS CLICKED */
+  }
+}
