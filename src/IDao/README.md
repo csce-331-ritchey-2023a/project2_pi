@@ -1,4 +1,4 @@
-# IDao Design Doc # 
+# IDao Overview Doc # 
 
 ## Purpose ##
 The IDao serves as an abstraction layer to ensure that the database logic is seperate from the main business logic.

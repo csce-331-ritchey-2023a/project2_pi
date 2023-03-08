@@ -55,6 +55,7 @@ public class GUI extends JFrame implements ActionListener {
     // create a new frame
     mainMenu = new JFrame("DB GUI");
 
+      //TODO Step 4javac *.java
     // create a object
     MainGUI = new GUI();
 
@@ -71,7 +72,7 @@ public class GUI extends JFrame implements ActionListener {
     mainButtons[0].addActionListener(MainGUI);
     mainButtons[1].addActionListener(MainGUI);
 
-    //change design of server and manager button
+    //change design of servers and manager button
     for (int i = 0; i < mainButtons.length; i++) {
       mainButtons[i].setFont(new Font("serif", Font.PLAIN, 30));
       mainButtons[i].setBackground(new Color(46,56,116));
@@ -163,9 +164,60 @@ public class GUI extends JFrame implements ActionListener {
     label.setFont(new Font("serif", Font.PLAIN, 40));
     label.setForeground(Color.white);
 
+    //Create a new Panel for the Base Items: ASAHU
+    JPanel basePanel= new JPanel();
+    basePanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 75, 50));
+    basePanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for Base items: ASAHU 
+    String[] baseItems = {"Brown Rice","Rice Pillaf","Pita"};
+    JComboBox baseList = new JComboBox(baseItems);
+    JLabel baseLabel = new JLabel("BASE");
+    baseLabel.setFont(new Font("serif", Font.PLAIN, 20));
+    baseLabel.setForeground(Color.black);
+
+    //Create a new Panel for the Protein Items: ASAHU
+    JPanel proteinPanel = new JPanel();
+    proteinPanel.setBorder(BorderFactory.createEmptyBorder(25, 25, 75, 50));
+    proteinPanel.setBackground(Color.white);
+    
+    // Add a combobox dropdown for protein: ASAHU 
+    String[] protein = {"Falafel","Meatball"};
+    JComboBox proteinList = new JComboBox(protein);
+    JLabel proteinLabel = new JLabel("PROTEIN");
+    proteinLabel.setFont(new Font("serif",Font.PLAIN,20));
+    proteinLabel.setForeground(Color.black);
+
+    // Create a new Panel for the Dressing Items: ASAHU
+    JPanel dressingPanel = new JPanel();
+    dressingPanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    dressingPanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for the dressing: ASAHU
+    String[] dressing = {"Greek Yogurt", "Aioli","Harissa","Tahini","Oregano"};
+    JComboBox dressingList = new JComboBox(dressing);
+    JLabel dressingLabel = new JLabel("DRESSING");
+    dressingLabel.setFont(new Font("serif",Font.PLAIN,20));
+    dressingLabel.setForeground(Color.black);
+
     //adds components to Jpanel
     serverPanel.add(label);
     serverPanel.add(mainMenuButton);
+
+    // Add CombobBox Components: ASAHU
+    serverPanel.add(basePanel);
+    basePanel.add(baseLabel);
+    basePanel.add(baseList);
+
+    serverPanel.add(proteinPanel);
+    proteinPanel.add(proteinLabel);
+    proteinPanel.add(proteinList);
+
+    serverPanel.add(dressingPanel);
+    dressingPanel.add(dressingLabel);
+    dressingPanel.add(dressingList);
+    //serverPanel.add(cmbMessageList);
+
 
     //shows Server JFrame
     serverFrame.add(serverPanel);
