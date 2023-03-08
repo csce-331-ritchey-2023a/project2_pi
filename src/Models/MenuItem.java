@@ -1,11 +1,17 @@
 package src.Models;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MenuItem {
-    public int id;
+    public String id;
     public String name;
-    public float price;
     public String category;
-    public List<Cutlery> MenuItemCutlery;
+    public float price;
+    public int quanitity;
+    public List<MenuItemCutlery> MenuItemCutlery;
+
+    public MenuItem() {
+        id = UUID.randomUUID().toString();
+    }
 }
