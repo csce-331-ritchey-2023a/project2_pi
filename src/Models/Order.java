@@ -12,7 +12,7 @@ public class Order {
     public float total_price;
     public List<OrderedMenuItem> OrderedMenuItems;
 
-    MenuItemDao menuItemDao;
+    private MenuItemDao menuItemDao;
 
     public Order() {
         id = UUID.randomUUID().toString();
