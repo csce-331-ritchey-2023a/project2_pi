@@ -49,8 +49,16 @@ public class GUI extends JFrame implements ActionListener {
       JOptionPane.showMessageDialog(null,"Connection NOT Closed.");
     }
   }
-
-  //Main Menu GUI design
+  /** * No Returns
+   * Opens Main Menu GUI for Pom & Honey POS System
+   * Allows User to select Server and Manager Side
+   * Switches to Server or Manager based on button pressed
+   * Calls switch_to_manager_client() and switch_to_server_client() 
+   * 
+   * @param none
+   * @return none - opens GUI using Java Swing
+   * @throws SQLException
+   */
   public static void open_main_menu(){
     // create a new frame
     mainMenu = new JFrame("DB GUI");
@@ -104,7 +112,17 @@ public class GUI extends JFrame implements ActionListener {
     mainMenu.setVisible(true);
   }
 
-  /* ADD CODE HERE FOR MANAGE AND SERVER CLIENT */
+  /** * No Returns
+   * Opens Manager Client for Pom & Honey POS System
+   * Allows Manager to track remaining inventory
+   * Manager can also add and remove items from inventory
+   * Switches to Main Menu based on button pressed
+   * Calls open_main_menu()
+   * 
+   * @param none
+   * @return none - opens GUI using Java Swing
+   * @throws SQLException
+   */
   public static void switch_to_manager_client(){
     //closes Main Menu JFrame
     mainMenu.setVisible(false);
@@ -139,6 +157,16 @@ public class GUI extends JFrame implements ActionListener {
     managerFrame.setVisible(true);
   }
 
+  /** * No Returns
+   * Opens Server Client for Pom & Honey POS System
+   * Allows User to place orders for customers
+   * Switches to Main Menu based on button pressed
+   * Calls open_main_menu()
+   * 
+   * @param none
+   * @return none - opens GUI using Java Swing
+   * @throws SQLException
+   */
   public static void switch_to_server_client(){
     //closes Main Menu JFrame
     mainMenu.setVisible(false);
