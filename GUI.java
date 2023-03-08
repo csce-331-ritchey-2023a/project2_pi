@@ -134,6 +134,63 @@ public class GUI extends JFrame implements ActionListener {
     managerPanel.add(label);
     managerPanel.add(mainMenuButton);
 
+    //Set Up a new Panel for the Inventory Table on the Manager Side: ASAHU
+    JPanel inventoryPanel = new JPanel();
+    inventoryPanel.setBorder(BorderFactory.createEmptyBorder(50,50,75,200));
+    inventoryPanel.setBackground(Color.white);
+
+    //Add a label for the Ingredient Table: ASAHU
+    JLabel inventoryLabel = new JLabel("INVENTORY");
+    inventoryLabel.setFont(new Font("serif",Font.PLAIN,40));
+    inventoryLabel.setForeground(Color.black);
+
+    //Create the Inventory Table: ASAHU
+    //Individual Data Rows: ASAHU
+    String itemData[][] = {
+      {"Item","Amount","Pricing","Add","Remove"};
+      {"brown rice","2000","0.0","Temp","Temp"},
+      {"rice pilaf","2000","0.0","Temp","Temp"},
+      {"pita","2000","0.0","Temp","Temp"},
+      {"falafel","2000","5.89","Temp","Temp"},
+      {"meatball","2000","6.89","Temp","Temp"},
+      {"feta cheese","2000","0.0","Temp","Temp"},
+      {"cucumber","2000","0.0","Temp","Temp"},
+      {"tzatziki","2000","0.0","Temp","Temp"},
+      {"hot sauce","2000","0.0","Temp","Temp"},
+      {"peppers","2000","0.0","Temp","Temp"},
+      {"hummus","2000","0.0","Temp","Temp"},
+      {"olives","2000","0.0","Temp","Temp"},
+      {"onion","2000","0.0","Temp","Temp"},
+      {"tomato","2000","0.0","Temp","Temp"},
+      {"greek yogurt","2000","0.0","Temp","Temp"},
+      {"aioli","2000","0.0","Temp","Temp"},
+      {"harissa","2000","0.0","Temp","Temp"},
+      {"tahini","2000","0.0","Temp","Temp"},
+      {"oregano","2000","0.0","Temp","Temp"},
+      {"salad","2000","0.0","Temp","Temp"},
+      {"hummus and pita","2000","0.0","Temp","Temp"},
+      {"drink","2000","0.0","Temp","Temp"},
+      {"extra meat","2000","2.49","Temp","Temp"},
+      {"extra dressing","2000","0.39","Temp","Temp"},
+      {"bowl","2000","0.0","Temp","Temp"},
+      {"plate","2000","0.0","Temp","Temp"},
+      {"silverware","5000","0.0","Temp","Temp"},
+      {"napkins","10000","0.0","Temp","Temp"},
+      {"cup","4000","0.0","Temp","Temp"}
+    };
+
+    //Individual Column Names: ASAHU
+    String columnNames[] = {"Item","Amount","Pricing","Add","Remove"};
+    //Instantiating the Tables: ASAHU    
+    JTable inventoryTable = new JTable(itemData, columnNames);
+    inventoryTable.setBounds(30, 40, 200, 300);
+
+    //Add Inventory Components onto the Manager Panel: ASAHU
+    managerPanel.add(inventoryPanel);
+    inventoryPanel.add(inventoryLabel);
+    inventoryPanel.add(inventoryTable);
+
+
     //shows Manager JFrame
     managerFrame.add(managerPanel);
     managerFrame.setVisible(true);
@@ -170,7 +227,7 @@ public class GUI extends JFrame implements ActionListener {
     basePanel.setBackground(Color.white);
 
     // Add a combobox dropdown for Base items: ASAHU 
-    String[] baseItems = {"Brown Rice","Rice Pillaf","Pita"};
+    String[] baseItems = {"brown rice","rice pillaf","pita"};
     JComboBox baseList = new JComboBox(baseItems);
     JLabel baseLabel = new JLabel("BASE");
     baseLabel.setFont(new Font("serif", Font.PLAIN, 20));
@@ -182,7 +239,7 @@ public class GUI extends JFrame implements ActionListener {
     proteinPanel.setBackground(Color.white);
     
     // Add a combobox dropdown for protein: ASAHU 
-    String[] protein = {"Falafel","Meatball"};
+    String[] protein = {"falafel","meatball"};
     JComboBox proteinList = new JComboBox(protein);
     JLabel proteinLabel = new JLabel("PROTEIN");
     proteinLabel.setFont(new Font("serif",Font.PLAIN,20));
@@ -194,11 +251,84 @@ public class GUI extends JFrame implements ActionListener {
     dressingPanel.setBackground(Color.white);
 
     // Add a combobox dropdown for the dressing: ASAHU
-    String[] dressing = {"Greek Yogurt", "Aioli","Harissa","Tahini","Oregano"};
+    String[] dressing = {"greek yogurt", "aioli","harissa","tahini","oregano"};
     JComboBox dressingList = new JComboBox(dressing);
     JLabel dressingLabel = new JLabel("DRESSING");
     dressingLabel.setFont(new Font("serif",Font.PLAIN,20));
     dressingLabel.setForeground(Color.black);
+
+    // Create a new Panel for the Toppings: ASAHU
+    JPanel toppingsPanel = new JPanel();
+    toppingsPanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    toppingsPanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for the Toppings: ASAHU
+    String[] toppings = {
+      "feta cheese",
+      "cucumber",
+      "tzatziki",
+      "hot sauce",
+      "peppers",
+      "hummus",
+      "olives",
+      "onion",
+      "tomato",
+    };
+    JComboBox toppingsList = new JComboBox(toppings);
+    JLabel toppingLabel = new JLabel("TOPPINGS");
+    toppingLabel.setFont(new Font("serif",Font.PLAIN,20));
+    toppingLabel.setForeground(Color.black);
+
+
+    // Create a new Panel for the Side Items: ASAHU
+    JPanel sidePanel = new JPanel();
+    sidePanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    sidePanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for the Sides: ASAHU
+    String[] sides = {"salad","hummus and pita"};
+    JComboBox sidesList = new JComboBox(sides);
+    JLabel sideLabel = new JLabel("SIDES");
+    sideLabel.setFont(new Font("serif",Font.PLAIN,20));
+    sideLabel.setForeground(Color.black);
+    
+
+    // Create a new Panel for the Drinks: ASAHU
+    JPanel drinksPanel = new JPanel();
+    drinksPanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    drinksPanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for the Drinks: ASAHU
+    String[] drinks = {"drink"};
+    JComboBox drinksList = new JComboBox(drinks);
+    JLabel drinksLabel = new JLabel("DRINKS");
+    drinksLabel.setFont(new Font("serif",Font.PLAIN,20));
+    drinksLabel.setForeground(Color.black);
+
+    // Create a new Panel for the Extras: ASAHU
+    JPanel extrasPanel = new JPanel();
+    extrasPanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    extrasPanel.setBackground(Color.white);
+
+    // Add a combobox dropdown for the Drinks: ASAHU
+    String[] extras = {"extra meat","extra dressing"};
+    JComboBox extrasList = new JComboBox(extras);
+    JLabel extrasLabel = new JLabel("EXTRAS");
+    extrasLabel.setFont(new Font("serif",Font.PLAIN,20));
+    extrasLabel.setForeground(Color.black);
+
+
+    // Create a new Panel for the Submit Button: ASAHU
+    JPanel submitPanel = new JPanel();
+    submitPanel.setBorder(BorderFactory.createEmptyBorder(25,25,75,50));
+    submitPanel.setBackground(Color.white);
+    JLabel submitLabel = new JLabel("SUBMIT ORDER");
+    submitLabel.setFont(new Font("serif",Font.PLAIN,20));
+    submitLabel.setForeground(Color.black);
+
+    //Create a new Button for the Submit Button Panel: ASAHU
+    JButton submitButton = new JButton("SUBMIT");
+    submitButton.setBounds(20,20,95,30);
 
     //adds components to Jpanel
     serverPanel.add(label);
@@ -216,8 +346,27 @@ public class GUI extends JFrame implements ActionListener {
     serverPanel.add(dressingPanel);
     dressingPanel.add(dressingLabel);
     dressingPanel.add(dressingList);
+
+    serverPanel.add(toppingsPanel);
+    toppingsPanel.add(toppingLabel);
+    toppingsPanel.add(toppingsList);
+
+    serverPanel.add(sidePanel);
+    sidePanel.add(sideLabel);
+    sidePanel.add(sidesList);
+
+    serverPanel.add(drinksPanel);
+    drinksPanel.add(drinksLabel);
+    drinksPanel.add(drinksList);
+
+    serverPanel.add(extrasPanel);
+    extrasPanel.add(extrasLabel);
+    extrasPanel.add(extrasList);
     //serverPanel.add(cmbMessageList);
 
+    serverPanel.add(submitPanel);
+    submitPanel.add(submitLabel);
+    submitPanel.add(submitButton);
 
     //shows Server JFrame
     serverFrame.add(serverPanel);
