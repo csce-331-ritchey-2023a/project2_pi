@@ -2,6 +2,7 @@ package src.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import src.IDao.CutleryDao;
@@ -25,7 +26,7 @@ public class MenuItem {
         Optional<String> optionalCutleryId= cutleryDao.getId(name);
         if (! optionalCutleryId.isPresent())
         {
-            throw new IllegalArgumentException("[MenuItem]: MenuItem name not valid/found"); 
+            throw new IllegalArgumentException("[MenuItem]: Cutlery name not valid/found"); 
         }
         if (quantity <= 0)
         {

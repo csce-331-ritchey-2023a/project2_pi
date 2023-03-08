@@ -147,7 +147,7 @@ public class GUI extends JFrame implements ActionListener {
     //Create the Inventory Table: ASAHU
     //Individual Data Rows: ASAHU
     String itemData[][] = {
-      {"Item","Amount","Pricing","Add","Remove"};
+      {"Item","Amount","Pricing","Add","Remove"},
       {"brown rice","2000","0.0","Temp","Temp"},
       {"rice pilaf","2000","0.0","Temp","Temp"},
       {"pita","2000","0.0","Temp","Temp"},
