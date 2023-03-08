@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface IDao<T> {
     /**
      * Converts Result Set to Class Object T
@@ -25,7 +24,14 @@ public interface IDao<T> {
      * @return List containing all the objects in the database
      */
     List<T> getAll();
-   
+    
+    /**
+     * Returns historical sales data over past 6 months
+     * @param entity
+     * @return Result set containing sales history
+     */
+    ResultSet getHistory(String id);
+    
     /**
      * Gets Id of object given name
      * @param name - name of object 
