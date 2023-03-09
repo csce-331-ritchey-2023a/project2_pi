@@ -1,5 +1,6 @@
 package src.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,7 +11,7 @@ public class Order {
     public String id;
     public String date;
     public float total_price;
-    public List<OrderedMenuItem> OrderedMenuItems;
+    public List<OrderedMenuItem> OrderedMenuItems = new ArrayList<OrderedMenuItem>();
 
     private MenuItemDao menuItemDao;
 

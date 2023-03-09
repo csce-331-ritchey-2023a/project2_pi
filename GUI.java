@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.UUID;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -442,7 +443,7 @@ public class GUI extends JFrame implements ActionListener {
         //creates new order based on chosen value
         Order curOrder = new Order();
         curOrder.date = "2023-03-08";
-        curOrder.id = "f3f20238-b924-11fd-a35d-00155dc3f5bd";
+        curOrder.id = UUID.randomUUID().toString(); 
         curOrder.total_price = (float)12.38;
 
         OrdersDao newOrder = new OrdersDao();

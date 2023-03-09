@@ -108,13 +108,13 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public void add(Order order) {
-       String query = String.format("INSERT INTO orders(id, date, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
+       String query = String.format("INSERT INTO orders(id, date_time, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
 
        dbClient.executeQuery(query);
         
        for(int i = 0; i < order.OrderedMenuItems.size(); i++)
        {
-            query = String.format("INSERT INTO OrderedMenuItems(id, date, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
+            query = String.format("INSERT INTO OrderedMenuItems(id, date_time, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
        };
     }
 
