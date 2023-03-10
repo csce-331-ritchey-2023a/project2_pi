@@ -135,7 +135,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             // insert into MenuItemCutlery table
             query = String.format(
                 "INSERT INTO menu_item_cutlery(menu_item_id, cutlery_id, quantity) VALUES ('%s', '%s', %d);",
-                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId, menuItem.MenuItemCutlery.get(i).quantity 
+                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).cutleryId, menuItem.MenuItemCutlery.get(i).quantity 
             );
         }
     }
@@ -152,25 +152,37 @@ public class MenuItemDao implements IDao<MenuItem>{
             // Update Cutlery 
             query = String.format(
                 "UPDATE menu_item_cutlery SET quanitity %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
-                menuItem.MenuItemCutlery.get(i).quantity ,menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId
+                menuItem.MenuItemCutlery.get(i).quantity ,menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).cutleryId
             );
-        }
-        
-        dbClient.executeQuery(query);
+            
+            dbClient.executeQuery(query);
+        }    
     }
 
     @Override
     public void delete(MenuItem menuItem) {
         String query = String.format("DELETE FROM menu_item WHERE id = '%s';", menuItem.id);
         dbClient.executeQuery(query);
-        
-        for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
-        {
-            // Update Cutlery 
-            query = String.format(
-                "DELETE FROM menu_item_cutlery WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
-                menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).orderId
-            );
-        }
+     
+        // Delete from menu_item_cutlery 
+        query = String.format(
+            "DELETE FROM menu_item_cutlery WHERE menu_item_id = '%s';",
+            menuItem.id
+        );
+        dbClient.executeQuery(query);
+    }
+
+    /**
+     * deletes cutlery dependency from menu_item_cutlery table
+     * @param menuItemId
+     * @param cutleryId
+     */
+    public void deleteCutlery(String menuItemId, String cutleryId) {
+        String query = String.format(
+            "DELETE FROM menu_item_cutlery WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
+            menuItemId, cutleryId 
+        );
+
+        dbClient.executeQuery(query);
     }
 }

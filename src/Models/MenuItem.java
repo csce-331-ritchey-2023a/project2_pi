@@ -23,7 +23,7 @@ public class MenuItem {
     }
  
     public void AddCutlery(String name, int quantity) {
-        Optional<String> optionalCutleryId= cutleryDao.getId(name);
+        Optional<String> optionalCutleryId = cutleryDao.getId(name);
         if (! optionalCutleryId.isPresent())
         {
             throw new IllegalArgumentException("[MenuItem]: Cutlery name not valid/found"); 

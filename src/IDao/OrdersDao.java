@@ -115,20 +115,35 @@ public class OrdersDao implements IDao<Order> {
        for(int i = 0; i < order.OrderedMenuItems.size(); i++)
        {
             query = String.format("INSERT INTO OrderedMenuItems(id, date_time, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
+            dbClient.executeQuery(query);
        };
     }
 
     @Override
     public void update(Order order) {
         String query = String.format("UPDATE Orders SET date = '%s', total_price = %f WHERE id = '%s';", order.date, order.total_price, order.id);
-        // update all the orderedMenuItems as well  
         dbClient.executeQuery(query);
+ 
+        for (int i = 0; i < order.OrderedMenuItems.size(); i++)
+        {
+            // Update Cutlery 
+            query = String.format(
+                "UPDATE ordered_menu_item SET quanitity %d WHERE menu_item_id = '%s' AND order_id = '%s';",
+                order.OrderedMenuItems.get(i).quantity, order.OrderedMenuItems.get(i).menuItemId, order.OrderedMenuItems.get(i).orderId
+            );
+            
+            dbClient.executeQuery(query);
+        }    
     }
 
     @Override
     public void delete(Order order) {
         String query = String.format("DELETE FROM orders WHERE id = '%s';", order.id);
         // delete all MenuItem Dependencies
+        dbClient.executeQuery(query);
+        
+        // Delete all entries in ordered_menu_item  
+        query = String.format("DELETE FROM ordered_menu_item WHERE order_id = '%s';", order.id);
         dbClient.executeQuery(query);
     }
 }
