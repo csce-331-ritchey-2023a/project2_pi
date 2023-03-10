@@ -1,17 +1,22 @@
 package src.Dao;
 
 import java.sql.ResultSet;
-import java.util.List;
-import java.util.Optional;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import src.IDbClient.DbClient;
 
 public class Inventory{
-    public Optional<ResultSet> get(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    private DbClient dbClient;
+    
+    public ResultSet get() {
+        ResultSet rs = dbClient.executeQuery(
+            "SELECT id, name, quantity" +
+            "FROM cutlery" +
+            "UNION" +
+            "SELECT id, name, quantity" +
+            "FROM menu_item;"
+        );
+
+        return rs;  
     }
 
     public void add(Object entity) {
