@@ -1,4 +1,4 @@
-package src.IDao;
+package src.Dao;
 
 import java.sql.ResultSet;
 import java.util.List;
