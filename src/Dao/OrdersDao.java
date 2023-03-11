@@ -54,6 +54,16 @@ public class OrdersDao implements IDao<Order> {
             // if exists, then return object inside Optional container
             if (rs.next()) {
                 Order order = ConvertResultSet(rs);
+
+                // populate ordered menu item
+                query = String.format("SELECT * FROM ordered_menu_item WHERE order_id = '%s';", id);
+                ResultSet orderedMenuItemRs = dbClient.executeQuery(query);
+                while (orderedMenuItemRs.next())
+                {
+                    String menuItem_id = orderedMenuItemRs.getString("cutlery_id");
+                    int quantity = orderedMenuItemRs.getInt("quantity"); 
+                    order.OrderedMenuItems.add(new OrderedMenuItem(menuItem_id, id, quantity));
+                }
                 return Optional.of(order);           
             }
             else 
