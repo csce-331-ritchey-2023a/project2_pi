@@ -41,14 +41,26 @@ public class Inventory{
         }
     }
 
-    public void update(Object entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(Object entity) { 
+        if (entity instanceof MenuItem) 
+        {
+            menuItemDao.update((MenuItem) entity);
+        }
+        else if (entity instanceof Cutlery)
+        {
+            cutleryDao.update((Cutlery) entity);
+        }
     }
 
     public void delete(Object entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (entity instanceof MenuItem) 
+        {
+            menuItemDao.delete((MenuItem) entity);
+        }
+        else if (entity instanceof Cutlery)
+        {
+            cutleryDao.delete((Cutlery) entity);
+        }
     }
 
 }
