@@ -326,7 +326,7 @@ public class GUI extends JFrame implements ActionListener {
     extrasPanel.setBackground(Color.white);
 
     // Add a combobox dropdown for the Drinks: ASAHU
-    String[] extras = {"extra meat","extra dressing"};
+    String[] extras = {"extra meat","extra dressing", "none"};
     extrasList = new JComboBox(extras);
     JLabel extrasLabel = new JLabel("EXTRAS");
     extrasLabel.setFont(new Font("serif",Font.PLAIN,20));
