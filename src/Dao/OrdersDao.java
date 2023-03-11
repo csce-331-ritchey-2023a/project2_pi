@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 import src.IDbClient.DbClient;
+import src.Models.Cutlery;
 import src.Models.MenuItem;
 import src.Models.Order;
+import src.Models.OrderedMenuItem;
 
 public class OrdersDao implements IDao<Order> {
 
     public DbClient dbClient; 
-    public MenuItemDao menuItemDao;
 
     // init client connection
     public OrdersDao() {
@@ -114,11 +115,38 @@ public class OrdersDao implements IDao<Order> {
 
        dbClient.executeQuery(query);
         
-       for(int i = 0; i < order.OrderedMenuItems.size(); i++)
-       {
-            query = String.format("INSERT INTO OrderedMenuItems(id, date_time, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
+        MenuItemDao menuItemDao = new MenuItemDao();
+        CutleryDao cutleryDao = new CutleryDao();
+        for(int i = 0; i < order.OrderedMenuItems.size(); i++)
+        {
+            query = String.format("INSERT INTO OrderedMenuItems(order_id, menu_item_id, quantity) VALUES ('%s', '%s', %d);", order.OrderedMenuItems.get(i).orderId, order.OrderedMenuItems.get(i).menuItemId, order.OrderedMenuItems.get(i).quantity);
             dbClient.executeQuery(query);
-       };
+
+            // reduce quantity
+            Optional<MenuItem> optionalMenuItem = menuItemDao.get(order.OrderedMenuItems.get(i).menuItemId); 
+            if (optionalMenuItem.isPresent())
+            {
+                // update menu item quantity
+                MenuItem menuItem = optionalMenuItem.get(); 
+                menuItem.quantity -= order.OrderedMenuItems.get(i).quantity;
+                menuItemDao.update(menuItem);
+
+                // update cutlerly 
+                for (int j = 0; j < menuItem.MenuItemCutlery.size(); j++)
+                {
+                    String cultleryId = menuItem.MenuItemCutlery.get(j).cutleryId;
+                    Optional<Cutlery> optionalCutlery = cutleryDao.get(cultleryId);
+                    Cutlery cutlery = optionalCutlery.get();
+                    cutlery.quantity -= menuItem.MenuItemCutlery.get(j).quantity;
+                    cutleryDao.update(cutlery);
+                }
+            }
+            else 
+            {
+                System.out.println("[OrderDao]: Menu Item in order does not exist");
+            }
+        };
+        System.out.println("[OrderDao]: Successfully added order");
     }
 
     @Override
@@ -147,8 +175,5 @@ public class OrdersDao implements IDao<Order> {
         // Delete all entries in ordered_menu_item  
         query = String.format("DELETE FROM ordered_menu_item WHERE order_id = '%s';", order.id);
         dbClient.executeQuery(query);
-    }
-
-    public void reduceQuantity(int quantity, String id) {
     }
 }

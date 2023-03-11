@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import src.IDbClient.DbClient;
 import src.Models.MenuItem;
+import src.Models.OrderedMenuItem;
 
 public class MenuItemDao implements IDao<MenuItem>{
     
@@ -52,6 +53,17 @@ public class MenuItemDao implements IDao<MenuItem>{
             if (rs.next())
             {
                 MenuItem menuItem = ConvertResultSet(rs);
+                
+                // populate menu item cutlery
+                query = String.format("SELECT * FROM menu_item_cutlery WHERE menu_item_id = '%s';", id);
+                ResultSet menuItemCutleryRs = dbClient.executeQuery(query);
+                while (menuItemCutleryRs.next())
+                {
+                    String cutlery_id = menuItemCutleryRs.getString("cutlery_id");
+                    int quantity = menuItemCutleryRs.getInt("quantity");
+                    menuItem.AddCutlery(cutlery_id, quantity);
+                }
+
                 return Optional.of(menuItem);
             }
             else
@@ -184,9 +196,5 @@ public class MenuItemDao implements IDao<MenuItem>{
         );
 
         dbClient.executeQuery(query);
-    }
-
-    public void reduceQuantity(int quantity, String id) {
-        
     }
 }
