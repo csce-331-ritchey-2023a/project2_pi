@@ -185,4 +185,8 @@ public class MenuItemDao implements IDao<MenuItem>{
 
         dbClient.executeQuery(query);
     }
+
+    public void reduceQuantity(int quantity, String id) {
+        
+    }
 }

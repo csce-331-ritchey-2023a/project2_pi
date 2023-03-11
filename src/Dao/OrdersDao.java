@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 import src.IDbClient.DbClient;
+import src.Models.MenuItem;
 import src.Models.Order;
 
 public class OrdersDao implements IDao<Order> {
 
-    public DbClient dbClient;    
+    public DbClient dbClient; 
+    public MenuItemDao menuItemDao;
 
     // init client connection
     public OrdersDao() {
@@ -145,5 +147,8 @@ public class OrdersDao implements IDao<Order> {
         // Delete all entries in ordered_menu_item  
         query = String.format("DELETE FROM ordered_menu_item WHERE order_id = '%s';", order.id);
         dbClient.executeQuery(query);
+    }
+
+    public void reduceQuantity(int quantity, String id) {
     }
 }

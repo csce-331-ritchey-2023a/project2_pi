@@ -142,4 +142,9 @@ public class CutleryDao implements IDao<Cutlery>{
         String query = String.format("DELETE FROM cutlery WHERE id = '%s';", cutlery.id);
         dbClient.executeQuery(query);
     }
+
+    public void reduceQuantity(int quantity, String id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reduceQuantity'");
+    }
 }
