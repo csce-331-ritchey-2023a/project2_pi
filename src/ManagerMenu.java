@@ -50,7 +50,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         MainMenuBtn.setBackground(new java.awt.Color(46, 56, 116));
         MainMenuBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MainMenuBtn.setForeground(java.awt.Color.white);
-        MainMenuBtn.setText("Main Menu");
+        MainMenuBtn.setText("Back");
         MainMenuBtn.setFocusPainted(false);
         MainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,7 @@ public class ManagerMenu extends javax.swing.JFrame {
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
         // TODO add your handling code here:
         String s = evt.getActionCommand();
-        if (s.equals("Main Menu")) {
+        if (s.equals("Back")) {
             this.setVisible(false);
             MainMenu menuFrame = new MainMenu();
             menuFrame.setVisible(true);

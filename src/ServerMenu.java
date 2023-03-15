@@ -279,7 +279,8 @@ public class ServerMenu extends javax.swing.JFrame {
         MainMenuServerBtn.setBackground(new java.awt.Color(46, 56, 116));
         MainMenuServerBtn.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 24)); // NOI18N
         MainMenuServerBtn.setForeground(java.awt.Color.white);
-        MainMenuServerBtn.setText("Main Menu");
+        MainMenuServerBtn.setText("Back");
+        MainMenuServerBtn.setToolTipText("");
         MainMenuServerBtn.setFocusable(false);
         MainMenuServerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,7 +358,7 @@ public class ServerMenu extends javax.swing.JFrame {
     private void MainMenuServerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuServerBtnActionPerformed
         // TODO add your handling code here:
         String s = evt.getActionCommand();
-        if (s.equals("Main Menu")) {
+        if (s.equals("Back")) {
             this.setVisible(false);
             MainMenu menuFrame = new MainMenu();
             menuFrame.setVisible(true);
