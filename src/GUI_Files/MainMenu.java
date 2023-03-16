@@ -1,12 +1,11 @@
+package GUI_Files;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author rajas
- */
+
 public class MainMenu extends javax.swing.JFrame {
 
     /**

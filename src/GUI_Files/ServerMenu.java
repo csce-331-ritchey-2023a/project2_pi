@@ -1,3 +1,5 @@
+package GUI_Files;
+
 
 import javax.swing.JOptionPane;
 
@@ -7,10 +9,6 @@ import javax.swing.JOptionPane;
  */
 
 
-/**
- *
- * @author rajas
- */
 public class ServerMenu extends javax.swing.JFrame {
 
     /**

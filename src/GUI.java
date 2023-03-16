@@ -3,13 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
+import GUI_Files.MainMenu;
 import java.sql.*;
 import javax.swing.*;
+import src.Models.*;
 
-/**
- *
- * @author rajas
- */
+
 public class GUI {
 
     /**

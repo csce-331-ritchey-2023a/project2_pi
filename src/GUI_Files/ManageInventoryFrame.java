@@ -1,3 +1,5 @@
+package GUI_Files;
+
 
 import javax.swing.JOptionPane;
 
@@ -6,10 +8,7 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author rajas
- */
+
 public class ManageInventoryFrame extends javax.swing.JFrame {
 
     /**
@@ -19,7 +18,6 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         initComponents();
     }
      
-    ManagerMenu managerMenuFrame = new ManagerMenu();
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -301,6 +299,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         String s = evt.getActionCommand();
         if (s.equals("Back")) {
             this.setVisible(false);
+            ManagerMenu managerMenuFrame = new ManagerMenu();
             managerMenuFrame.setVisible(true);
         }
     }//GEN-LAST:event_ManagerBackBtnActionPerformed
