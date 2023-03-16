@@ -45,9 +45,12 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         EditValueField = new javax.swing.JTextField();
         ItemSelection = new javax.swing.JComboBox<>();
         ValueSubmitBtn = new javax.swing.JButton();
-        CategoryLabel1 = new javax.swing.JLabel();
+        EditItemSubLabel = new javax.swing.JLabel();
         ItemSelection1 = new javax.swing.JComboBox<>();
-        CategoryLabel2 = new javax.swing.JLabel();
+        EditTypeLabel = new javax.swing.JLabel();
+        RemoveItemLabel = new javax.swing.JLabel();
+        RemoveItemSelection = new javax.swing.JComboBox<>();
+        RemoveSubmitBtn = new javax.swing.JButton();
         ManagerBackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,7 +100,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
             .addGroup(InventoryPanelLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(TableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         AddEditPanel.setBackground(new java.awt.Color(46, 56, 116));
@@ -146,15 +149,29 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
             }
         });
 
-        CategoryLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 24)); // NOI18N
-        CategoryLabel1.setForeground(java.awt.Color.white);
-        CategoryLabel1.setText("Item:");
+        EditItemSubLabel.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 24)); // NOI18N
+        EditItemSubLabel.setForeground(java.awt.Color.white);
+        EditItemSubLabel.setText("Item:");
 
         ItemSelection1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Quantity", "Price", "Category" }));
 
-        CategoryLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 24)); // NOI18N
-        CategoryLabel2.setForeground(java.awt.Color.white);
-        CategoryLabel2.setText("Type:");
+        EditTypeLabel.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 24)); // NOI18N
+        EditTypeLabel.setForeground(java.awt.Color.white);
+        EditTypeLabel.setText("Type:");
+
+        RemoveItemLabel.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 50)); // NOI18N
+        RemoveItemLabel.setForeground(java.awt.Color.white);
+        RemoveItemLabel.setText("Remove Item:");
+
+        RemoveItemSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "brown rice", "rice pilaf", "pita", "remaining items" }));
+
+        RemoveSubmitBtn.setText("Remove Item");
+        RemoveSubmitBtn.setFocusable(false);
+        RemoveSubmitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveSubmitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AddEditPanelLayout = new javax.swing.GroupLayout(AddEditPanel);
         AddEditPanel.setLayout(AddEditPanelLayout);
@@ -170,13 +187,6 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
                     .addGroup(AddEditPanelLayout.createSequentialGroup()
                         .addComponent(AddItemsLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddEditPanelLayout.createSequentialGroup()
-                        .addComponent(ItemSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EditValueField)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ValueSubmitBtn)
-                        .addGap(24, 24, 24))
                     .addGroup(AddEditPanelLayout.createSequentialGroup()
                         .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AddEditPanelLayout.createSequentialGroup()
@@ -190,7 +200,19 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
                                     .addComponent(ItemNameField))
                                 .addGap(39, 39, 39)))
                         .addComponent(AddSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddEditPanelLayout.createSequentialGroup()
+                        .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(AddEditPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(RemoveSubmitBtn))
+                            .addGroup(AddEditPanelLayout.createSequentialGroup()
+                                .addComponent(ItemSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(EditValueField)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ValueSubmitBtn)
+                        .addGap(24, 24, 24))))
             .addGroup(AddEditPanelLayout.createSequentialGroup()
                 .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddEditPanelLayout.createSequentialGroup()
@@ -200,10 +222,19 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
                         .addComponent(ItemInformationLabel))
                     .addGroup(AddEditPanelLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(CategoryLabel1)
+                        .addComponent(EditItemSubLabel)
                         .addGap(96, 96, 96)
-                        .addComponent(CategoryLabel2)))
+                        .addComponent(EditTypeLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(AddEditPanelLayout.createSequentialGroup()
+                .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddEditPanelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(RemoveItemLabel))
+                    .addGroup(AddEditPanelLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(RemoveItemSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         AddEditPanelLayout.setVerticalGroup(
             AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,19 +254,25 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
                 .addComponent(ItemQuantityField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ItemPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
+                .addGap(44, 44, 44)
                 .addComponent(EditItemLabel)
                 .addGap(16, 16, 16)
                 .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CategoryLabel1)
-                    .addComponent(CategoryLabel2))
+                    .addComponent(EditItemSubLabel)
+                    .addComponent(EditTypeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditValueField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ItemSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ValueSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ItemSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(RemoveItemLabel)
+                .addGap(18, 18, 18)
+                .addGroup(AddEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RemoveItemSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RemoveSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         ManagerBackBtn.setBackground(new java.awt.Color(46, 56, 116));
@@ -277,8 +314,8 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(AddEditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InventoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE))
-                .addContainerGap(90, Short.MAX_VALUE))
+                    .addComponent(InventoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
@@ -303,6 +340,10 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
             managerMenuFrame.setVisible(true);
         }
     }//GEN-LAST:event_ManagerBackBtnActionPerformed
+
+    private void RemoveSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveSubmitBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveSubmitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,10 +385,10 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel AddItemsLabel;
     private javax.swing.JButton AddSubmitBtn;
     private javax.swing.JLabel CategoryLabel;
-    private javax.swing.JLabel CategoryLabel1;
-    private javax.swing.JLabel CategoryLabel2;
     private javax.swing.JComboBox<String> CategorySelection;
     private javax.swing.JLabel EditItemLabel;
+    private javax.swing.JLabel EditItemSubLabel;
+    private javax.swing.JLabel EditTypeLabel;
     private javax.swing.JTextField EditValueField;
     private javax.swing.JPanel InventoryPanel;
     private javax.swing.JTable InventoryTable;
@@ -359,6 +400,9 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ItemSelection1;
     private javax.swing.JButton ManagerBackBtn;
     private javax.swing.JLabel ManagerMenuLabel;
+    private javax.swing.JLabel RemoveItemLabel;
+    private javax.swing.JComboBox<String> RemoveItemSelection;
+    private javax.swing.JButton RemoveSubmitBtn;
     private javax.swing.JScrollPane TableScrollPanel;
     private javax.swing.JButton ValueSubmitBtn;
     // End of variables declaration//GEN-END:variables
