@@ -12,9 +12,9 @@ This will allow the main driving code to only concern itself with business logic
 
 ## Design Decisions ##
 ### IDao Interface ###
-I understand the "I" is not java practice, but it helps me pretend I am actually programming in C#. It's comforting to pretend I'm not developing in Java instead. 
 If you are not familiar with interfaces, an interface is a "contract" between itself and any class that implements it. It basically helps define all the interactions our classes will have. Also, it helps take full advantage of polymorphyism.
 I have it here to define the interactions the front end will have with the database. 
+Note: I understand the "I" is not java practice, but it helps me pretend I am actually programming in C#. It's comforting to pretend I'm not developing in Java instead. 
 
 ### Inventory DAO ###
 The biggest design decision to note is the inventory DAO. 
