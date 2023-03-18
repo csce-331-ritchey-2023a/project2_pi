@@ -20,7 +20,7 @@ Note: I understand the "I" is not java practice, but it helps me pretend I am ac
 The biggest design decision to note is the inventory DAO. 
 Although it is still a DAO and is there to help facilitate CRUD functionality, it does not require all of the methods that the other DAO's require. 
 Yes, I know I could have made the DAO less broad and have it included. It would be cleaner and make more sense and I wouldn't have to explain everything.
-**HOWEVER** I would not have my intellisense to autofill the other functions most of the DAO's share, and we have to build this in 3 days anyways so who cares if it's a little sloppy.
+**HOWEVER** I would not have my intellisense to autofill the other functions most of the DAO's share, and we had to build this in 3 days anyways so it's a little sloppy.
 Thus, for that reason, it does not implement the IDAO interface.  
 
 ### Delete Cutlery ###
