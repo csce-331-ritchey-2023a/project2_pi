@@ -7,13 +7,13 @@ Refer to the database design doc for more background on the queries being run.
 **IDbClient** - to connect to the database and run queries. 
 
 ## Purpose ##
-The IDao serves as an abstraction layer to ensure that the database logic is seperate from the main business logic.
+In accordance to the dependency inversion principle, the DAOs (Data Access Objects) serve as an abstraction layer to ensure that the database logic is seperate from the higher level business logic.
 This will allow the main driving code to only concern itself with business logic and avoids repetitive code.
 
 ## Design Decisions ##
 ### IDao Interface ###
 If you are not familiar with interfaces, an interface is a "contract" between itself and any class that implements it. It basically helps define all the interactions our classes will have. Also, it helps take full advantage of polymorphyism.
-I have it here to define the interactions the front end will have with the database. 
+Thus, the DAO interface exists to define the interactions the front end will have with the database. 
 Note: I understand the "I" is not java practice, but it helps me pretend I am actually programming in C#. It's comforting to pretend I'm not developing in Java instead. 
 
 ### Inventory DAO ###
@@ -24,20 +24,19 @@ Yes, I know I could have made the DAO less broad and have it included. It would 
 Thus, for that reason, it does not implement the IDAO interface.  
 
 ### Delete Cutlery ###
-Deleting cutlery is the only function that isn't included in (nearly) every single DAO class. Why? Well, it does not make sense to delete an ordered menu item once the order has been submitted, the customer has already payed! 
+Deleting cutlery is the only function that is only included in a single DAO implementation. Why? Well, it does not make sense to delete an ordered menu item once the order has been submitted, the customer has already payed! 
 At that point you might as well refund, delete the order, and go at it again.
 Thus, it only makes sense to be able to remove the cutlery dependency from a MenuItem. 
 
 So, the deleteCutlery function takes in a menu item id and the cutlery id and removes the dependency from the database.
 
 ### Optional Data Type ###
-The DAO is a common object oriented patern, so the only big design decion made here is the use of Optional containers. 
-The Optional container allow us to represent a state that may or may not return a value.
+The Optional container allow us to represent a state that may or may not return a value. I felt it was an appropriate data type to use for methods that may or may not find an instance of an object.
 
 ## IDao Documentation ##
 ### Overview ### 
-This interface defines a Data Access Object (DAO) that can be used to interact with a database. 
-It provides methods to add, update, delete, get, and retrieve data from a database. 
+This interface defines a DAO that can be used to interact with a database. 
+It provides methods to add, update, delete, get, and adapt the data from a database. 
 The generic type T specifies the type of object that this DAO can interact with.
 
 ### Methods ###
