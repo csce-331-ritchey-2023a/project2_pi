@@ -28,7 +28,7 @@ public interface IDao<T> {
     /**
      * Returns historical sales data over past 6 months
      * @param entity
-     * @return Result set containing sales history
+     * @return Result set containing sales history with columns (day, quantity)
      */
     ResultSet getHistory(String id);
     

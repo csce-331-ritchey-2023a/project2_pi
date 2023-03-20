@@ -76,6 +76,14 @@ public class MenuItemDao implements IDao<MenuItem>{
         }
     }
 
+    public List<MenuItem> getByCategory(String category) {
+        List<MenuItem> menuItems = new ArrayList<MenuItem>();
+        String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
+        ResultSet rs = dbClient.executeQuery(query);
+
+        return menuItems;
+    }
+
     @Override
     public List<MenuItem> getAll() {
         String query = String.format("SELECT * FROM menu_item;");
@@ -127,8 +135,8 @@ public class MenuItemDao implements IDao<MenuItem>{
             "ORDER BY day ASC;",
             id
         ); 
-        
-        ResultSet rs = dbClient.executeQuery(query); 
+
+        ResultSet rs = dbClient.executeQuery(query);  
         return rs;
     }
 
