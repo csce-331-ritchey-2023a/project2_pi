@@ -33,6 +33,7 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         StartDateField = new javax.swing.JTextField();
         EndDateField = new javax.swing.JTextField();
         SalesReportLabel1 = new javax.swing.JLabel();
+        SubmitBtn = new javax.swing.JButton();
         RestockReportPanel = new javax.swing.JPanel();
         LowItemLabel = new javax.swing.JLabel();
         LowItemScroll = new javax.swing.JScrollPane();
@@ -90,17 +91,22 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         SalesReportLabel1.setForeground(java.awt.Color.white);
         SalesReportLabel1.setText("Sales Report");
 
+        SubmitBtn.setText("Submit");
+        SubmitBtn.setFocusable(false);
+
         javax.swing.GroupLayout SalesReportPanelLayout = new javax.swing.GroupLayout(SalesReportPanel);
         SalesReportPanel.setLayout(SalesReportPanelLayout);
         SalesReportPanelLayout.setHorizontalGroup(
             SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SalesReportPanelLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(69, 69, 69)
                 .addComponent(SalesReportSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SalesReportPanelLayout.createSequentialGroup()
                 .addContainerGap(42, Short.MAX_VALUE)
@@ -116,11 +122,11 @@ public class SalesRestockFrame extends javax.swing.JFrame {
             SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SalesReportPanelLayout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
-                .addGroup(SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SalesReportSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -279,6 +285,7 @@ public class SalesRestockFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SalesReportSelection;
     private javax.swing.JLabel SalesRestockLabel;
     private javax.swing.JTextField StartDateField;
+    private javax.swing.JButton SubmitBtn;
     private javax.swing.JScrollPane TableScrollPanel;
     // End of variables declaration//GEN-END:variables
 }
