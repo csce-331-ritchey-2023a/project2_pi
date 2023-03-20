@@ -104,9 +104,9 @@
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Component id="SalesReportSelection" min="-2" pref="252" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="StartDateField" min="-2" pref="212" max="-2" attributes="0"/>
+                  <Component id="StartTimeField" min="-2" pref="212" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="EndDateField" min="-2" pref="212" max="-2" attributes="0"/>
+                  <Component id="EndTimeField" min="-2" pref="212" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="SubmitBtn" min="-2" pref="79" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -131,8 +131,8 @@
                   <EmptySpace pref="100" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="SalesReportSelection" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="StartDateField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="EndDateField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="StartTimeField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="EndTimeField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="SubmitBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -219,14 +219,14 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="StartDateField">
+        <Component class="javax.swing.JTextField" name="StartTimeField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Start Date"/>
+            <Property name="text" type="java.lang.String" value="Start Time"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="EndDateField">
+        <Component class="javax.swing.JTextField" name="EndTimeField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="End Date"/>
+            <Property name="text" type="java.lang.String" value="End Time"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="SalesReportLabel1">

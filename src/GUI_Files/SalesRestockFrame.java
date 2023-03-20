@@ -30,8 +30,8 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         TableScrollPanel = new javax.swing.JScrollPane();
         InventoryTable = new javax.swing.JTable();
         SalesReportSelection = new javax.swing.JComboBox<>();
-        StartDateField = new javax.swing.JTextField();
-        EndDateField = new javax.swing.JTextField();
+        StartTimeField = new javax.swing.JTextField();
+        EndTimeField = new javax.swing.JTextField();
         SalesReportLabel1 = new javax.swing.JLabel();
         SubmitBtn = new javax.swing.JButton();
         RestockReportPanel = new javax.swing.JPanel();
@@ -83,9 +83,9 @@ public class SalesRestockFrame extends javax.swing.JFrame {
 
         SalesReportSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "brown rice", "rice pilaf", "remaining items" }));
 
-        StartDateField.setText("Start Date");
+        StartTimeField.setText("Start Time");
 
-        EndDateField.setText("End Date");
+        EndTimeField.setText("End Time");
 
         SalesReportLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 36)); // NOI18N
         SalesReportLabel1.setForeground(java.awt.Color.white);
@@ -102,9 +102,9 @@ public class SalesRestockFrame extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addComponent(SalesReportSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(StartTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EndTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -124,8 +124,8 @@ public class SalesRestockFrame extends javax.swing.JFrame {
                 .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(SalesReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SalesReportSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EndTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +272,7 @@ public class SalesRestockFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EndDateField;
+    private javax.swing.JTextField EndTimeField;
     private javax.swing.JTable InventoryTable;
     private javax.swing.JLabel LowItemLabel;
     private javax.swing.JList<String> LowItemList;
@@ -284,7 +284,7 @@ public class SalesRestockFrame extends javax.swing.JFrame {
     private javax.swing.JPanel SalesReportPanel;
     private javax.swing.JComboBox<String> SalesReportSelection;
     private javax.swing.JLabel SalesRestockLabel;
-    private javax.swing.JTextField StartDateField;
+    private javax.swing.JTextField StartTimeField;
     private javax.swing.JButton SubmitBtn;
     private javax.swing.JScrollPane TableScrollPanel;
     // End of variables declaration//GEN-END:variables

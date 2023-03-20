@@ -29,8 +29,7 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         ExcessReportPanel = new javax.swing.JPanel();
         TableScrollPanel = new javax.swing.JScrollPane();
         InventoryTable = new javax.swing.JTable();
-        StartDateField = new javax.swing.JTextField();
-        EndDateField = new javax.swing.JTextField();
+        StartTimeField = new javax.swing.JTextField();
         SubmitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,14 +73,7 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         InventoryTable.getTableHeader().setReorderingAllowed(false);
         TableScrollPanel.setViewportView(InventoryTable);
 
-        StartDateField.setText("Start Date");
-
-        EndDateField.setText("End Date");
-        EndDateField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EndDateFieldActionPerformed(evt);
-            }
-        });
+        StartTimeField.setText("Start Time");
 
         SubmitBtn.setText("Submit");
         SubmitBtn.setFocusable(false);
@@ -91,11 +83,9 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         ExcessReportPanelLayout.setHorizontalGroup(
             ExcessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ExcessReportPanelLayout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(257, 257, 257)
+                .addComponent(StartTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExcessReportPanelLayout.createSequentialGroup()
@@ -108,8 +98,7 @@ public class ExcessReportFrame extends javax.swing.JFrame {
             .addGroup(ExcessReportPanelLayout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(ExcessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(StartDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StartTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(TableScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,10 +147,6 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ManagerBackBtnActionPerformed
 
-    private void EndDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndDateFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EndDateFieldActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -198,12 +183,11 @@ public class ExcessReportFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField EndDateField;
     private javax.swing.JLabel ExcessReportLabel;
     private javax.swing.JPanel ExcessReportPanel;
     private javax.swing.JTable InventoryTable;
     private javax.swing.JButton ManagerBackBtn;
-    private javax.swing.JTextField StartDateField;
+    private javax.swing.JTextField StartTimeField;
     private javax.swing.JButton SubmitBtn;
     private javax.swing.JScrollPane TableScrollPanel;
     // End of variables declaration//GEN-END:variables

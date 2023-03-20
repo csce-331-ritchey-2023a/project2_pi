@@ -96,11 +96,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
-                  <Component id="StartDateField" min="-2" pref="212" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                  <Component id="EndDateField" min="-2" pref="212" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+                  <Component id="StartTimeField" min="-2" pref="212" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="SubmitBtn" min="-2" pref="96" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -116,8 +114,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="76" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="StartDateField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="EndDateField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="StartTimeField" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="SubmitBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -163,18 +160,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="StartDateField">
+        <Component class="javax.swing.JTextField" name="StartTimeField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Start Date"/>
+            <Property name="text" type="java.lang.String" value="Start Time"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="EndDateField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="End Date"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EndDateFieldActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="SubmitBtn">
           <Properties>
