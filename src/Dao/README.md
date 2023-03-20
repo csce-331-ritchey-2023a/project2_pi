@@ -7,7 +7,7 @@ Refer to the database design doc for more background on the queries being run.
 **IDbClient** - to connect to the database and run queries. 
 
 ## Purpose ##
-The IDao serves as an abstraction layer to ensure that the database logic is seperate from the main business logic.
+The IDao serves as an interface abstraction layer to ensure that the database logic is seperate from the main business logic.
 This will allow the main driving code to only concern itself with business logic and avoids repetitive code.
 
 ## Design Decisions ##
