@@ -16,7 +16,7 @@ class dbClientTest {
     
     @BeforeEach
     void setUp() {
-        dbClient = new DbClient("C:/opt/CSCE331/project2_pi/src/test/db.conf");
+        dbClient = new DbClient(); 
         dbClient.connect();
     }
     
@@ -31,14 +31,16 @@ class dbClientTest {
         ResultSet rs = dbClient.executeQuery("SELECT * FROM menu_item_test;");
         assertNotNull(rs);
         
-        // Test query that doesn't return results
-
+        // Test query that doesn't return results 
         String uuid = UUID.randomUUID().toString();
-        String query = String.format("UPDATE cutlery SET id = '%s' VALUES ('')", uuid);  
-        rs = dbClient.executeQuery("UPDATE cutlery SET id = '{}' VALUES ('')");
+        String query = String.format("INSERT INTO cutlery_test(id, name, quantity) VALUES (%s, %s, %d)", uuid, "test", 2);  
+        rs = dbClient.executeQuery(query);
         assertNull(rs);
+
+        query = String.format("DELETE FROM cutlery_test WHERE id = '%s'", uuid);
+        rs = dbClient.executeQuery(query);
     }
-    
+
     @Test
     void testConnect() throws SQLException {
         assertTrue(dbClient.connection.isValid(5));

@@ -1,7 +1,12 @@
 package src.Models;
+import java.util.UUID;
 
 public class Cutlery {
-    public int id;
+    public String id;
     public String name;
-    public String quantity;
+    public int quantity;
+
+    public Cutlery() {
+        id = UUID.randomUUID().toString();
+    }    
 }

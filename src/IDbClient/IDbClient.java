@@ -5,17 +5,17 @@ import java.sql.ResultSet;
 public interface IDbClient {
 
     /** 
-     * creates connection with database
+     * Creates connection with database
     */
     public void connect();
 
     /**
-     * disconnects client from database
+     * Disconnects client from database
      */
     public void disconnect();
 
     /**
-     * 
+     * Executes query in database 
      * @param query 
      * @return ResultSet if query returns values, else null
      */

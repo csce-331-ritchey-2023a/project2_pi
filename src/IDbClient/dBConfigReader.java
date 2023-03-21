@@ -1,7 +1,7 @@
 package src.IDbClient;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class dBConfigReader {
@@ -11,11 +11,11 @@ public class dBConfigReader {
     public String username;
     public String password;
 
-    public dBConfigReader(String fileloc)
+    public dBConfigReader()
     {
         try {
             _properties = new Properties();
-            FileInputStream input = new FileInputStream(fileloc);
+            InputStream input = dBConfigReader.class.getResourceAsStream("db.conf");
             _properties.load(input);
             input.close();
         } catch (IOException e) {
