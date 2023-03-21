@@ -57,6 +57,18 @@ public class MenuItemDaoTest {
     }
 
     @Test
+    public void testGetByCategory() {
+        List<MenuItem> menuItems = menuItemDao.getByCategory("base");
+
+        assertNotNull(menuItems);
+        assertTrue(menuItems.size() > 0);
+
+        for(MenuItem item : menuItems) {
+            assertEquals("base", item.category);
+        }
+    }
+
+    @Test
     public void testAddAndUpdate() {
         MenuItem menuItem = new MenuItem();
         menuItem.id = "3";
