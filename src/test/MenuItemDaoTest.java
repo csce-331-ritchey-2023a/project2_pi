@@ -12,6 +12,7 @@ import org.junit.After;
 
 import Dao.MenuItemDao;
 import Models.MenuItem;
+import Models.MenuItemCutlery;
 
 public class MenuItemDaoTest {
 
@@ -96,19 +97,43 @@ public class MenuItemDaoTest {
     }
 
     @Test
-    public void testDelete() { 
-        Optional<MenuItem> testMenuItem= menuItemDao.get("3");
-        if (testMenuItem.isPresent())
+    public void testDelete() {
+        // see if we can use the menu item created from the "add" test 
+        Optional<MenuItem> optionalMenuItem= menuItemDao.get("3");
+        MenuItem menuItem = new MenuItem();
+        if (! optionalMenuItem.isPresent())
+        { 
+            menuItem.id = "3";
+        }
+        else 
         {
-            menuItemDao.add(testMenuItem.get());
+            menuItem = optionalMenuItem.get();
         }
 
-        MenuItem menuItem = new MenuItem();
-        menuItem.id = "3";
         menuItemDao.delete(menuItem);
 
         Optional<MenuItem> deletedMenuItem = menuItemDao.get("3");
         assertFalse(deletedMenuItem.isPresent());
     }
 
+    @Test
+    public void testDeleteCutlery() {
+        // create fake menu item
+        MenuItem newMenuItem = new MenuItem();
+        newMenuItem.AddCutlery("bowl", 1);
+        menuItemDao.add(newMenuItem);
+        MenuItemCutlery newMenuItemCutlery = newMenuItem.MenuItemCutlery.get(0);
+
+        menuItemDao.add(newMenuItem);
+        
+        // delete menuItem cutlery
+        menuItemDao.deleteCutlery(newMenuItemCutlery.menuItemId, newMenuItemCutlery.cutleryId);
+        MenuItem updatedMenuItem = menuItemDao.get(newMenuItem.id).get(); 
+        
+        // should not have any menuItem cutlery anymore
+        assertEquals(0, updatedMenuItem.MenuItemCutlery.size());  
+       
+        // clean up
+        menuItemDao.delete(updatedMenuItem);
+    }
 }
