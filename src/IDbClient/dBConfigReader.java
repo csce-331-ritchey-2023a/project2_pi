@@ -11,6 +11,9 @@ public class dBConfigReader {
     public String username;
     public String password;
 
+    /**
+     * Reads config file
+     */
     public dBConfigReader()
     {
         try {
