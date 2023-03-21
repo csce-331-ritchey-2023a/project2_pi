@@ -115,7 +115,7 @@ public class OrdersDao implements IDao<Order> {
     }   
 
     @Override
-    public ResultSet getHistory(String id) {   
+    public ResultSet getHistory(String id, String interval) {   
         throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
     }
 

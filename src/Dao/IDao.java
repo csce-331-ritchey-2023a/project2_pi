@@ -30,7 +30,7 @@ public interface IDao<T> {
      * @param entity
      * @return Result set containing sales history with columns (day, quantity)
      */
-    ResultSet getHistory(String id);
+    ResultSet getHistory(String id, String interval);
     
     /**
      * Gets Id of object given name

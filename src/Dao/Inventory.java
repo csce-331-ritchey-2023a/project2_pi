@@ -14,10 +14,19 @@ public class Inventory{
     public Inventory() 
     {
         dbClient = new DbClient();
+        dbClient.connect();
         menuItemDao = new MenuItemDao();
         cutleryDao = new CutleryDao();
     }
+
+    protected void finalize() {
+        dbClient.disconnect();
+    }
     
+    /**
+     * gets all inventory
+     * @return ResultSet containing inventory table (id, name, quantity)
+     */
     public ResultSet get() {
         ResultSet rs = dbClient.executeQuery(
             "SELECT id, name, quantity" +
@@ -30,6 +39,10 @@ public class Inventory{
         return rs;  
     }
 
+    /**
+     * Add inventory item (cutlery / menuItem)
+     * @param entity
+     */
     public void add(Object entity) {
         if (entity instanceof MenuItem) 
         {
@@ -41,6 +54,10 @@ public class Inventory{
         }
     }
 
+    /**
+     * Update menu item
+     * @param entity
+     */
     public void update(Object entity) { 
         if (entity instanceof MenuItem) 
         {
@@ -52,6 +69,10 @@ public class Inventory{
         }
     }
 
+    /**
+     * Deletes inventory item 
+     * @param entity
+     */
     public void delete(Object entity) {
         if (entity instanceof MenuItem) 
         {
@@ -62,5 +83,4 @@ public class Inventory{
             cutleryDao.delete((Cutlery) entity);
         }
     }
-
 }

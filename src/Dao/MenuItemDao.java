@@ -77,13 +77,10 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
 
     public List<MenuItem> getByCategory(String category) {
-        List<Models.MenuItem> menuItems = new ArrayList<MenuItem>();
+        List<MenuItem> menuItems = new ArrayList<MenuItem>();
         String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
         ResultSet rs = dbClient.executeQuery(query);
 
-        List<MenuItem> menuItems = new ArrayList<MenuItem>();
-
-        // TODO: turn into list. View: getAll()
         try {
             while(rs.next()){
                 menuItems.add(ConvertResultSet(rs));
@@ -134,19 +131,19 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
    
     @Override
-    public ResultSet getHistory(String id) {
+    public ResultSet getHistory(String id, String interval) {
         String query = String.format(
             "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales" +
             "FROM orders o" +
             "JOIN ordered_menu_item omi ON omi.order_id = o.id" +
             "JOIN menu_item mi ON mi.id = omi.menuitem_id" +
             "WHERE mi.id = '%s'" + 
-            "AND o.date_time >= CURRENT_DATE - INTERVAL '6 months' -- filter data from the last 6 months" +
+            "AND o.date_time >= CURRENT_DATE - INTERVAL '%s'" +
             "GROUP BY day" +
             "ORDER BY day ASC;",
-            id
+            id, interval
         ); 
-
+        
         ResultSet rs = dbClient.executeQuery(query);  
         return rs;
     }
