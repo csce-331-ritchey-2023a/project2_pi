@@ -21,7 +21,12 @@ public class MenuItem {
         id = UUID.randomUUID().toString();
         cutleryDao = new CutleryDao();
     }
- 
+    
+    /**
+     * Adds cutlery to the menuitem object
+     * @param name name of the cutlery
+     * @param quantity quantity of the cutlery
+     */
     public void AddCutlery(String name, int quantity) {
         Optional<String> optionalCutleryId = cutleryDao.getId(name);
         if (! optionalCutleryId.isPresent())
