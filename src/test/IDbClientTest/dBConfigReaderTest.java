@@ -1,4 +1,4 @@
-package test;
+package test.IDbClientTest;
 
 import static org.junit.Assert.assertEquals;
 
