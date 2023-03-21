@@ -98,20 +98,7 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public Optional<String> getId(String name) {
-        String query = String.format("SELECT * FROM menu_item WHERE name = '%s';",name);
-        ResultSet rs = dbClient.executeQuery(query);
-        try {
-            String id = "";
-            // if result set has any rows
-            if (rs.next())
-            {
-                id = rs.getString("id");
-            }
-            return Optional.of(id);
-        } catch (SQLException e) { 
-            System.out.println("[OrderDao]: Given query did not return id");
-            return Optional.empty();
-        }
+        throw new UnsupportedOperationException("Orders do not have ids based on names");
     }   
 
     @Override
