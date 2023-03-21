@@ -1,4 +1,4 @@
-package src.test;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,6 +79,8 @@ public class MenuItemDaoTest {
         assertEquals(420, updatedMenuItem.get().quantity);
         assertEquals(0f, updatedMenuItem.get().price, 0.001f);
         assertEquals("base", updatedMenuItem.get().category);
+
+        menuItemDao.delete(menuItem);
     }
 
     @Test

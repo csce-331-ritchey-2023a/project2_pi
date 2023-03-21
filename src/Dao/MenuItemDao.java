@@ -76,16 +76,16 @@ public class MenuItemDao implements IDao<MenuItem>{
         }
     }
 
+    /**
+     * gets all the menu items in a certain category
+     * @param category "base, side, drink, etc"
+     * @return List of menu items
+     */
     public List<MenuItem> getByCategory(String category) {
         List<MenuItem> menuItems = new ArrayList<MenuItem>();
         String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
         ResultSet rs = dbClient.executeQuery(query);
 
-<<<<<<< HEAD
-=======
-
-        // TODO: turn into list. View: getAll()
->>>>>>> 8eea049de4e08444a068a6cc0338d177bf47eb8d
         try {
             while(rs.next()){
                 menuItems.add(ConvertResultSet(rs));
@@ -178,6 +178,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             "UPDATE menu_item SET name = '%s', quantity = %d, price = %f, category = '%s' WHERE id = '%s';", 
             menuItem.name, menuItem.quantity, menuItem.price, menuItem.category, menuItem.id); 
         
+            dbClient.executeQuery(query);
         
         for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
         {
