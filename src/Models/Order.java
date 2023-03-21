@@ -38,5 +38,7 @@ public class Order {
 
         OrderedMenuItem orderedMenuItem = new OrderedMenuItem(optionalMenuItemId.get(), id, quantity);
         OrderedMenuItems.add(orderedMenuItem);
+        MenuItem addedMenuItem = menuItemDao.get(optionalMenuItemId.get()).get();
+        total_price += addedMenuItem.price;
     }
 }
