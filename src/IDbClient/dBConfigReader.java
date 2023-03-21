@@ -1,4 +1,4 @@
-package src.IDbClient;
+package IDbClient;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.IDbClient.dBConfigReader;
+import IDbClient.dBConfigReader;
 
 public class dBConfigReaderTest {
     private dBConfigReader configReader;

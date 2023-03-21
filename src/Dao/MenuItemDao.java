@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.MenuItem;
+import IDbClient.DbClient;
+import Models.MenuItem;
 
 public class MenuItemDao implements IDao<MenuItem>{
     
@@ -81,7 +81,6 @@ public class MenuItemDao implements IDao<MenuItem>{
         String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
         ResultSet rs = dbClient.executeQuery(query);
 
-        List<MenuItem> menuItems = new ArrayList<MenuItem>();
 
         // TODO: turn into list. View: getAll()
         try {

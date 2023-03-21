@@ -1,7 +1,10 @@
 package GUI_Files;
 
 
+import Dao.MenuItemDao;
+import Models.MenuItem;
 import javax.swing.JOptionPane;
+import java.util.List;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,6 +14,11 @@ import javax.swing.JOptionPane;
 
 public class ManageInventoryFrame extends javax.swing.JFrame {
 
+    
+    //gets items from DB to be used in Inventory Frame
+    MenuItemDao menuItemDao = new MenuItemDao();
+    List<MenuItem> currentMenu = menuItemDao.getAll();
+    
     /**
      * Creates new form ManageInventoryFrame
      */
@@ -139,7 +147,12 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
         EditValueField.setText("New Value");
 
-        ItemSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "brown rice", "rice pilaf", "pita", "remaining items" }));
+        String[] editArray = new String[currentMenu.size()];
+        for (int i = 0; i < currentMenu.size(); i++){
+            editArray[i] = currentMenu.get(i).name;
+        }
+
+        ItemSelection.setModel(new javax.swing.DefaultComboBoxModel<>(editArray));
 
         ValueSubmitBtn.setText("Update Value");
         ValueSubmitBtn.setFocusable(false);
@@ -163,7 +176,12 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         RemoveItemLabel.setForeground(java.awt.Color.white);
         RemoveItemLabel.setText("Remove Item:");
 
-        RemoveItemSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "brown rice", "rice pilaf", "pita", "remaining items" }));
+        String[] removeArray = new String[currentMenu.size()];
+        for (int i = 0; i < currentMenu.size(); i++){
+            removeArray[i] = currentMenu.get(i).name;
+        }
+
+        RemoveItemSelection.setModel(new javax.swing.DefaultComboBoxModel<>(removeArray));
 
         RemoveSubmitBtn.setText("Remove Item");
         RemoveSubmitBtn.setFocusable(false);

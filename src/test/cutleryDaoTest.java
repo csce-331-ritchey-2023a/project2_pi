@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import src.Dao.CutleryDao;
-import src.Models.Cutlery;
+import Dao.CutleryDao;
+import Models.Cutlery;
 
 public class cutleryDaoTest {
     private CutleryDao cutleryDao;
