@@ -14,7 +14,7 @@ import Dao.MenuItemDao;
 import Models.MenuItem;
 import Models.MenuItemCutlery;
 
-public class MenuItemDaoTest {
+public class menuItemDaoTest {
 
     private MenuItemDao menuItemDao;
 
