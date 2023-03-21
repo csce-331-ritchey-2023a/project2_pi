@@ -1,5 +1,9 @@
 package GUI_Files;
 
+import Dao.MenuItemDao;
+import Models.MenuItem;
+import java.util.List;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,6 +12,10 @@ package GUI_Files;
 
 public class SalesRestockFrame extends javax.swing.JFrame {
 
+    
+    MenuItemDao menuItemDao = new MenuItemDao();
+    List<MenuItem> currentMenu = menuItemDao.getAll();
+    
     /**
      * Creates new form SalesRestockFrame
      */
@@ -30,6 +38,12 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         TableScrollPanel = new javax.swing.JScrollPane();
         InventoryTable = new javax.swing.JTable();
         SalesReportSelection = new javax.swing.JComboBox<>();
+        String[] salesArray = new String[currentMenu.size()];
+        for (int i = 0; i < currentMenu.size(); i++){
+            salesArray[i] = currentMenu.get(i).name;
+        }
+
+        SalesReportSelection.setModel(new javax.swing.DefaultComboBoxModel<>(salesArray));
         StartTimeField = new javax.swing.JTextField();
         EndTimeField = new javax.swing.JTextField();
         SalesReportLabel1 = new javax.swing.JLabel();
@@ -80,8 +94,6 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         InventoryTable.setShowGrid(true);
         InventoryTable.getTableHeader().setReorderingAllowed(false);
         TableScrollPanel.setViewportView(InventoryTable);
-
-        SalesReportSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "brown rice", "rice pilaf", "remaining items" }));
 
         StartTimeField.setText("Start Time");
 
