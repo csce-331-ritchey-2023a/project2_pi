@@ -1,11 +1,11 @@
-package src.Models;
+package Models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import src.Dao.CutleryDao;
+import Dao.CutleryDao;
 
 public class MenuItem {
     public String id;

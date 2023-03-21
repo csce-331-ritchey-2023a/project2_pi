@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.After;
 
-import src.Dao.MenuItemDao;
-import src.Models.MenuItem;
+import Dao.MenuItemDao;
+import Models.MenuItem;
 
 public class MenuItemDaoTest {
 

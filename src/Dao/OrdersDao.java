@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
-import src.Models.MenuItem;
-import src.Models.Order;
-import src.Models.OrderedMenuItem;
+import IDbClient.DbClient;
+import Models.Cutlery;
+import Models.MenuItem;
+import Models.Order;
+import Models.OrderedMenuItem;
 
 public class OrdersDao implements IDao<Order> {
 

@@ -6,7 +6,6 @@
 import GUI_Files.MainMenu;
 import java.sql.*;
 import javax.swing.*;
-import src.Models.*;
 
 
 public class GUI {

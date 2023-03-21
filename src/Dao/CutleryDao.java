@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
+import IDbClient.DbClient;
+import Models.Cutlery;
 
 public class CutleryDao implements IDao<Cutlery>{ 
     public DbClient dbClient;    

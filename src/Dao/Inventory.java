@@ -1,10 +1,10 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
-import src.Models.MenuItem;
+import IDbClient.DbClient;
+import Models.Cutlery;
+import Models.MenuItem;
 
 public class Inventory{
     private DbClient dbClient;
