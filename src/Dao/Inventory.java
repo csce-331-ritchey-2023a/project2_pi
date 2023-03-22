@@ -1,6 +1,5 @@
 package Dao;
 
-import java.security.Timestamp;
 import java.sql.ResultSet;
 
 import IDbClient.DbClient;
@@ -40,6 +39,10 @@ public class Inventory{
         return rs;  
     }
 
+    /**
+     * gets restock report
+     * @return
+     */
     public ResultSet getRestockReport(){
         ResultSet rs = dbClient.executeQuery(
             "SELECT name " +
@@ -53,20 +56,26 @@ public class Inventory{
 
         return rs; 
     }
-    
-//    public ResultSet getExcessReport(Timestamp timestamp){
-//        ResultSet rs = dbClient.executeQuery(
-//            "SELECT id, name, quantity" +
-//            "FROM cutlery" +
-//            "UNION" +
-//            "SELECT id, name, quantity" +
-//            "FROM menu_item" + 
-//            "WHERE quantity > 900" + 
-//            "AND o.date::timestamp + o.time::time WITH TIME ZONE BETWEEN ? AND NOW()::timestamp;", timestamp
-//        );
-//
-//        return rs; 
-//    }
+   
+    /**
+     * gets excess report given start time
+     * @param time
+     * @return ReturnSet containing id, name
+     */
+    public ResultSet getExcessReport(String time) {
+        String query = String.format(
+            "SELECT mi.name, SUM(om.quantity) as total_quantity, mi.quantity as initial_quantity " +
+            "FROM menu_item mi " +
+            "JOIN ordered_menu_item om ON om.menuitem_id = mi.id " +
+            "JOIN orders o ON o.id = om.order_id " +
+            "WHERE o.date_time >= '%s' AND o.date_time <= CURRENT_TIMESTAMP " +
+            "GROUP BY mi.id " +
+            "HAVING (SUM(om.quantity) / mi.quantity) < 0.1;", time);
+        
+        ResultSet rs = dbClient.executeQuery(query);
+        
+        return rs;
+    }
 
     /**
      * Add inventory item (cutlery / menuItem)
