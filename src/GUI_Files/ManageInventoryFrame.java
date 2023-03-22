@@ -4,8 +4,13 @@ package GUI_Files;
 import Dao.Inventory;
 import Dao.MenuItemDao;
 import Models.MenuItem;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -72,9 +77,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
         InventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"7278bd76-b7a8-11ed-b486-00155d0752bf", "brown rice", "2000", "0.0", "base"},
-                {"7278c294-b7a8-11ed-b486-00155d0752bf", "rice pilaf", "2000", "0.0", "base"},
-                {"7278c370-b7a8-11ed-b486-00155d0752bf", "pita", "2000", "0.0", "base"}
+
             },
             new String [] {
                 "ID", "Name", "Quantity", "Price", "Category"
@@ -90,6 +93,14 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         });
         InventoryTable.setShowGrid(true);
         InventoryTable.getTableHeader().setReorderingAllowed(false);
+        Inventory getInventory = new Inventory();
+        ResultSet InventoryRS = getInventory.get();
+        try{
+            InventoryTable = new javax.swing.JTable(buildTableModel(InventoryRS));
+        }
+        catch(SQLException SQLException){
+            System.out.println("SQL Exception");
+        }
         TableScrollPanel.setViewportView(InventoryTable);
         if (InventoryTable.getColumnModel().getColumnCount() > 0) {
             InventoryTable.getColumnModel().getColumn(0).setMinWidth(200);
@@ -400,6 +411,32 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         newFrame.setVisible(true);
     }//GEN-LAST:event_RemoveSubmitBtnActionPerformed
 
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+    ResultSetMetaData metaData = rs.getMetaData();
+
+    // names of columns
+    Vector<String> columnNames = new Vector<String>();
+    int columnCount = metaData.getColumnCount();
+    for (int column = 1; column <= columnCount; column++) {
+        columnNames.add(metaData.getColumnName(column));
+    }
+
+    // data of the table
+    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+    while (rs.next()) {
+        Vector<Object> vector = new Vector<Object>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            vector.add(rs.getObject(columnIndex));
+        }
+        data.add(vector);
+    }
+
+    return new DefaultTableModel(data, columnNames);
+
+}
+    
     /**
      * @param args the command line arguments
      */

@@ -30,10 +30,10 @@ public class Inventory{
      */
     public ResultSet get() {
         ResultSet rs = dbClient.executeQuery(
-            "SELECT id, name, quantity" +
-            "FROM cutlery" +
-            "UNION" +
-            "SELECT id, name, quantity" +
+            "SELECT id, name, quantity " +
+            "FROM cutlery " +
+            "UNION " +
+            "SELECT id, name, quantity " +
             "FROM menu_item;"
         );
 

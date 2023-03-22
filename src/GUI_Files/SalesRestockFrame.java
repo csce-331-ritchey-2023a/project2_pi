@@ -180,7 +180,6 @@ public class SalesRestockFrame extends javax.swing.JFrame {
             }
         ));
         Inventory restockInventory = new Inventory();
-        System.out.println("here");
         ResultSet RestockRS = restockInventory.getRestockReport();
         try{
             LowItemTable = new javax.swing.JTable(buildTableModel(RestockRS));

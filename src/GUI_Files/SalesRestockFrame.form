@@ -342,7 +342,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="Inventory restockInventory = new Inventory();&#xa;System.out.println(&quot;here&quot;);&#xa;ResultSet RestockRS = restockInventory.getRestockReport();&#xa;try{&#xa;    LowItemTable = new javax.swing.JTable(buildTableModel(RestockRS));&#xa;}&#xa;catch(SQLException SQLException){&#xa;    System.out.println(&quot;SQL Exception&quot;);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="Inventory restockInventory = new Inventory();&#xa;ResultSet RestockRS = restockInventory.getRestockReport();&#xa;try{&#xa;    LowItemTable = new javax.swing.JTable(buildTableModel(RestockRS));&#xa;}&#xa;catch(SQLException SQLException){&#xa;    System.out.println(&quot;SQL Exception&quot;);&#xa;}"/>
               </AuxValues>
             </Component>
           </SubComponents>
