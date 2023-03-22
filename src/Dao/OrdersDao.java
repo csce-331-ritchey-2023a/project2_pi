@@ -102,7 +102,7 @@ public class OrdersDao implements IDao<Order> {
     }   
 
     @Override
-    public ResultSet getHistory(String id, String interval) {   
+    public ResultSet getHistory(String id, String startDate, String endDate) {   
         throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
     }
 

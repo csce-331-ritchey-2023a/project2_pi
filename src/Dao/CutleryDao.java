@@ -101,19 +101,19 @@ public class CutleryDao implements IDao<Cutlery>{
     }    
 
     @Override
-    public ResultSet getHistory(String cutlery_id, String interval) {
+    public ResultSet getHistory(String cutlery_id, String startDate, String endDate) {
         String query = String.format(
-        "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(mic.quantity * omi.quantity) as total_sales" +
-        "FROM orders o" +
-        "JOIN ordered_menu_item omi ON omi.order_id = o.id" +
-        "JOIN menu_item mi ON mi.id = omi.menuitem_id" +
-        "JOIN menu_item_cutlery mic ON mic.menu_item_id = mi.id" +
-        "JOIN cutlery c ON c.id = mic.cutlery_id" +
-        "WHERE c.id = '%s'" +
-        "AND o.date_time >= CURRENT_DATE - INTERVAL '%s'" +
-        "GROUP BY day" +
-        "ORDER BY day ASC;", 
-        cutlery_id, interval);
+        "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(mic.quantity * omi.quantity) as total_sales " +
+        "FROM orders o " +
+        "JOIN ordered_menu_item omi ON omi.order_id = o.id " +
+        "JOIN menu_item mi ON mi.id = omi.menuitem_id " +
+        "JOIN menu_item_cutlery mic ON mic.menu_item_id = mi.id " +
+        "JOIN cutlery c ON c.id = mic.cutlery_id " +
+        "WHERE c.id = '%s' " +
+        "AND o.date_time >= '%s' " +
+        "GROUP BY day " +
+        "ORDER BY day ASC; ", 
+        cutlery_id, startDate, endDate);
         
         ResultSet rs = dbClient.executeQuery(query); 
         return rs; 
