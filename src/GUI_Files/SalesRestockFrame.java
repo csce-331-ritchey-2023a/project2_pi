@@ -1,8 +1,12 @@
 package GUI_Files;
 
+import Dao.Inventory;
 import Dao.MenuItemDao;
 import Models.MenuItem;
 import java.util.List;
+import java.sql.*;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -50,9 +54,9 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         SubmitBtn = new javax.swing.JButton();
         RestockReportPanel = new javax.swing.JPanel();
         LowItemLabel = new javax.swing.JLabel();
-        LowItemScroll = new javax.swing.JScrollPane();
-        LowItemList = new javax.swing.JList<>();
         RestockReportLabel1 = new javax.swing.JLabel();
+        LowItemScrollPane = new javax.swing.JScrollPane();
+        LowItemTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +109,11 @@ public class SalesRestockFrame extends javax.swing.JFrame {
 
         SubmitBtn.setText("Submit");
         SubmitBtn.setFocusable(false);
+        SubmitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout SalesReportPanelLayout = new javax.swing.GroupLayout(SalesReportPanel);
         SalesReportPanel.setLayout(SalesReportPanelLayout);
@@ -155,18 +164,31 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         LowItemLabel.setForeground(java.awt.Color.white);
         LowItemLabel.setText("The Following Items Should Be Restocked");
 
-        LowItemList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        LowItemList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        LowItemList.setFocusable(false);
-        LowItemScroll.setViewportView(LowItemList);
-
         RestockReportLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 36)); // NOI18N
         RestockReportLabel1.setForeground(java.awt.Color.white);
         RestockReportLabel1.setText("Restock Report");
+
+        LowItemTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Item Name"
+            }
+        ));
+        Inventory restockInventory = new Inventory();
+        System.out.println("here");
+        ResultSet RestockRS = restockInventory.getRestockReport();
+        try{
+            LowItemTable = new javax.swing.JTable(buildTableModel(RestockRS));
+        }
+        catch(SQLException SQLException){
+            System.out.println("SQL Exception");
+        }
+        LowItemScrollPane.setViewportView(LowItemTable);
 
         javax.swing.GroupLayout RestockReportPanelLayout = new javax.swing.GroupLayout(RestockReportPanel);
         RestockReportPanel.setLayout(RestockReportPanelLayout);
@@ -175,31 +197,26 @@ public class SalesRestockFrame extends javax.swing.JFrame {
             .addGroup(RestockReportPanelLayout.createSequentialGroup()
                 .addGroup(RestockReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RestockReportPanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(LowItemScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(LowItemScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RestockReportPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(LowItemLabel)))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(RestockReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RestockReportPanelLayout.createSequentialGroup()
-                    .addContainerGap(97, Short.MAX_VALUE)
-                    .addComponent(RestockReportLabel1)
-                    .addGap(73, 73, 73)))
+                        .addGap(66, 66, 66)
+                        .addComponent(LowItemLabel))
+                    .addGroup(RestockReportPanelLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(RestockReportLabel1)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         RestockReportPanelLayout.setVerticalGroup(
             RestockReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RestockReportPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(RestockReportLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(LowItemLabel)
-                .addGap(32, 32, 32)
-                .addComponent(LowItemScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(RestockReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(RestockReportPanelLayout.createSequentialGroup()
-                    .addGap(43, 43, 43)
-                    .addComponent(RestockReportLabel1)
-                    .addContainerGap(730, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(LowItemScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -218,7 +235,7 @@ public class SalesRestockFrame extends javax.swing.JFrame {
                         .addComponent(SalesReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(RestockReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,6 +265,50 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ManagerBackBtnActionPerformed
 
+    private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
+        // TODO add your handling code here:
+        String s = evt.getActionCommand();
+        if (s.equals("Submit")) {
+            MenuItemDao salesTableDao = new MenuItemDao();
+            System.out.println(currentMenu.get(0).id);
+            ResultSet table = salesTableDao.getHistory(currentMenu.get(0).id, "2022-1-07 08:44");
+            try{
+                InventoryTable = new javax.swing.JTable(buildTableModel(table));
+            }
+            catch(SQLException SQLException){
+                System.out.println("SQL Exception");
+            }
+            
+        }
+    }//GEN-LAST:event_SubmitBtnActionPerformed
+
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+    ResultSetMetaData metaData = rs.getMetaData();
+
+    // names of columns
+    Vector<String> columnNames = new Vector<String>();
+    int columnCount = metaData.getColumnCount();
+    for (int column = 1; column <= columnCount; column++) {
+        columnNames.add(metaData.getColumnName(column));
+    }
+
+    // data of the table
+    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+    while (rs.next()) {
+        Vector<Object> vector = new Vector<Object>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            vector.add(rs.getObject(columnIndex));
+        }
+        data.add(vector);
+    }
+
+    return new DefaultTableModel(data, columnNames);
+
+}
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -287,8 +348,8 @@ public class SalesRestockFrame extends javax.swing.JFrame {
     private javax.swing.JTextField EndTimeField;
     private javax.swing.JTable InventoryTable;
     private javax.swing.JLabel LowItemLabel;
-    private javax.swing.JList<String> LowItemList;
-    private javax.swing.JScrollPane LowItemScroll;
+    private javax.swing.JScrollPane LowItemScrollPane;
+    private javax.swing.JTable LowItemTable;
     private javax.swing.JButton ManagerBackBtn;
     private javax.swing.JLabel RestockReportLabel1;
     private javax.swing.JPanel RestockReportPanel;
