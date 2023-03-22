@@ -5,6 +5,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 import Dao.Inventory;
+import static GUI_Files.SalesRestockFrame.buildTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -58,24 +59,6 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         ExcessReportPanel.setBackground(new java.awt.Color(46, 56, 116));
         ExcessReportPanel.setPreferredSize(new java.awt.Dimension(549, 609));
 
-        InventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Rice Pillaf"},
-                {"Pita"},
-                {"Remaining Items"}
-            },
-            new String [] {
-                "Item Names"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         InventoryTable.setShowGrid(true);
         InventoryTable.getTableHeader().setReorderingAllowed(false);
         TableScrollPanel.setViewportView(InventoryTable);
@@ -168,14 +151,18 @@ public class ExcessReportFrame extends javax.swing.JFrame {
             
             System.out.println(startTime);
             
-//            Inventory excessReportObject = new Inventory();
-//            ResultSet table = excessReportObject.getExcessReport(startTime);
-//            try{
-//                InventoryTable = new javax.swing.JTable(buildTableModel(table));
-//            }
-//            catch(SQLException SQLException){
-//                System.out.println("SQL Exception");
-//            }
+            Inventory excessReportObject = new Inventory();
+            ResultSet excessRS = excessReportObject.getExcessReport(startTime);
+            try{
+                DefaultTableModel model = (DefaultTableModel) InventoryTable.getModel();
+                model.setRowCount(0);
+                
+                InventoryTable.setModel(buildTableModel(excessRS));
+                InventoryTable.repaint();
+            }
+            catch(SQLException SQLException){
+                System.out.println("SQL Exception");
+            }
             
         }
     }//GEN-LAST:event_SubmitBtnActionPerformed

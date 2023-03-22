@@ -17,13 +17,15 @@ import javax.swing.table.DefaultTableModel;
 public class SalesRestockFrame extends javax.swing.JFrame {
 
     
-    MenuItemDao menuItemDao = new MenuItemDao();
-    List<MenuItem> currentMenu = menuItemDao.getAll();
+    public MenuItemDao menuItemDao;
+    public List<MenuItem> currentMenu;
     
     /**
      * Creates new form SalesRestockFrame
      */
     public SalesRestockFrame() {
+        menuItemDao = new MenuItemDao();
+        currentMenu = menuItemDao.getAll();
         initComponents();
     }
 
@@ -77,24 +79,6 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         SalesReportPanel.setBackground(new java.awt.Color(46, 56, 116));
         SalesReportPanel.setPreferredSize(new java.awt.Dimension(549, 609));
 
-        InventoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"7278bd76-b7a8-11ed-b486-00155d0752bf", "7278bd76-b7a8-11ed-b486-00155d0752bf", "1"},
-                {"7278c294-b7a8-11ed-b486-00155d0752bf", "7278bd76-b7a8-11ed-b486-00155d0752bf", "1"},
-                {"7278c370-b7a8-11ed-b486-00155d0752bf", "7278bd76-b7a8-11ed-b486-00155d0752bf", "1"}
-            },
-            new String [] {
-                "Order ID", "Menu Item ID", "Quantity"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         InventoryTable.setShowGrid(true);
         InventoryTable.getTableHeader().setReorderingAllowed(false);
         TableScrollPanel.setViewportView(InventoryTable);
@@ -273,30 +257,30 @@ public class SalesRestockFrame extends javax.swing.JFrame {
             String endTime = EndTimeField.getText();
             String itemSelection = SalesReportSelection.getSelectedItem().toString();
             
-            System.out.println(startTime);
-            System.out.println(endTime);
-            System.out.println(itemSelection);
-            
             String id = "";
             for(int i = 0; i < currentMenu.size(); i++){
                 if(itemSelection.equals(currentMenu.get(i).name)){
                     id = currentMenu.get(i).id;
                 }
             }
-            System.out.println(id);
-//            MenuItemDao salesTableDao = new MenuItemDao();
-//            System.out.println(currentMenu.get(0).id);
-//            ResultSet table = salesTableDao.getHistory(id, startTime, endTime);
-//            try{
-//                InventoryTable = new javax.swing.JTable(buildTableModel(table));
-//            }
-//            catch(SQLException SQLException){
-//                System.out.println("SQL Exception");
-//            }
-            
+
+            MenuItemDao salesTableDao = new MenuItemDao();
+            ResultSet salesRS = salesTableDao.getHistory(id, startTime, endTime);
+            try{
+                
+                // Clear any existing data from the table model
+                DefaultTableModel model = (DefaultTableModel) InventoryTable.getModel();
+                model.setRowCount(0);
+                
+                InventoryTable.setModel(buildTableModel(salesRS));
+                InventoryTable.repaint();
+            }
+            catch( SQLException e){
+                System.out.println("SQL Exception");
+            }
         }
     }//GEN-LAST:event_SubmitBtnActionPerformed
-
+ 
     public static DefaultTableModel buildTableModel(ResultSet rs)
         throws SQLException {
 
