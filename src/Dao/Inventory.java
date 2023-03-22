@@ -1,5 +1,6 @@
 package src.Dao;
 
+import java.security.Timestamp;
 import java.sql.ResultSet;
 
 import src.IDbClient.DbClient;
@@ -29,6 +30,23 @@ public class Inventory{
 
         return rs;  
     }
+
+   
+    public ResultSet getRestockReport(){
+        ResultSet rs = dbClient.executeQuery(
+            "SELECT id, name, quantity" +
+            "FROM cutlery" +
+            "UNION" +
+            "SELECT id, name, quantity" +
+            "FROM menu_item" + 
+            "WHERE quantity < 1000;"
+        );
+
+        return rs; 
+    }
+
+   
+
 
     public void add(Object entity) {
         if (entity instanceof MenuItem) 
@@ -62,5 +80,10 @@ public class Inventory{
             cutleryDao.delete((Cutlery) entity);
         }
     }
+
+
+
+
+
 
 }

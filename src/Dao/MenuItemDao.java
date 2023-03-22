@@ -76,6 +76,11 @@ public class MenuItemDao implements IDao<MenuItem>{
         }
     }
 
+    /**
+     * gets menu items by category
+     * @param category
+     * @return list of menu items
+     */
     public List<MenuItem> getByCategory(String category) {
         List<Models.MenuItem> menuItems = new ArrayList<MenuItem>();
         String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
