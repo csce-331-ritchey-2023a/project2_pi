@@ -1,10 +1,16 @@
 package GUI_Files;
 
 
+import Dao.Inventory;
 import Dao.MenuItemDao;
 import Models.MenuItem;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -71,9 +77,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
         InventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"7278bd76-b7a8-11ed-b486-00155d0752bf", "brown rice", "2000", "0.0", "base"},
-                {"7278c294-b7a8-11ed-b486-00155d0752bf", "rice pilaf", "2000", "0.0", "base"},
-                {"7278c370-b7a8-11ed-b486-00155d0752bf", "pita", "2000", "0.0", "base"}
+
             },
             new String [] {
                 "ID", "Name", "Quantity", "Price", "Category"
@@ -89,6 +93,14 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         });
         InventoryTable.setShowGrid(true);
         InventoryTable.getTableHeader().setReorderingAllowed(false);
+        Inventory getInventory = new Inventory();
+        ResultSet InventoryRS = getInventory.get();
+        try{
+            InventoryTable = new javax.swing.JTable(buildTableModel(InventoryRS));
+        }
+        catch(SQLException SQLException){
+            System.out.println("SQL Exception");
+        }
         TableScrollPanel.setViewportView(InventoryTable);
         if (InventoryTable.getColumnModel().getColumnCount() > 0) {
             InventoryTable.getColumnModel().getColumn(0).setMinWidth(200);
@@ -117,7 +129,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         AddItemsLabel.setForeground(java.awt.Color.white);
         AddItemsLabel.setText("Add Items:");
 
-        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base", "Protein", "Topping", "Dressing", "Side", "Drink", "Extra" }));
+        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "base", "protein", "topping", "dressing", "side", "drink", "extra" }));
 
         ItemNameField.setText("Name");
 
@@ -342,12 +354,67 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void AddSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSubmitBtnActionPerformed
         // TODO add your handling code here:
+        String currentCategory = CategorySelection.getSelectedItem().toString();
+        
+        String itemName = ItemNameField.getText();
+        String itemQuantity = ItemQuantityField.getText();
+        String itemPrice = ItemPriceField.getText();
+        
+        MenuItem newItem = new MenuItem();
+        newItem.name = itemName; 
+        newItem.quantity = Integer.parseInt(itemQuantity); 
+        newItem.price = Float.parseFloat(itemPrice);
+        newItem.category = currentCategory;
+        
         JOptionPane.showMessageDialog(this, "Item Added");
+        
+        Inventory newInventory = new Inventory();
+        newInventory.add(newItem);
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_AddSubmitBtnActionPerformed
 
     private void ValueSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValueSubmitBtnActionPerformed
         // TODO add your handling code here:
+                String currentItem = ItemSelection.getSelectedItem().toString();
+        String currentType = ItemSelection1.getSelectedItem().toString();
+        String changeValue = EditValueField.getText();
+        
         JOptionPane.showMessageDialog(this, "Value Updated");
+        
+        Inventory newInventory = new Inventory();
+        
+        for (int i = 0; i <= currentMenu.size() - 1; i++){
+            if (currentMenu.get(i).name.equals(currentItem)){
+                switch (currentType) {
+                    case "Quantity":
+                        currentMenu.get(i).quantity = Integer.parseInt(changeValue);
+                        break;
+                    case "Price":
+                        currentMenu.get(i).price = Float.parseFloat(changeValue);
+                        break;
+                    case "ID":
+                        currentMenu.get(i).id = changeValue;
+                        break;
+                    case "Name":
+                        currentMenu.get(i).name = changeValue;
+                        break;
+                    case "Category":
+                        currentMenu.get(i).category = changeValue;
+                        break;
+                    default:
+                        break;
+                }
+                
+                newInventory.update(currentMenu.get(i));
+            }
+        }
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_ValueSubmitBtnActionPerformed
 
     private void ManagerBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerBackBtnActionPerformed
@@ -362,8 +429,50 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void RemoveSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveSubmitBtnActionPerformed
         // TODO add your handling code here:
+        String itemName = RemoveItemSelection.getSelectedItem().toString();
+        
+        JOptionPane.showMessageDialog(this, "Item Removed");
+       
+        Inventory newInventory = new Inventory();
+        
+        for (int i = 0; i <= currentMenu.size() - 1; i++){
+            if (currentMenu.get(i).name.equals(itemName)){
+                newInventory.delete(currentMenu.get(i));
+            }
+            
+        }
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_RemoveSubmitBtnActionPerformed
 
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+    ResultSetMetaData metaData = rs.getMetaData();
+
+    // names of columns
+    Vector<String> columnNames = new Vector<String>();
+    int columnCount = metaData.getColumnCount();
+    for (int column = 1; column <= columnCount; column++) {
+        columnNames.add(metaData.getColumnName(column));
+    }
+
+    // data of the table
+    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+    while (rs.next()) {
+        Vector<Object> vector = new Vector<Object>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            vector.add(rs.getObject(columnIndex));
+        }
+        data.add(vector);
+    }
+
+    return new DefaultTableModel(data, columnNames);
+
+}
+    
     /**
      * @param args the command line arguments
      */

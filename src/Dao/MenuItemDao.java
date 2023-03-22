@@ -145,7 +145,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             "WHERE mi.id = '%s' " + 
             "AND o.date_time >= CURRENT_DATE - INTERVAL '%s' " +
             "GROUP BY day " +
-            "ORDER BY day ASC; ",
+            "ORDER BY day ASC;",
             id, interval
         ); 
         
