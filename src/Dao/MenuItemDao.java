@@ -136,17 +136,20 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
    
     @Override
-    public ResultSet getHistory(String id, String interval) {
+    public ResultSet getHistory(String id, String startDate, String endDate) {
+
+
         String query = String.format(
             "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales " +
             "FROM orders o " +
             "JOIN ordered_menu_item omi ON omi.order_id = o.id " +
             "JOIN menu_item mi ON mi.id = omi.menuitem_id " +
             "WHERE mi.id = '%s' " + 
-            "AND o.date_time >= CURRENT_DATE - INTERVAL '%s' " +
+            "AND o.date_time >= '%s' " +
+            "AND o.date_time <= '%s " +
             "GROUP BY day " +
             "ORDER BY day ASC;",
-            id, interval
+            id, startDate, endDate
         ); 
         
         ResultSet rs = dbClient.executeQuery(query);  
