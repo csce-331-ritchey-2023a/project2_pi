@@ -137,8 +137,6 @@ public class MenuItemDao implements IDao<MenuItem>{
    
     @Override
     public ResultSet getHistory(String id, String startDate, String endDate) {
-
-
         String query = String.format(
             "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales " +
             "FROM orders o " +
