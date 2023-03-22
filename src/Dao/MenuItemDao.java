@@ -146,7 +146,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             "JOIN menu_item mi ON mi.id = omi.menuitem_id " +
             "WHERE mi.id = '%s' " + 
             "AND o.date_time >= '%s' " +
-            "AND o.date_time <= '%s " +
+            "AND o.date_time <= '%s' " +
             "GROUP BY day " +
             "ORDER BY day ASC;",
             id, startDate, endDate

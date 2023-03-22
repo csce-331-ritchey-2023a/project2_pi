@@ -140,5 +140,7 @@ public class menuItemDaoTest {
 
     @Test
     public void testGetHistory() {
+        ResultSet rs = menuItemDao.getHistory("7278c370-b7a8-11ed-b486-00155d0752bf", "01/01/2023", "02/01/2023");
+        assertNotNull(rs);
     }
 }
