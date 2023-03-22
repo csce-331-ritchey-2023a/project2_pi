@@ -382,7 +382,22 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void RemoveSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveSubmitBtnActionPerformed
         // TODO add your handling code here:
+        String itemName = RemoveItemSelection.getSelectedItem().toString();
+        
         JOptionPane.showMessageDialog(this, "Item Removed");
+       
+        Inventory newInventory = new Inventory();
+        
+        for (int i = 0; i <= currentMenu.size() - 1; i++){
+            if (currentMenu.get(i).name.equals(itemName)){
+                newInventory.delete(currentMenu.get(i));
+            }
+            
+        }
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_RemoveSubmitBtnActionPerformed
 
     /**
