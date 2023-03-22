@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import Dao.MenuItemDao;
 
@@ -18,6 +20,10 @@ public class Order {
     public Order() {
         id = UUID.randomUUID().toString();
         menuItemDao = new MenuItemDao();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        date = currentDateTime.format(formatter);
     } 
 
     /**
