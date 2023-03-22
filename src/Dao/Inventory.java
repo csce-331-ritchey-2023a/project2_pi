@@ -1,6 +1,7 @@
 package Dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import IDbClient.DbClient;
 import Models.Cutlery;
@@ -74,6 +75,45 @@ public class Inventory{
         
         ResultSet rs = dbClient.executeQuery(query);
         
+        return rs;
+    }
+
+    /**
+     * gets the total sales for the day
+     * @return float with the total sales for the day
+     */
+    public float getXReport() {
+        float totalSales = 0.0f; // Initialize totalSales as a float
+
+        try {
+            ResultSet rs = dbClient.executeQuery(
+                "SELECT ROUND(SUM(total_price)::numeric, 2) AS total_sales " +
+                "FROM orders " +
+                "WHERE DATE(date_time) = CURRENT_DATE; "
+            );
+
+            if (rs.next()) {
+                totalSales = rs.getFloat("total_sales"); // Get the "total_sales" column value as a float
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalSales;
+    }
+
+    /**
+     * gets historical sales data
+     * @return ResultSet with columns (day, total_sales)
+     */
+    public ResultSet getZReport() {
+        ResultSet rs = dbClient.executeQuery(
+            "SELECT DATE(date_time) AS day, ROUND(SUM(total_price)::numeric, 2) AS total_sales " +
+            "FROM orders " +
+            "GROUP BY DATE(date_time) " +
+            "ORDER BY DATE(date_time) DESC;"
+        );
+
         return rs;
     }
 
