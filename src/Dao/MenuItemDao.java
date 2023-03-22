@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.MenuItem;
+import IDbClient.DbClient;
+import Models.MenuItem;
 
 public class MenuItemDao implements IDao<MenuItem>{
     
@@ -77,18 +77,21 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
 
     /**
+<<<<<<< HEAD
      * gets menu items by category
      * @param category
      * @return list of menu items
+=======
+     * gets all the menu items in a certain category
+     * @param category "base, side, drink, etc"
+     * @return List of menu items
+>>>>>>> 5f3cfea78a2aa69fb2f2e74afee7bde5aaebad28
      */
     public List<MenuItem> getByCategory(String category) {
-        List<Models.MenuItem> menuItems = new ArrayList<MenuItem>();
+        List<MenuItem> menuItems = new ArrayList<MenuItem>();
         String query = String.format("SELECT * FROM menu_item WHERE category='%s'", category);
         ResultSet rs = dbClient.executeQuery(query);
 
-        List<MenuItem> menuItems = new ArrayList<MenuItem>();
-
-        // TODO: turn into list. View: getAll()
         try {
             while(rs.next()){
                 menuItems.add(ConvertResultSet(rs));
@@ -139,19 +142,19 @@ public class MenuItemDao implements IDao<MenuItem>{
     }
    
     @Override
-    public ResultSet getHistory(String id) {
+    public ResultSet getHistory(String id, String interval) {
         String query = String.format(
             "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales" +
             "FROM orders o" +
             "JOIN ordered_menu_item omi ON omi.order_id = o.id" +
             "JOIN menu_item mi ON mi.id = omi.menuitem_id" +
             "WHERE mi.id = '%s'" + 
-            "AND o.date_time >= CURRENT_DATE - INTERVAL '6 months' -- filter data from the last 6 months" +
+            "AND o.date_time >= CURRENT_DATE - INTERVAL '%s'" +
             "GROUP BY day" +
             "ORDER BY day ASC;",
-            id
+            id, interval
         ); 
-
+        
         ResultSet rs = dbClient.executeQuery(query);  
         return rs;
     }
@@ -181,6 +184,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             "UPDATE menu_item SET name = '%s', quantity = %d, price = %f, category = '%s' WHERE id = '%s';", 
             menuItem.name, menuItem.quantity, menuItem.price, menuItem.category, menuItem.id); 
         
+            dbClient.executeQuery(query);
         
         for (int i = 0; i < menuItem.MenuItemCutlery.size(); i++)
         {

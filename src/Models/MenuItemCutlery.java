@@ -1,4 +1,4 @@
-package src.Models;
+package Models;
 
 public class MenuItemCutlery {
     public String menuItemId;

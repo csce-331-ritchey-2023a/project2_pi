@@ -1,4 +1,4 @@
-package src.IDbClient;
+package IDbClient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +11,9 @@ public class dBConfigReader {
     public String username;
     public String password;
 
+    /**
+     * Reads config file
+     */
     public dBConfigReader()
     {
         try {

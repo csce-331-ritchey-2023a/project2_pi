@@ -1,11 +1,11 @@
-package src.Models;
+package Models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import src.Dao.CutleryDao;
+import Dao.CutleryDao;
 
 public class MenuItem {
     public String id;
@@ -21,7 +21,12 @@ public class MenuItem {
         id = UUID.randomUUID().toString();
         cutleryDao = new CutleryDao();
     }
- 
+    
+    /**
+     * Adds cutlery to the menuitem object
+     * @param name name of the cutlery
+     * @param quantity quantity of the cutlery
+     */
     public void AddCutlery(String name, int quantity) {
         Optional<String> optionalCutleryId = cutleryDao.getId(name);
         if (! optionalCutleryId.isPresent())

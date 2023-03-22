@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
-import src.Models.MenuItem;
-import src.Models.Order;
-import src.Models.OrderedMenuItem;
+import IDbClient.DbClient;
+import Models.Cutlery;
+import Models.MenuItem;
+import Models.Order;
+import Models.OrderedMenuItem;
 
 public class OrdersDao implements IDao<Order> {
 
@@ -98,24 +98,11 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public Optional<String> getId(String name) {
-        String query = String.format("SELECT * FROM menu_item WHERE name = '%s';",name);
-        ResultSet rs = dbClient.executeQuery(query);
-        try {
-            String id = "";
-            // if result set has any rows
-            if (rs.next())
-            {
-                id = rs.getString("id");
-            }
-            return Optional.of(id);
-        } catch (SQLException e) { 
-            System.out.println("[OrderDao]: Given query did not return id");
-            return Optional.empty();
-        }
+        throw new UnsupportedOperationException("Orders do not have ids based on names");
     }   
 
     @Override
-    public ResultSet getHistory(String id) {   
+    public ResultSet getHistory(String id, String interval) {   
         throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
     }
 

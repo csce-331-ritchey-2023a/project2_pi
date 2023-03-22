@@ -1,11 +1,11 @@
-package src.Models;
+package Models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import src.Dao.MenuItemDao;
+import Dao.MenuItemDao;
 
 public class Order {
     public String id;
@@ -20,6 +20,11 @@ public class Order {
         menuItemDao = new MenuItemDao();
     } 
 
+    /**
+     * Adds menu item to order
+     * @param name name of menu item
+     * @param quantity 
+     */
     public void AddMenuItem(String name, int quantity) {
         Optional<String> optionalMenuItemId = menuItemDao.getId(name);
         if (! optionalMenuItemId.isPresent())

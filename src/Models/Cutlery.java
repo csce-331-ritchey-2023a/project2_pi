@@ -1,4 +1,4 @@
-package src.Models;
+package Models;
 import java.util.UUID;
 
 public class Cutlery {

@@ -208,14 +208,11 @@
         <Component class="javax.swing.JComboBox" name="SalesReportSelection">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="brown rice"/>
-                <StringItem index="1" value="rice pilaf"/>
-                <StringItem index="2" value="remaining items"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="String[] salesArray = new String[currentMenu.size()];&#xd;&#xa;for (int i = 0; i &lt; currentMenu.size(); i++){&#xd;&#xa;    salesArray[i] = currentMenu.get(i).name;&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;SalesReportSelection.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(salesArray));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

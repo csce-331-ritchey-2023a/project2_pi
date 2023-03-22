@@ -1,11 +1,11 @@
-package src.Dao;
+package Dao;
 
 import java.security.Timestamp;
 import java.sql.ResultSet;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
-import src.Models.MenuItem;
+import IDbClient.DbClient;
+import Models.Cutlery;
+import Models.MenuItem;
 
 public class Inventory{
     private DbClient dbClient;
@@ -15,10 +15,19 @@ public class Inventory{
     public Inventory() 
     {
         dbClient = new DbClient();
+        dbClient.connect();
         menuItemDao = new MenuItemDao();
         cutleryDao = new CutleryDao();
     }
+
+    protected void finalize() {
+        dbClient.disconnect();
+    }
     
+    /**
+     * gets all inventory
+     * @return ResultSet containing inventory table (id, name, quantity)
+     */
     public ResultSet get() {
         ResultSet rs = dbClient.executeQuery(
             "SELECT id, name, quantity" +
@@ -31,6 +40,7 @@ public class Inventory{
         return rs;  
     }
 
+<<<<<<< HEAD
    
     public ResultSet getRestockReport(){
         ResultSet rs = dbClient.executeQuery(
@@ -48,6 +58,12 @@ public class Inventory{
    
 
 
+=======
+    /**
+     * Add inventory item (cutlery / menuItem)
+     * @param entity
+     */
+>>>>>>> 5f3cfea78a2aa69fb2f2e74afee7bde5aaebad28
     public void add(Object entity) {
         if (entity instanceof MenuItem) 
         {
@@ -59,6 +75,10 @@ public class Inventory{
         }
     }
 
+    /**
+     * Update menu item
+     * @param entity
+     */
     public void update(Object entity) { 
         if (entity instanceof MenuItem) 
         {
@@ -70,6 +90,10 @@ public class Inventory{
         }
     }
 
+    /**
+     * Deletes inventory item 
+     * @param entity
+     */
     public void delete(Object entity) {
         if (entity instanceof MenuItem) 
         {
@@ -80,10 +104,13 @@ public class Inventory{
             cutleryDao.delete((Cutlery) entity);
         }
     }
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> 5f3cfea78a2aa69fb2f2e74afee7bde5aaebad28
 }

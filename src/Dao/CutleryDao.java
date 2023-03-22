@@ -1,4 +1,4 @@
-package src.Dao;
+package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import src.IDbClient.DbClient;
-import src.Models.Cutlery;
+import IDbClient.DbClient;
+import Models.Cutlery;
 
 public class CutleryDao implements IDao<Cutlery>{ 
     public DbClient dbClient;    
@@ -101,7 +101,7 @@ public class CutleryDao implements IDao<Cutlery>{
     }    
 
     @Override
-    public ResultSet getHistory(String cutlery_id) {
+    public ResultSet getHistory(String cutlery_id, String interval) {
         String query = String.format(
         "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(mic.quantity * omi.quantity) as total_sales" +
         "FROM orders o" +
@@ -110,9 +110,10 @@ public class CutleryDao implements IDao<Cutlery>{
         "JOIN menu_item_cutlery mic ON mic.menu_item_id = mi.id" +
         "JOIN cutlery c ON c.id = mic.cutlery_id" +
         "WHERE c.id = '%s'" +
-        "AND o.date_time >= CURRENT_DATE - INTERVAL '6 months' -- filter data from the last 6 months" +
+        "AND o.date_time >= CURRENT_DATE - INTERVAL '%s'" +
         "GROUP BY day" +
-        "ORDER BY day ASC;", cutlery_id);
+        "ORDER BY day ASC;", 
+        cutlery_id, interval);
         
         ResultSet rs = dbClient.executeQuery(query); 
         return rs; 
