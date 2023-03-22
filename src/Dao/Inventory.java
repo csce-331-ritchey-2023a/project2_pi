@@ -44,10 +44,11 @@ public class Inventory{
    
     public ResultSet getRestockReport(){
         ResultSet rs = dbClient.executeQuery(
-            "SELECT id, name, quantity" +
+            "SELECT name" +
             "FROM cutlery" +
+            "WHERE quantity < 1000"
             "UNION" +
-            "SELECT id, name, quantity" +
+            "SELECT name" +
             "FROM menu_item" + 
             "WHERE quantity < 1000;"
         );
@@ -56,7 +57,6 @@ public class Inventory{
     }
 
    
-
 
 =======
     /**
