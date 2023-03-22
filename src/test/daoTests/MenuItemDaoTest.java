@@ -2,6 +2,7 @@ package test.daoTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -135,5 +136,11 @@ public class menuItemDaoTest {
        
         // clean up
         menuItemDao.delete(updatedMenuItem);
+    }
+
+    @Test
+    public void testGetHistory() {
+        ResultSet rs = menuItemDao.getHistory("7278c370-b7a8-11ed-b486-00155d0752bf", "6 months");
+        assertNotNull(rs);
     }
 }
