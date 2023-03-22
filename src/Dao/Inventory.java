@@ -40,8 +40,6 @@ public class Inventory{
         return rs;  
     }
 
-<<<<<<< HEAD
-   
     public ResultSet getRestockReport(){
         ResultSet rs = dbClient.executeQuery(
             "SELECT name" +
@@ -55,15 +53,25 @@ public class Inventory{
 
         return rs; 
     }
+    
+    public ResultSet getExcessReport(Timestamp timestamp){
+        ResultSet rs = dbClient.executeQuery(
+            "SELECT id, name, quantity" +
+            "FROM cutlery" +
+            "UNION" +
+            "SELECT id, name, quantity" +
+            "FROM menu_item" + 
+            "WHERE quantity > 900" + 
+            "AND o.date::timestamp + o.time::time WITH TIME ZONE BETWEEN ? AND NOW()::timestamp;", timestamp
+        );
 
-   
+        return rs; 
+    }
 
-=======
     /**
      * Add inventory item (cutlery / menuItem)
      * @param entity
      */
->>>>>>> 5f3cfea78a2aa69fb2f2e74afee7bde5aaebad28
     public void add(Object entity) {
         if (entity instanceof MenuItem) 
         {
@@ -104,13 +112,4 @@ public class Inventory{
             cutleryDao.delete((Cutlery) entity);
         }
     }
-<<<<<<< HEAD
-
-
-
-
-
-
-=======
->>>>>>> 5f3cfea78a2aa69fb2f2e74afee7bde5aaebad28
 }
