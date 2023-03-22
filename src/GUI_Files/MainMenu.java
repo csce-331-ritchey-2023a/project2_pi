@@ -14,9 +14,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
     }
-    
-    ServerMenu serverMenuFrame = new ServerMenu();
-    ManagerMenu managerMenuFrame = new ManagerMenu();
+ 
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,6 +112,7 @@ public class MainMenu extends javax.swing.JFrame {
         String s = evt.getActionCommand();
         if (s.equals("Server")) {
             this.setVisible(false);
+            ServerMenu serverMenuFrame = new ServerMenu();
             serverMenuFrame.setVisible(true);
         }
     }//GEN-LAST:event_ServerBtnActionPerformed
@@ -123,6 +122,7 @@ public class MainMenu extends javax.swing.JFrame {
         String s = evt.getActionCommand();
         if (s.equals("Manager")) {
             this.setVisible(false);
+            ManagerMenu managerMenuFrame = new ManagerMenu();
             managerMenuFrame.setVisible(true);
         }
     }//GEN-LAST:event_ManagerBtnActionPerformed
