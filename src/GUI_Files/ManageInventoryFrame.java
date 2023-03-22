@@ -3,6 +3,7 @@ package GUI_Files;
 
 import Dao.Inventory;
 import Dao.MenuItemDao;
+import Models.Cutlery;
 import Models.MenuItem;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -129,7 +130,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         AddItemsLabel.setForeground(java.awt.Color.white);
         AddItemsLabel.setText("Add Items:");
 
-        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "base", "protein", "topping", "dressing", "side", "drink", "extra" }));
+        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "base", "protein", "topping", "dressing", "side", "drink", "extra", "cutlery" }));
 
         ItemNameField.setText("Name");
 
@@ -360,16 +361,29 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         String itemQuantity = ItemQuantityField.getText();
         String itemPrice = ItemPriceField.getText();
         
-        MenuItem newItem = new MenuItem();
-        newItem.name = itemName; 
-        newItem.quantity = Integer.parseInt(itemQuantity); 
-        newItem.price = Float.parseFloat(itemPrice);
-        newItem.category = currentCategory;
-        
-        JOptionPane.showMessageDialog(this, "Item Added");
-        
-        Inventory newInventory = new Inventory();
-        newInventory.add(newItem);
+        if("cutlery".equals(currentCategory)){
+            Cutlery newCutlery = new Cutlery();
+            newCutlery.name = itemName;
+            newCutlery.quantity = Integer.parseInt(itemQuantity);
+            
+            JOptionPane.showMessageDialog(this, "Item Added");
+            
+            Inventory newInventory = new Inventory();
+            newInventory.add(newCutlery);
+ 
+        }
+        else{
+            MenuItem newItem = new MenuItem();
+            newItem.name = itemName; 
+            newItem.quantity = Integer.parseInt(itemQuantity); 
+            newItem.price = Float.parseFloat(itemPrice);
+            newItem.category = currentCategory;
+
+            JOptionPane.showMessageDialog(this, "Item Added");
+
+            Inventory newInventory = new Inventory();
+            newInventory.add(newItem);
+        }
         
         ManageInventoryFrame newFrame = new ManageInventoryFrame();
         this.setVisible(false);
