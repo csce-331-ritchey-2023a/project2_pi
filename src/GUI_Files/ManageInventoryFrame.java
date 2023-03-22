@@ -378,7 +378,43 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void ValueSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValueSubmitBtnActionPerformed
         // TODO add your handling code here:
+                String currentItem = ItemSelection.getSelectedItem().toString();
+        String currentType = ItemSelection1.getSelectedItem().toString();
+        String changeValue = EditValueField.getText();
+        
         JOptionPane.showMessageDialog(this, "Value Updated");
+        
+        Inventory newInventory = new Inventory();
+        
+        for (int i = 0; i <= currentMenu.size() - 1; i++){
+            if (currentMenu.get(i).name.equals(currentItem)){
+                switch (currentType) {
+                    case "Quantity":
+                        currentMenu.get(i).quantity = Integer.parseInt(changeValue);
+                        break;
+                    case "Price":
+                        currentMenu.get(i).price = Float.parseFloat(changeValue);
+                        break;
+                    case "ID":
+                        currentMenu.get(i).id = changeValue;
+                        break;
+                    case "Name":
+                        currentMenu.get(i).name = changeValue;
+                        break;
+                    case "Category":
+                        currentMenu.get(i).category = changeValue;
+                        break;
+                    default:
+                        break;
+                }
+                
+                newInventory.update(currentMenu.get(i));
+            }
+        }
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_ValueSubmitBtnActionPerformed
 
     private void ManagerBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerBackBtnActionPerformed
