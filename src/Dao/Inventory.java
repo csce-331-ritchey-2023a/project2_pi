@@ -44,7 +44,7 @@ public class Inventory{
         ResultSet rs = dbClient.executeQuery(
             "SELECT name" +
             "FROM cutlery" +
-            "WHERE quantity < 1000"
+            "WHERE quantity < 1000" +
             "UNION" +
             "SELECT name" +
             "FROM menu_item" + 
