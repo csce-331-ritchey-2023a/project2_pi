@@ -1,6 +1,7 @@
 package GUI_Files;
 
 
+import Dao.Inventory;
 import Dao.MenuItemDao;
 import Models.MenuItem;
 import javax.swing.JOptionPane;
@@ -117,7 +118,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
         AddItemsLabel.setForeground(java.awt.Color.white);
         AddItemsLabel.setText("Add Items:");
 
-        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base", "Protein", "Topping", "Dressing", "Side", "Drink", "Extra" }));
+        CategorySelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "base", "protein", "topping", "dressing", "side", "drink", "extra" }));
 
         ItemNameField.setText("Name");
 
@@ -342,7 +343,26 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void AddSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSubmitBtnActionPerformed
         // TODO add your handling code here:
+        String currentCategory = CategorySelection.getSelectedItem().toString();
+        
+        String itemName = ItemNameField.getText();
+        String itemQuantity = ItemQuantityField.getText();
+        String itemPrice = ItemPriceField.getText();
+        
+        MenuItem newItem = new MenuItem();
+        newItem.name = itemName; 
+        newItem.quantity = Integer.parseInt(itemQuantity); 
+        newItem.price = Float.parseFloat(itemPrice);
+        newItem.category = currentCategory;
+        
         JOptionPane.showMessageDialog(this, "Item Added");
+        
+        Inventory newInventory = new Inventory();
+        newInventory.add(newItem);
+        
+        ManageInventoryFrame newFrame = new ManageInventoryFrame();
+        this.setVisible(false);
+        newFrame.setVisible(true);
     }//GEN-LAST:event_AddSubmitBtnActionPerformed
 
     private void ValueSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValueSubmitBtnActionPerformed
@@ -362,6 +382,7 @@ public class ManageInventoryFrame extends javax.swing.JFrame {
 
     private void RemoveSubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveSubmitBtnActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Item Removed");
     }//GEN-LAST:event_RemoveSubmitBtnActionPerformed
 
     /**

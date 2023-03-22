@@ -330,13 +330,13 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="7">
-                <StringItem index="0" value="Base"/>
-                <StringItem index="1" value="Protein"/>
-                <StringItem index="2" value="Topping"/>
-                <StringItem index="3" value="Dressing"/>
-                <StringItem index="4" value="Side"/>
-                <StringItem index="5" value="Drink"/>
-                <StringItem index="6" value="Extra"/>
+                <StringItem index="0" value="base"/>
+                <StringItem index="1" value="protein"/>
+                <StringItem index="2" value="topping"/>
+                <StringItem index="3" value="dressing"/>
+                <StringItem index="4" value="side"/>
+                <StringItem index="5" value="drink"/>
+                <StringItem index="6" value="extra"/>
               </StringArray>
             </Property>
           </Properties>

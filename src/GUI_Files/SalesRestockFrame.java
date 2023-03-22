@@ -269,15 +269,31 @@ public class SalesRestockFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String s = evt.getActionCommand();
         if (s.equals("Submit")) {
-            MenuItemDao salesTableDao = new MenuItemDao();
-            System.out.println(currentMenu.get(0).id);
-            ResultSet table = salesTableDao.getHistory(currentMenu.get(0).id, "2022-1-07 08:44");
-            try{
-                InventoryTable = new javax.swing.JTable(buildTableModel(table));
+            
+            String startTime = StartTimeField.getText();
+            String endTime = EndTimeField.getText();
+            String itemSelection = SalesReportSelection.getSelectedItem().toString();
+            
+            System.out.println(startTime);
+            System.out.println(endTime);
+            System.out.println(itemSelection);
+            
+            String id = "";
+            for(int i = 0; i < currentMenu.size(); i++){
+                if(itemSelection.equals(currentMenu.get(i).name)){
+                    id = currentMenu.get(i).id;
+                }
             }
-            catch(SQLException SQLException){
-                System.out.println("SQL Exception");
-            }
+            System.out.println(id);
+//            MenuItemDao salesTableDao = new MenuItemDao();
+//            System.out.println(currentMenu.get(0).id);
+//            ResultSet table = salesTableDao.getHistory(id, startTime, endTime);
+//            try{
+//                InventoryTable = new javax.swing.JTable(buildTableModel(table));
+//            }
+//            catch(SQLException SQLException){
+//                System.out.println("SQL Exception");
+//            }
             
         }
     }//GEN-LAST:event_SubmitBtnActionPerformed
