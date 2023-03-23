@@ -65,13 +65,17 @@ public class Inventory{
      */
     public ResultSet getExcessReport(String time) {
         String query = String.format(
-            "SELECT mi.name, SUM(om.quantity) as sold_quantity, mi.quantity as initial_quantity " +
+            "SELECT mi.id, mi.name, mi.quantity, COALESCE(s.amount_sold, 0) AS amount_sold " +
             "FROM menu_item mi " +
-            "JOIN ordered_menu_item om ON om.menu_item_id = mi.id " +
-            "JOIN orders o ON o.id = om.order_id " +
-            "WHERE o.date_time >= '%s' AND o.date_time <= CURRENT_TIMESTAMP " +
-            "GROUP BY mi.id " +
-            "HAVING (SUM(om.quantity) / mi.quantity) < 0.1;", time);
+            "LEFT JOIN ( " +
+            "SELECT omi.menu_item_id, COALESCE(SUM(omi.quantity), 0) AS amount_sold " + 
+            "FROM ordered_menu_item omi " +
+            "JOIN orders o ON omi.order_id = o.id " + 
+            "WHERE o.date_time BETWEEN '%s' AND NOW() " + 
+            "GROUP BY omi.menu_item_id " +
+            ") s ON mi.id = s.menu_item_id " +
+            "WHERE mi.quantity = 0 OR COALESCE(s.amount_sold, 0) < 0.1 * mi.quantity;"
+            , time);
         
         ResultSet rs = dbClient.executeQuery(query);
         
