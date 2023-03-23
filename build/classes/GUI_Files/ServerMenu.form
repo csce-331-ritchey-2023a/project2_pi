@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -167,144 +167,95 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="BaseIngredients">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Brown Rice"/>
-                <StringItem index="1" value="Rice Pillaf"/>
-                <StringItem index="2" value="Pita"/>
-              </StringArray>
-            </Property>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BaseIngredientsActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="MenuItemDao newDao = new MenuItemDao();&#xd;&#xa;List&lt;MenuItem&gt; baseList = newDao.getByCategory(&quot;base&quot;);&#xd;&#xa;String [] newBaseNames = new String[baseList.size()];&#xd;&#xa;for (int i = 0; i &lt;= baseList.size() - 1; i++){&#xd;&#xa;    newBaseNames[i] = baseList.get(i).name;&#xd;&#xa;}&#xd;&#xa;BaseIngredients.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newBaseNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="MeatChoice">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Falafel"/>
-                <StringItem index="1" value="Meatballs"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeatChoiceActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; proteinList = newDao.getByCategory(&quot;protein&quot;);&#xd;&#xa;String [] newProteinNames = new String[proteinList.size()];&#xd;&#xa;for (int i = 0; i &lt;= proteinList.size() - 1; i++){&#xd;&#xa;    newProteinNames[i] = proteinList.get(i).name;&#xd;&#xa;}&#xd;&#xa;MeatChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newProteinNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="DressingChoice">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="No Dressing"/>
-                <StringItem index="1" value="Greek Yogurt"/>
-                <StringItem index="2" value="Aioli"/>
-                <StringItem index="3" value="Harrisa"/>
-                <StringItem index="4" value="Tahini"/>
-                <StringItem index="5" value="Oregano"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DressingChoiceActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; dressingList = newDao.getByCategory(&quot;dressing&quot;);&#xd;&#xa;String [] newDressingNames = new String[dressingList.size()];&#xd;&#xa;for (int i = 0; i &lt;= dressingList.size() - 1; i++){&#xd;&#xa;    newDressingNames[i] = dressingList.get(i).name;&#xd;&#xa;}&#xd;&#xa;DressingChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newDressingNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="ExtrasChoice">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="No Extras"/>
-                <StringItem index="1" value="Extra Protein"/>
-                <StringItem index="2" value="Extra Dressing"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExtrasChoiceActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; extrasList = newDao.getByCategory(&quot;extra&quot;);&#xd;&#xa;String [] newExtrasNames = new String[extrasList.size()+1];&#xd;&#xa;newExtrasNames[0] = &quot;no extras&quot;;&#xd;&#xa;for (int i = 0; i &lt;= extrasList.size() - 1; i++){&#xd;&#xa;    newExtrasNames[i+1] = extrasList.get(i).name;&#xd;&#xa;}&#xd;&#xa;ExtrasChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newExtrasNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="ToppingsChoice">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="10">
-                <StringItem index="0" value="No Toppings"/>
-                <StringItem index="1" value="Feta Cheese"/>
-                <StringItem index="2" value="Cucumber"/>
-                <StringItem index="3" value="Tzatziki"/>
-                <StringItem index="4" value="Hot Sauce"/>
-                <StringItem index="5" value="Peppers"/>
-                <StringItem index="6" value="Hummus"/>
-                <StringItem index="7" value="Olives"/>
-                <StringItem index="8" value="Onions"/>
-                <StringItem index="9" value="Tomato"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToppingsChoiceActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; toppingsList = newDao.getByCategory(&quot;topping&quot;);&#xd;&#xa;String [] newToppingsNames = new String[toppingsList.size()+1];&#xd;&#xa;newToppingsNames[0] = &quot;no toppings&quot;;&#xd;&#xa;for (int i = 0; i &lt;= toppingsList.size() - 1; i++){&#xd;&#xa;    newToppingsNames[i+1] = toppingsList.get(i).name;&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;ToppingsChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newToppingsNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="ToppingsChoice1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="10">
-                <StringItem index="0" value="No Toppings"/>
-                <StringItem index="1" value="Feta Cheese"/>
-                <StringItem index="2" value="Cucumber"/>
-                <StringItem index="3" value="Tzatziki"/>
-                <StringItem index="4" value="Hot Sauce"/>
-                <StringItem index="5" value="Peppers"/>
-                <StringItem index="6" value="Hummus"/>
-                <StringItem index="7" value="Olives"/>
-                <StringItem index="8" value="Onions"/>
-                <StringItem index="9" value="Tomato"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToppingsChoice1ActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ToppingsChoice1.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newToppingsNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="ToppingsChoice2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="10">
-                <StringItem index="0" value="No Toppings"/>
-                <StringItem index="1" value="Feta Cheese"/>
-                <StringItem index="2" value="Cucumber"/>
-                <StringItem index="3" value="Tzatziki"/>
-                <StringItem index="4" value="Hot Sauce"/>
-                <StringItem index="5" value="Peppers"/>
-                <StringItem index="6" value="Hummus"/>
-                <StringItem index="7" value="Olives"/>
-                <StringItem index="8" value="Onions"/>
-                <StringItem index="9" value="Tomato"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToppingsChoice2ActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="ToppingsChoice2.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newToppingsNames));&#xd;&#xa;"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
@@ -422,18 +373,14 @@
         <Component class="javax.swing.JComboBox" name="SidesSelection">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="No Sides"/>
-                <StringItem index="1" value="Salad"/>
-                <StringItem index="2" value="Falafels"/>
-                <StringItem index="3" value="Hummus &amp; Pita"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SidesSelectionActionPerformed"/>
           </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; sidesList = newDao.getByCategory(&quot;side&quot;);&#xd;&#xa;String [] newSidesNames = new String[sidesList.size()+1];&#xd;&#xa;newSidesNames[0] = &quot;no sides&quot;;&#xd;&#xa;for (int i = 0; i &lt;= sidesList.size() - 1; i++){&#xd;&#xa;    newSidesNames[i+1] = sidesList.get(i).name;&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;SidesSelection.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newSidesNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

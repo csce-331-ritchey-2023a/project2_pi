@@ -1,6 +1,9 @@
 package GUI_Files;
 
 
+import Models.MenuItem;
+import Dao.MenuItemDao;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /*
@@ -61,54 +64,83 @@ public class ServerMenu extends javax.swing.JFrame {
         MainDishLabel.setForeground(java.awt.Color.white);
         MainDishLabel.setText("Choose 3 Toppings");
 
-        BaseIngredients.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brown Rice", "Rice Pillaf", "Pita" }));
+        MenuItemDao newDao = new MenuItemDao();
+        List<MenuItem> baseList = newDao.getByCategory("base");
+        String [] newBaseNames = new String[baseList.size()];
+        for (int i = 0; i <= baseList.size() - 1; i++){
+            newBaseNames[i] = baseList.get(i).name;
+        }
+        BaseIngredients.setModel(new javax.swing.DefaultComboBoxModel<>(newBaseNames));
         BaseIngredients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BaseIngredientsActionPerformed(evt);
             }
         });
 
-        MeatChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Falafel", "Meatballs" }));
+        List<MenuItem> proteinList = newDao.getByCategory("protein");
+        String [] newProteinNames = new String[proteinList.size()];
+        for (int i = 0; i <= proteinList.size() - 1; i++){
+            newProteinNames[i] = proteinList.get(i).name;
+        }
+        MeatChoice.setModel(new javax.swing.DefaultComboBoxModel<>(newProteinNames));
         MeatChoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MeatChoiceActionPerformed(evt);
             }
         });
 
-        DressingChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Dressing", "Greek Yogurt", "Aioli", "Harrisa", "Tahini", "Oregano" }));
+        List<MenuItem> dressingList = newDao.getByCategory("dressing");
+        String [] newDressingNames = new String[dressingList.size()];
+        for (int i = 0; i <= dressingList.size() - 1; i++){
+            newDressingNames[i] = dressingList.get(i).name;
+        }
+        DressingChoice.setModel(new javax.swing.DefaultComboBoxModel<>(newDressingNames));
         DressingChoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DressingChoiceActionPerformed(evt);
             }
         });
 
-        ExtrasChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Extras", "Extra Protein", "Extra Dressing" }));
+        List<MenuItem> extrasList = newDao.getByCategory("extra");
+        String [] newExtrasNames = new String[extrasList.size()+1];
+        newExtrasNames[0] = "no extras";
+        for (int i = 0; i <= extrasList.size() - 1; i++){
+            newExtrasNames[i+1] = extrasList.get(i).name;
+        }
+        ExtrasChoice.setModel(new javax.swing.DefaultComboBoxModel<>(newExtrasNames));
         ExtrasChoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExtrasChoiceActionPerformed(evt);
             }
         });
 
-        ToppingsChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Toppings", "Feta Cheese", "Cucumber", "Tzatziki", "Hot Sauce", "Peppers", "Hummus", "Olives", "Onions", "Tomato" }));
+        List<MenuItem> toppingsList = newDao.getByCategory("topping");
+        String [] newToppingsNames = new String[toppingsList.size()+1];
+        newToppingsNames[0] = "no toppings";
+        for (int i = 0; i <= toppingsList.size() - 1; i++){
+            newToppingsNames[i+1] = toppingsList.get(i).name;
+        }
+
+        ToppingsChoice.setModel(new javax.swing.DefaultComboBoxModel<>(newToppingsNames));
         ToppingsChoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToppingsChoiceActionPerformed(evt);
             }
         });
 
-        ToppingsChoice1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Toppings", "Feta Cheese", "Cucumber", "Tzatziki", "Hot Sauce", "Peppers", "Hummus", "Olives", "Onions", "Tomato" }));
+        ToppingsChoice1.setModel(new javax.swing.DefaultComboBoxModel<>(newToppingsNames));
         ToppingsChoice1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToppingsChoice1ActionPerformed(evt);
             }
         });
 
-        ToppingsChoice2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Toppings", "Feta Cheese", "Cucumber", "Tzatziki", "Hot Sauce", "Peppers", "Hummus", "Olives", "Onions", "Tomato" }));
         ToppingsChoice2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ToppingsChoice2ActionPerformed(evt);
             }
         });
+        ToppingsChoice2.setModel(new javax.swing.DefaultComboBoxModel<>(newToppingsNames));
 
         ToppingsLabel.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 36)); // NOI18N
         ToppingsLabel.setForeground(java.awt.Color.white);
@@ -188,7 +220,14 @@ public class ServerMenu extends javax.swing.JFrame {
         DrinkSlider.setSnapToTicks(true);
         DrinkSlider.setValue(0);
 
-        SidesSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Sides", "Salad", "Falafels", "Hummus & Pita" }));
+        List<MenuItem> sidesList = newDao.getByCategory("side");
+        String [] newSidesNames = new String[sidesList.size()+1];
+        newSidesNames[0] = "no sides";
+        for (int i = 0; i <= sidesList.size() - 1; i++){
+            newSidesNames[i+1] = sidesList.get(i).name;
+        }
+
+        SidesSelection.setModel(new javax.swing.DefaultComboBoxModel<>(newSidesNames));
         SidesSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SidesSelectionActionPerformed(evt);
