@@ -185,7 +185,7 @@ public class MenuItemDao implements IDao<MenuItem>{
         {
             // Update Cutlery 
             query = String.format(
-                "UPDATE menu_item_cutlery SET quantity %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
+                "UPDATE menu_item_cutlery SET quantity = %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
                 menuItem.MenuItemCutlery.get(i).quantity, menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).cutleryId
             );
             
