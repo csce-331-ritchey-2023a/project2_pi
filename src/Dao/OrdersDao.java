@@ -118,10 +118,12 @@ public class OrdersDao implements IDao<Order> {
         MenuItemDao menuItemDao = new MenuItemDao();
         CutleryDao cutleryDao = new CutleryDao();
         for(int i = 0; i < order.OrderedMenuItems.size(); i++)
-        {
+        {;
             query = String.format("INSERT INTO ordered_menu_item(order_id, menu_item_id, quantity) VALUES ('%s', '%s', %d);", order.OrderedMenuItems.get(i).orderId, order.OrderedMenuItems.get(i).menuItemId, order.OrderedMenuItems.get(i).quantity);
             dbClient.executeQuery(query);
 
+            System.out.println("menu item id: " + order.OrderedMenuItems.get(i).menuItemId);
+            
             // reduce quantity
             Optional<MenuItem> optionalMenuItem = menuItemDao.get(order.OrderedMenuItems.get(i).menuItemId); 
             if (optionalMenuItem.isPresent())
@@ -135,6 +137,8 @@ public class OrdersDao implements IDao<Order> {
                 for (int j = 0; j < menuItem.MenuItemCutlery.size(); j++)
                 {
                     String cutleryId = menuItem.MenuItemCutlery.get(j).cutleryId;
+                    System.out.println("cutleryId: " + cutleryId);
+                    System.out.println("menuItemId: " + menuItem.MenuItemCutlery.get(j).menuItemId);
                     Optional<Cutlery> optionalCutlery = cutleryDao.get(cutleryId);
                     if (optionalCutlery.isPresent())
                     {

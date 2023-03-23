@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import IDbClient.DbClient;
+import Models.Cutlery;
 import Models.MenuItem;
+import Models.MenuItemCutlery;
 
 public class MenuItemDao implements IDao<MenuItem>{
     
@@ -59,8 +61,10 @@ public class MenuItemDao implements IDao<MenuItem>{
                 while (menuItemCutleryRs.next())
                 {
                     String cutlery_id = menuItemCutleryRs.getString("cutlery_id");
+                    System.out.println("MenuItemDao, cutlery id= " + cutlery_id);
                     int quantity = menuItemCutleryRs.getInt("quantity");
-                    menuItem.AddCutlery(cutlery_id, quantity);
+                    
+                    menuItem.MenuItemCutlery.add(new MenuItemCutlery(id, cutlery_id, quantity));
                 }
 
                 return Optional.of(menuItem);

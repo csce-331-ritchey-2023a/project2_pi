@@ -38,7 +38,7 @@ public class MenuItem {
             throw new IllegalArgumentException("[MenuItem]: cannot give quantity less than or equal to 0");
         }
 
-        MenuItemCutlery menuItemCutlery = new MenuItemCutlery(optionalCutleryId.get(), id, quantity);
+        MenuItemCutlery menuItemCutlery = new MenuItemCutlery(id, optionalCutleryId.get(), quantity);
         MenuItemCutlery.add(menuItemCutlery);
     }
 }

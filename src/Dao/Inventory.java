@@ -65,7 +65,7 @@ public class Inventory{
      */
     public ResultSet getExcessReport(String time) {
         String query = String.format(
-            "SELECT mi.name, SUM(om.quantity) as total_quantity, mi.quantity as initial_quantity " +
+            "SELECT mi.name, SUM(om.quantity) as sold_quantity, mi.quantity as initial_quantity " +
             "FROM menu_item mi " +
             "JOIN ordered_menu_item om ON om.menu_item_id = mi.id " +
             "JOIN orders o ON o.id = om.order_id " +
