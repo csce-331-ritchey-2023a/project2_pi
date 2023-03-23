@@ -199,7 +199,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DressingChoiceActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; dressingList = newDao.getByCategory(&quot;dressing&quot;);&#xd;&#xa;String [] newDressingNames = new String[dressingList.size()];&#xd;&#xa;for (int i = 0; i &lt;= dressingList.size() - 1; i++){&#xd;&#xa;    newDressingNames[i] = dressingList.get(i).name;&#xd;&#xa;}&#xd;&#xa;DressingChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newDressingNames));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="List&lt;MenuItem&gt; dressingList = newDao.getByCategory(&quot;dressing&quot;);&#xd;&#xa;String [] newDressingNames = new String[dressingList.size()+1];&#xd;&#xa;newDressingNames[0] = &quot;no dressing&quot;;&#xd;&#xa;for (int i = 0; i &lt;= dressingList.size() - 1; i++){&#xd;&#xa;    newDressingNames[i+1] = dressingList.get(i).name;&#xd;&#xa;}&#xd;&#xa;DressingChoice.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(newDressingNames));"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

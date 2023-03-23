@@ -3,6 +3,8 @@ package GUI_Files;
 
 import Models.MenuItem;
 import Dao.MenuItemDao;
+import Dao.OrdersDao;
+import Models.Order;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -90,9 +92,10 @@ public class ServerMenu extends javax.swing.JFrame {
         });
 
         List<MenuItem> dressingList = newDao.getByCategory("dressing");
-        String [] newDressingNames = new String[dressingList.size()];
+        String [] newDressingNames = new String[dressingList.size()+1];
+        newDressingNames[0] = "no dressing";
         for (int i = 0; i <= dressingList.size() - 1; i++){
-            newDressingNames[i] = dressingList.get(i).name;
+            newDressingNames[i+1] = dressingList.get(i).name;
         }
         DressingChoice.setModel(new javax.swing.DefaultComboBoxModel<>(newDressingNames));
         DressingChoice.addActionListener(new java.awt.event.ActionListener() {
@@ -404,9 +407,61 @@ public class ServerMenu extends javax.swing.JFrame {
 
     private void SubmitOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitOrderActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Order Submitted");
-    }//GEN-LAST:event_SubmitOrderActionPerformed
+        String s = evt.getActionCommand();
+        if (s.equals("Submit Order")) {
+            
+            int drinkValue = DrinkSlider.getValue();
+            String base =  BaseIngredients.getSelectedItem().toString();
+            String protein = MeatChoice.getSelectedItem().toString();
+            String dressing = DressingChoice.getSelectedItem().toString();
+            String extra = ExtrasChoice.getSelectedItem().toString();
+            String topping0 = ToppingsChoice.getSelectedItem().toString();
+            String topping1 = ToppingsChoice1.getSelectedItem().toString();
+            String topping2 = ToppingsChoice2.getSelectedItem().toString();
+            String side = SidesSelection.getSelectedItem().toString();
 
+            Order newOrder = new Order();
+            newOrder.AddMenuItem(base,1);
+            newOrder.AddMenuItem(protein,1);
+
+            if (!dressing.equals("no dressing")){
+                newOrder.AddMenuItem(dressing,1);
+            }
+
+            if (!topping0.equals("no toppings")){
+                newOrder.AddMenuItem(topping0, 1);
+            }
+
+            if (!topping1.equals("no toppings")){
+                newOrder.AddMenuItem(topping1, 1);
+            }
+
+            if (!topping2.equals("no toppings")){
+                newOrder.AddMenuItem(topping2, 1);
+            }
+
+            if (!extra.equals("no extras")){
+                newOrder.AddMenuItem(extra,1);
+            }
+
+            if (!side.equals("no sides")){
+                newOrder.AddMenuItem(side,1);
+            }
+
+            if (drinkValue != 0){
+                newOrder.AddMenuItem("drink",drinkValue);
+            }
+
+            OrdersDao newOrderDao = new OrdersDao();
+            newOrderDao.add(newOrder);
+            
+            float orderPrice = newOrder.total_price;
+            String newPrice = "$" + String. format("%.2f", orderPrice);
+            PriceLabel.setText(newPrice);
+
+            JOptionPane.showMessageDialog(this, "Order Submitted");
+    }//GEN-LAST:event_SubmitOrderActionPerformed
+ }
     private void ToppingsChoice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToppingsChoice1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ToppingsChoice1ActionPerformed
