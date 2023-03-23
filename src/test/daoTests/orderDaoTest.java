@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -39,16 +40,22 @@ public class orderDaoTest {
 
     @Test
     public void testGetAll() {
-        
+        List<Order> orders = ordersDao.getAll();
+        assertFalse(orders.isEmpty());
     }
-
 
     @Test
     public void testAdd() { 
+        
     }
 
     @Test
     public void testUpdate() {
+
+    }
+
+    @Test
+    public void testDelete() {
 
     }
 }

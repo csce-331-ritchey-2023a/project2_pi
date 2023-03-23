@@ -67,7 +67,7 @@ public class Inventory{
         String query = String.format(
             "SELECT mi.name, SUM(om.quantity) as total_quantity, mi.quantity as initial_quantity " +
             "FROM menu_item mi " +
-            "JOIN ordered_menu_item om ON om.menuitem_id = mi.id " +
+            "JOIN ordered_menu_item om ON om.menu_item_id = mi.id " +
             "JOIN orders o ON o.id = om.order_id " +
             "WHERE o.date_time >= '%s' AND o.date_time <= CURRENT_TIMESTAMP " +
             "GROUP BY mi.id " +

@@ -40,7 +40,8 @@ public class inventoryTest {
     public void testXReport() {
         OrdersDao ordersDao = new OrdersDao();
         Order order = new Order();
-        order.total_price = 1.0f;
+        order.AddMenuItem("pita", 1);
+        order.AddMenuItem("meatball", 1);
         ordersDao.add(order);
         
         float sales = inventory.getXReport();

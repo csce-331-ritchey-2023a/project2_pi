@@ -108,15 +108,18 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public void add(Order order) {
-       String query = String.format("INSERT INTO orders(id, date_time, total_price) VALUES ('%s', '%s', %f);", order.id, order.date, order.total_price);
+        String query = String.format(
+                 "INSERT INTO orders(id, date_time, total_price) VALUES ('%s', '%s', %f);", 
+                        order.id, order.date, order.total_price
+                        );
 
-       dbClient.executeQuery(query);
+        dbClient.executeQuery(query);
         
         MenuItemDao menuItemDao = new MenuItemDao();
         CutleryDao cutleryDao = new CutleryDao();
         for(int i = 0; i < order.OrderedMenuItems.size(); i++)
         {
-            query = String.format("INSERT INTO OrderedMenuItems(order_id, menu_item_id, quantity) VALUES ('%s', '%s', %d);", order.OrderedMenuItems.get(i).orderId, order.OrderedMenuItems.get(i).menuItemId, order.OrderedMenuItems.get(i).quantity);
+            query = String.format("INSERT INTO ordered_menu_item(order_id, menu_item_id, quantity) VALUES ('%s', '%s', %d);", order.OrderedMenuItems.get(i).orderId, order.OrderedMenuItems.get(i).menuItemId, order.OrderedMenuItems.get(i).quantity);
             dbClient.executeQuery(query);
 
             // reduce quantity
@@ -131,11 +134,18 @@ public class OrdersDao implements IDao<Order> {
                 // update cutlerly 
                 for (int j = 0; j < menuItem.MenuItemCutlery.size(); j++)
                 {
-                    String cultleryId = menuItem.MenuItemCutlery.get(j).cutleryId;
-                    Optional<Cutlery> optionalCutlery = cutleryDao.get(cultleryId);
-                    Cutlery cutlery = optionalCutlery.get();
-                    cutlery.quantity -= menuItem.MenuItemCutlery.get(j).quantity;
-                    cutleryDao.update(cutlery);
+                    String cutleryId = menuItem.MenuItemCutlery.get(j).cutleryId;
+                    Optional<Cutlery> optionalCutlery = cutleryDao.get(cutleryId);
+                    if (optionalCutlery.isPresent())
+                    {
+                        Cutlery cutlery = optionalCutlery.get();
+                        cutlery.quantity -= menuItem.MenuItemCutlery.get(j).quantity;
+                        cutleryDao.update(cutlery);
+                    }
+                    else 
+                    {
+                        System.out.println("[Orders DAO]: cutlery with cutleryID ("+ cutleryId + " not found");
+                    }
                 }
             }
             else 
@@ -165,12 +175,13 @@ public class OrdersDao implements IDao<Order> {
 
     @Override
     public void delete(Order order) {
-        String query = String.format("DELETE FROM orders WHERE id = '%s';", order.id);
-        // delete all MenuItem Dependencies
+        // Delete all entries in ordered_menu_item  
+        String query = String.format("DELETE FROM ordered_menu_item WHERE order_id = '%s';", order.id);
         dbClient.executeQuery(query);
         
-        // Delete all entries in ordered_menu_item  
-        query = String.format("DELETE FROM ordered_menu_item WHERE order_id = '%s';", order.id);
+        // delete from orders table
+        query = String.format("DELETE FROM orders WHERE id = '%s';", order.id);
         dbClient.executeQuery(query);
+        
     }
 }

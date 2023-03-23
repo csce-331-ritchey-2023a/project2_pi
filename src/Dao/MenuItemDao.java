@@ -141,7 +141,7 @@ public class MenuItemDao implements IDao<MenuItem>{
             "SELECT DATE_TRUNC('day', o.date_time) as day, SUM(omi.quantity) as total_sales " +
             "FROM orders o " +
             "JOIN ordered_menu_item omi ON omi.order_id = o.id " +
-            "JOIN menu_item mi ON mi.id = omi.menuitem_id " +
+            "JOIN menu_item mi ON mi.id = omi.menu_item_id " +
             "WHERE mi.id = '%s' " + 
             "AND o.date_time >= '%s' " +
             "AND o.date_time <= '%s' " +
@@ -185,8 +185,8 @@ public class MenuItemDao implements IDao<MenuItem>{
         {
             // Update Cutlery 
             query = String.format(
-                "UPDATE menu_item_cutlery SET quanitity %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
-                menuItem.MenuItemCutlery.get(i).quantity ,menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).cutleryId
+                "UPDATE menu_item_cutlery SET quantity %d WHERE menu_item_id = '%s' AND cutlery_id = '%s';",
+                menuItem.MenuItemCutlery.get(i).quantity, menuItem.MenuItemCutlery.get(i).menuItemId, menuItem.MenuItemCutlery.get(i).cutleryId
             );
             
             dbClient.executeQuery(query);
