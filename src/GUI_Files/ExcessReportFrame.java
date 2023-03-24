@@ -8,12 +8,10 @@ import Dao.Inventory;
 import static GUI_Files.SalesRestockFrame.buildTableModel;
 import javax.swing.table.DefaultTableModel;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * Used to open the Excess Report JFrame
+ * @author Team_Pi
  */
-
-
 public class ExcessReportFrame extends javax.swing.JFrame {
 
     /**
@@ -132,6 +130,9 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param ActionEventListener used to determine when the button has been pressed.
+    */
     private void ManagerBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagerBackBtnActionPerformed
         // TODO add your handling code here:
         String s = evt.getActionCommand();
@@ -142,6 +143,9 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ManagerBackBtnActionPerformed
 
+    /**
+     * @param ActionEventListener used to determine when the button has been pressed.
+    */
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
         // TODO add your handling code here:
         String s = evt.getActionCommand();
@@ -167,6 +171,12 @@ public class ExcessReportFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
+    /**
+     * 
+     * @param rs DefaultTableModel used to set table model in JFrame
+     * @return DefaultTableModel used to populated table in JFrame
+     * @throws SQLException if ResultSet is not properly formatted
+     */
     public static DefaultTableModel buildTableModel(ResultSet rs)
         throws SQLException {
 
@@ -194,6 +204,7 @@ public class ExcessReportFrame extends javax.swing.JFrame {
 }
     
     /**
+     * Creates the Excess Report JFrame
      * @param args the command line arguments
      */
     public static void main(String args[]) {
