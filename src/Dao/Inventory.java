@@ -7,6 +7,10 @@ import IDbClient.DbClient;
 import Models.Cutlery;
 import Models.MenuItem;
 
+/**
+ * Inventory class object
+ * @author Team_Pi
+ */
 public class Inventory{
     private DbClient dbClient;
     private MenuItemDao menuItemDao;

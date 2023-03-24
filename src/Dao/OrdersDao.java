@@ -12,6 +12,10 @@ import Models.MenuItem;
 import Models.Order;
 import Models.OrderedMenuItem;
 
+/**
+ * OrdersDao data class object
+ * @author Team_Pi
+ */
 public class OrdersDao implements IDao<Order> {
 
     public DbClient dbClient; 

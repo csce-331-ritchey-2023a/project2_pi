@@ -9,6 +9,10 @@ import java.util.Optional;
 import IDbClient.DbClient;
 import Models.Cutlery;
 
+/**
+ * cutlery data class object
+ * @author Team_pi
+ */
 public class CutleryDao implements IDao<Cutlery>{ 
     public DbClient dbClient;    
 

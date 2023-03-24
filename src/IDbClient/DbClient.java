@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Reads Creates Database Connection
+ * @author Team_Pi
+ */
 public class DbClient implements IDbClient {
     public Connection connection;
 

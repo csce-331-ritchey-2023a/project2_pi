@@ -10,6 +10,10 @@ import IDbClient.DbClient;
 import Models.MenuItem;
 import Models.MenuItemCutlery;
 
+/**
+ * MenuItem data class object
+ * @author Team_Pi
+ */
 public class MenuItemDao implements IDao<MenuItem>{
     
     public DbClient dbClient;    

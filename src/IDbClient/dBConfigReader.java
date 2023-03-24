@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Reads Configuration File with Database Login Information
+ * @author Team_Pi
+ */
 public class dBConfigReader {
     private static Properties _properties;
     
